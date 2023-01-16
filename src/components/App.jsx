@@ -1,3 +1,5 @@
+
+
 export const App = () => {
   return (
     <div
@@ -10,7 +12,7 @@ export const App = () => {
         color: '#010101'
       }}
     >
-      Kapu$ta1
+      Kapu$sta
     </div>
   );
 };
