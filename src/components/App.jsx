@@ -10,7 +10,7 @@ export const App = () => {
         color: '#010101'
       }}
     >
-      Kapu$ta
+      Kapu$ta1
     </div>
   );
 };
