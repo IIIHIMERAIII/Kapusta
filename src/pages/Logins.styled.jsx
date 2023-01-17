@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-// import BgImage1mob from '../images/bg-mob.png';
 import BgMonoCabbage from '../images/single_kapusta.png';
 import BgCabbage from '../images/double_kapustas.png';
 import BgImage2mob from '../images/home_bg_mobile.png';
@@ -36,6 +35,11 @@ export const ImageWrapperBottom = styled.div`
     width: 183px;
     height: 142px;
     background-size: contain;
+    bottom: 56px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    bottom: 50px;
   }
 `;
 
@@ -76,6 +80,7 @@ export const ContentWrapper = styled.div`
   @media screen and (min-width: 1280px) {
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
   }
 `;
 
@@ -98,6 +103,7 @@ export const FormWrapper = styled.div`
   @media screen and (min-width: 768px) {
     width: 426px;
     padding: 56px 84px;
+    box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
   }
 `;
 
@@ -130,14 +136,12 @@ export const HintLeft = styled.p`
 `;
 
 export const Form = styled.form`
-  /* width: 100%; */
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /* margin: 0 auto; */
 `;
 
 export const LogoWrapper = styled.div`
@@ -176,15 +180,13 @@ export const LogoWrapper = styled.div`
   @media screen and (min-width: 1280px) {
     width: 377px;
     margin-bottom: 0;
+    margin-bottom: 222px;
+    align-self: flex-end;
   }
 `;
 
 export const InputsWrapper = styled.div`
   width: 100%;
-  /* margin-top: 20px;
-  margin-bottom: 24px; */
-  /* gap: 8px; */
-  /* align-self: flex-end; */
   flex-direction: column;
   display: flex;
 `;
