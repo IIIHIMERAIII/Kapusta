@@ -1,6 +1,9 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
-export const BtnElement = styled.button`
+export const Link = styled(NavLink)`
+  text-decoration: none;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,7 +19,7 @@ export const BtnElement = styled.button`
     props.status === 'google' ? 'none' : 'uppercase'};
   color: ${props => (props.status === 'google' ? '#000000' : '#52555f')};
   background-color: ${p => p.theme.colors.PrimaryGray};
-  padding: ${props => (props.status === 'google' ? '10px 16px' : '12px 14px')};
+  padding: 12px 14px;
   border-radius: ${props => (props.status === 'google' ? '26px' : '16px')};
   border: none;
   filter: drop-shadow(1px 3px 5px rgba(82, 85, 95, 0.15));
@@ -28,7 +31,6 @@ export const BtnElement = styled.button`
     background-color: ${p => p.theme.colors.PrimaryOrange};
     filter: drop-shadow(1px 3px 5px rgba(255, 107, 8, 0.35));
   }
-
   &:active {
     background-color: ${p => p.theme.colors.PrimaryOrange};
     color: white;
@@ -37,13 +39,5 @@ export const BtnElement = styled.button`
 
   & > svg {
     margin-right: 10px;
-    width: 18px;
-    height: 18px;
-  }
-
-  @media screen and (min-width: 768px) {
-    min-width: 122px;
   }
 `;
-
-export const BtnText = styled.span``;
