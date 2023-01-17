@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter basename="/kapusta">
+        <BrowserRouter basename="/Kapusta">
           <ThemeProvider theme={theme}>
             <App />
           </ThemeProvider>
