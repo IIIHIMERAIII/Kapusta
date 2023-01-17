@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-// import BgImage1mob from '../images/bg-mob.png';
 import BgMonoCabbage from '../images/single_kapusta.png';
 import BgCabbage from '../images/double_kapustas.png';
 import BgImage2mob from '../images/home_bg_mobile.png';
@@ -13,7 +12,7 @@ export const ImageWrapper = styled.div`
   width: 100%;
   height: 286px;
   background-color: ${p => p.theme.colors.PrimaryGray};
-  z-index: -1000;
+  z-index: -100;
   border-bottom-left-radius: 125px;
 
   @media screen and (min-width: 768px) {
@@ -76,6 +75,7 @@ export const ContentWrapper = styled.div`
   @media screen and (min-width: 1280px) {
     flex-direction: row;
     justify-content: space-between;
+    /* margin-bottom: 76px; */
   }
 `;
 
@@ -91,6 +91,7 @@ export const FormWrapper = styled.div`
   border-radius: 30px;
   padding: 40px 20px;
   gap: 32px;
+  z-index: 10000;
 
   @media screen and (min-width: 320px) {
     width: 280px;
@@ -98,6 +99,7 @@ export const FormWrapper = styled.div`
   @media screen and (min-width: 768px) {
     width: 426px;
     padding: 56px 84px;
+    box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
   }
 `;
 
@@ -165,7 +167,7 @@ export const LogoWrapper = styled.div`
 
   @media screen and (min-width: 768px) {
     width: 306px;
-    margin-bottom: 79px;
+    margin-bottom: 80px;
 
     & p {
       font-size: 16px;
@@ -175,16 +177,13 @@ export const LogoWrapper = styled.div`
 
   @media screen and (min-width: 1280px) {
     width: 377px;
-    margin-bottom: 0;
+    /* margin-bottom: 222px; */
+    align-self: flex-end;
   }
 `;
 
 export const InputsWrapper = styled.div`
   width: 100%;
-  /* margin-top: 20px;
-  margin-bottom: 24px; */
-  /* gap: 8px; */
-  /* align-self: flex-end; */
   flex-direction: column;
   display: flex;
 `;
