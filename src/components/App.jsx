@@ -1,55 +1,58 @@
 import { useEffect, lazy } from 'react';
-import { RestrictedRoute } from '../RestrictedRoute'
-import { PrivateRoute } from '../PrivateRoute'
+import { RestrictedRoute } from '../RestrictedRoute';
+import { PrivateRoute } from '../PrivateRoute';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { useAuth } from 'hooks/useAuth';
 import { Layout } from './Layout';
-
+import { fetchCurrentUser } from 'redux/auth/authOperations';
 
 const RegisterPage = lazy(() => import('../pages/Register'));
-const LoginPage = lazy(() => import('../pages/Login'));
+const LoginPage = lazy(() => import('../pages/Logins'));
 const WalletPage = lazy(() => import('../pages/Wallet'));
-const StatsPage = lazy(() => import('../pages/Stats'));
-
+// const StatsPage = lazy(() => import('../pages/Stats'));
 
 export const App = () => {
-  const dispatch = useDispatch();
-  const { isRefreshing } = useAuth();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(refreshUser());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchCurrentUser());
+  // }, [dispatch]);
 
-  return isRefreshing ? (
-    <b>Refreshing user...</b>
-  ) : (
+  return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route
-          path="/register"
+          path="register"
           element={
-            <RestrictedRoute redirectTo="/wallet" component={<RegisterPage />} />
+            <RestrictedRoute
+              // redirectTo="/login"
+              component={<RegisterPage />}
+            />
           }
-          />
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute redirectTo="/wallet" component={<LoginPage />} />
-          }
-        />  
-        <Route
-          path="/wallet"
-          element={
-            <PrivateRoute redirectTo="/login" component={<WalletPage />} />
-          }   
         />
         <Route
-          path="/stats"
+          path="login"
+          element={
+            <RestrictedRoute
+              // redirectTo="/wallet"
+              component={<LoginPage />}
+            />
+          }
+        />
+        <Route
+          path="wallet"
+          element={
+            <PrivateRoute redirectTo="/login" component={<WalletPage />} />
+          }
+        />
+        {/* <Route
+          path="stats"
           element={
             <PrivateRoute redirectTo="/login" component={<StatsPage />} />
           }   
-        />
+        /> */}
+        {/* <Route path="*" element={<Navigate to="/login" />} /> */}
       </Route>
     </Routes>
   );
