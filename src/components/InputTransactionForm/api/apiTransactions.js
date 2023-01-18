@@ -2,7 +2,8 @@ import axios from 'axios';
 
 export const API_TRANSACTION = {
   expence: {
-    apiEndpoint: '/expense-categories',
+    apiTransactionsCategoriesEndpoint: '/expense-categories',
+    apiAddTransactionEndpoint: '/expense',
     apiCategories: {
       Продукты: 'Products',
       Алкоголь: 'Alcohol',
@@ -18,7 +19,8 @@ export const API_TRANSACTION = {
     },
   },
   income: {
-    apiEndpoint: '/income-categories',
+    apiTransactionsCategoriesEndpoint: '/income-categories',
+    apiAddTransactionEndpoint: '/income',
     apiCategories: {
       'З/П': 'Salary',
       'Доп. доход': 'AddIncome',
@@ -40,7 +42,9 @@ const setToken = token => {
 export const getTransactionCategories = async (type, token, resolve) => {
   try {
     setToken(token);
-    const { data } = await instance.get(API_TRANSACTION[type].apiEndpoint);
+    const { data } = await instance.get(
+      API_TRANSACTION[type].apiTransactionsCategoriesEndpoint
+    );
     const objData = [];
 
     for (let i = 0; i < data.length; i++) {

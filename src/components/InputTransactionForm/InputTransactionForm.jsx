@@ -12,7 +12,7 @@ import {
 } from './api/apiTransactions';
 
 export default function InputTransactionForm({ type = 'expence' }) {
-  const TRANSACTION = {
+  const TRANSACTION_FORM_DATA = {
     expence: {
       description: 'Product description',
       selectCategoryPlaceholder: 'Product category',
@@ -73,6 +73,19 @@ export default function InputTransactionForm({ type = 'expence' }) {
 
   const onFormSubmit = () => {
     console.log("I'm form submitter ");
+
+    if (formData.product !== '' && parseFloat(formData.sum) > 0 && category) {
+      const transaction = {
+        description: formData.product,
+        amount: parseFloat(formData.sum),
+        date: date,
+        category: Object.values(
+          API_TRANSACTION[type].apiCategories[category.value]
+        ),
+      };
+      console.log(transaction);
+    }
+    //else: form is not complete
   };
 
   const validateSumInput = value => {
@@ -122,7 +135,7 @@ export default function InputTransactionForm({ type = 'expence' }) {
             value={formData.product}
             className="input-product-form__input product-description"
             name="product"
-            placeholder={TRANSACTION[type].description}
+            placeholder={TRANSACTION_FORM_DATA[type].description}
             onChange={e =>
               setFormData(oldData => {
                 return { ...oldData, product: e.target.value };
@@ -131,7 +144,7 @@ export default function InputTransactionForm({ type = 'expence' }) {
           />
           <AsyncSelect
             defaultOptions
-            placeholder={TRANSACTION[type].selectCategoryPlaceholder}
+            placeholder={TRANSACTION_FORM_DATA[type].selectCategoryPlaceholder}
             styles={multiSelectStyles}
             loadOptions={promiseOptions}
             onChange={selectedOption => setCategory(selectedOption)}
