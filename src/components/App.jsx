@@ -10,7 +10,7 @@ import { getUser } from 'redux/auth/authSelectors';
 const RegisterPage = lazy(() => import('../pages/Register'));
 const LoginPage = lazy(() => import('../pages/Logins'));
 const WalletPage = lazy(() => import('../pages/Wallet'));
-// const StatsPage = lazy(() => import('../pages/Stats'));
+const StatsPage = lazy(() => import('../pages/Stats'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -42,12 +42,12 @@ export const App = () => {
             <PrivateRoute redirectTo="/login" component={<WalletPage />} />
           }
         />
-        {/* <Route
+        <Route
           path="stats"
           element={
             <PrivateRoute redirectTo="/login" component={<StatsPage />} />
           }   
-        /> */}
+        />
         {/* <Route path="*" element={<Navigate to="/login" />} /> */}
       </Route>
     </Routes>
