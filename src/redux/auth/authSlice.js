@@ -42,7 +42,7 @@ export const authSlice = createSlice({
       .addCase(loginUser.pending, onPending)
 
       .addCase(loginUser.fulfilled, (state, { payload }) => {
-        console.log(payload);
+        // console.log(payload);
         state.isLoading = false;
         state.refreshToken = payload.refreshToken;
         state.sid = payload.sid;
@@ -85,7 +85,7 @@ export const authSlice = createSlice({
       })
       .addCase(fetchCurrentUser.pending, onPending)
       .addCase(fetchCurrentUser.fulfilled, (state, { payload }) => {
-        console.log(payload);
+        // console.log(payload);
         state.error = null;
         state.isLoading = false;
         state.accessToken = payload.newAccessToken;

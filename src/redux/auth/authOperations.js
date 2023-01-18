@@ -41,7 +41,7 @@ export const fetchCurrentUser = createAsyncThunk(
       const state = getState();
       const sid = state.auth.sid;
       const refreshToken = state.auth.refreshToken;
-      console.log(getState());
+      // console.log(getState());
       if (sid && refreshToken) {
         setToken(refreshToken);
         const { data } = await instance.post('/auth/refresh', { sid });
