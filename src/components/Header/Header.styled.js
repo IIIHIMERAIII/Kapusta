@@ -53,12 +53,20 @@ export const StyledContainer = styled.div`
 `;
 
 export const Img = styled.div`
-  height: 30px;
-  width: 30px;
-
-  background-color: green;
-
+  height: 32px;
+  width: 32px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${p => p.theme.colors.PrimaryGray};
+  border-radius: 50%;
   margin-right: 16px;
+`;
+
+export const Avatar = styled.p`
+  color: ${p => p.theme.colors.logoGrey};
+  font-size: 12px;
+  font-weight: bold;
 `;
 
 export const Name = styled.p`

@@ -1,10 +1,12 @@
 import { createPortal } from 'react-dom';
-import { BtnElement } from 'components/Buttons/Btn.styled';
 import { BackDrop, Close, Modal, Title, WrapBtn } from './Popup.styled';
+import { Btn } from 'components/Buttons/Btn';
+import sprite from '../../images/icons_sprite.svg'
 
 export const Popup = ({ popup, setPopup }) => {
-  const handleOnClick = () => {
+  const handleLogout = () => {
     popup.action();
+    closePopup();
   };
 
   const closePopup = () => {
@@ -12,21 +14,30 @@ export const Popup = ({ popup, setPopup }) => {
   };
 
   const onClickBackDrop = event => {
-    if (!event.target.id === 'backdrop') return;
-    closePopup();
+    if (event.target === event.currentTarget) closePopup();
+    // closePopup();
   };
 
   return createPortal(
-    // <BackDrop onClick={onClickBackDrop} id="backdrop">
-    <Modal>
-      <Close onClick={closePopup}>x</Close>
-      <Title>{popup.title}</Title>
-      <WrapBtn>
-        <BtnElement type="button" text="Yes" onClick={handleOnClick} />
-        <BtnElement type="button" text="No" onClick={closePopup} />
-      </WrapBtn>
-    </Modal>,
-    // </BackDrop>
+    <BackDrop onClick={onClickBackDrop} id="backdrop">
+      <Modal>
+        <Close onClick={closePopup}>
+          <svg>
+            <use
+              
+              href={sprite + '#close'}
+              width='12px'
+              height='12px'>
+              </use>
+          </svg>
+        </Close>
+        <Title>{popup.title}</Title>
+        <WrapBtn>
+          <Btn type="button" text="Yes" onClick={handleLogout} />
+          <Btn type="button" text="No" onClick={closePopup} />
+        </WrapBtn>
+      </Modal>
+    </BackDrop>,
     document.querySelector('#modal')
   );
 };
