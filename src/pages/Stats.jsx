@@ -1,15 +1,29 @@
-import Income from "components/Income/Income";
-import Expenses from "components/Expenses/Expenses";
-import { useState } from "react";
+import Income from 'components/Income/Income';
+import Expenses from 'components/Expenses/Expenses';
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import styledComponents from 'components/Expenses/styleExpenses'
+
+const { BoxStats } = styledComponents
 
 const Statistics = () => {
-    const [toggleStats, setToggleStats] = useState(false)
+  const [toggleStats, setToggleStats] = useState(false);
+  const onClick = () => {
+    setToggleStats(prev => !prev);
+  };
 
-    return (<>
-        <button type="button" onClick={setToggleStats(prev => !prev)}>toggle</button>
-        {toggleStats? <Income />: <Expenses />}
-        <button type="button" onClick={setToggleStats(prev => !prev)}>toggle</button>
-    </>)
-}
+  return (
+    <>
+      <BoxStats>
+        <NavLink to="/transactions">Transactions</NavLink>
+        {toggleStats ? (
+          <Income onClick={onClick} />
+        ) : (
+          <Expenses onClick={onClick} />
+        )}
+      </BoxStats>
+    </>
+  );
+};
 
-export default Statistics
+export default Statistics;
