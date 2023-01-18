@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getTransaction } from './statsOperations';
+import { getStatistics } from './statsOperations';
 
 const initialState = {
-  transactions: null,
+  statistics: null,
   isLoading: false,
   error: null,
+  period: '2020-12',
 };
 
 const statusProgress = (state, action) => {
@@ -17,21 +18,21 @@ const statusError = (state, action) => {
 };
 
 export const statsSlice = createSlice({
-  name: 'transaction',
+  name: 'statistics',
   initialState,
   reducers: {
   },
   extraReducers: builder => {
     builder
-      .addCase(getTransaction.pending, state => {
+      .addCase(getStatistics.pending, state => {
         statusProgress(state);
       })
-      .addCase(getTransaction.fulfilled, (state, action) => {
-        state.transactions = action.payload;
+      .addCase(getStatistics.fulfilled, (state, action) => {
+        state.statistics = action.payload;
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(getTransaction.rejected, (state, action) => {
+      .addCase(getStatistics.rejected, (state, action) => {
         statusError(state, action);
       })
   },

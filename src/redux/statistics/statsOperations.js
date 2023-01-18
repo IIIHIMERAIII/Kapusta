@@ -1,18 +1,26 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getToken } from 'redux/auth/authSelectors';
 
-axios.defaults.baseURL = 'https://kapusta-backend.goit.global';
+const instance = axios.create({
+  baseURL: 'https://kapusta-backend.goit.global/transaction',
+});
 
-axios.defaults.headers.common.Authorization = `Bearer ${getToken()}`
+const setToken = token => {
+  if (token) {
+    return (instance.defaults.headers.common.authorization = `Bearer ${token}`);
+  }
+  instance.defaults.headers.common.authorization = '';
+};
 
-export const getTransaction = createAsyncThunk(
-  'stats/getTransaction',
-  async (period, thunkAPI) => {
+export const getStatistics = createAsyncThunk(
+  'stats/getStatistics',
+  async ({ token, period }, thunkAPI) => {
     try {
-      const response = await axios.get(`/transaction/period-data?date=${period}`);
-      return response.data;
-    } catch (e) {
+      setToken(token);
+      const { data } = await instance.get(`/period-data?date=${period}`);
+
+      return { data };
+    } catch (error) {
       return thunkAPI.rejectWithValue('Not founded!');
     }
   }
