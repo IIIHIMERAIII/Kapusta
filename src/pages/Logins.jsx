@@ -60,6 +60,7 @@ const LoginPage = () => {
   const resetForm = () => {
     setEmail('');
     setPassword('');
+    setError(false);
   };
 
   return (
