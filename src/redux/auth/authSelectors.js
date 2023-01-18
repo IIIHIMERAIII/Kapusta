@@ -1,4 +1,3 @@
-export const getUserName = state => state.auth.user.name;
 export const getUser = state => state.auth.user;
 export const getLoadingStatus = state => state.auth.isLoading;
 export const getLogStatus = state => state.auth.isLoggedIn;

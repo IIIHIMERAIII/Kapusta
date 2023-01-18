@@ -101,7 +101,7 @@ const LoginPage = () => {
 
             <BtnsWrapper>
               <Btn type="submit" text="Log in" />
-              <NavLink text="Register" to="/register" />
+              <NavLink text="Register" to="/" />
             </BtnsWrapper>
           </Form>
         </FormWrapper>
