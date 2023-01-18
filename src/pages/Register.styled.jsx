@@ -109,8 +109,8 @@ export const Hint = styled.p`
   height: auto;
   margin: 0;
   padding: 0;
-  font-family: 'Roboto';
-  font-style: normal;
+
+
   font-weight: 400;
   font-size: 12px;
   letter-spacing: 0.04em;
@@ -122,8 +122,6 @@ export const HintLeft = styled.p`
   height: auto;
   margin: 0;
   padding: 0;
-  font-family: 'Roboto';
-  font-style: normal;
   font-weight: 400;
   font-size: 12px;
   letter-spacing: 0.04em;
@@ -158,8 +156,8 @@ export const LogoWrapper = styled.div`
     display: inline-block;
     margin-left: 20%;
     margin-top: 2%;
-    font-family: 'Roboto';
-    font-style: normal;
+    
+   
     font-weight: 700;
     text-transform: uppercase;
     color: ${p => p.theme.colors.logoGrey};
@@ -207,6 +205,7 @@ export const Input = styled.input`
   padding: 17px 18px;
   width: 100%;
   font-size: 14px;
+  font-family: 'Roboto';
   placeholder: ${p => p.theme.colors.placeholderGrey};
   background-color: ${p => p.theme.colors.SecondGray};
   border-radius: 30px;
@@ -228,8 +227,6 @@ export const Label = styled.label`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  font-family: 'Roboto';
-  font-style: normal;
   font-weight: 400;
   font-size: 10px;
   /* line-height: 1.15; */
@@ -243,8 +240,7 @@ export const Label = styled.label`
 `;
 
 export const ErrorText = styled.span`
-  font-family: 'Roboto';
-  font-style: normal;
+  
   font-weight: 400;
   font-size: 10px;
   line-height: 1.16;
