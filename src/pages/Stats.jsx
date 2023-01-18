@@ -15,7 +15,7 @@ const Statistics = () => {
   return (
     <>
       <BoxStats>
-        <NavLink to="/transactions">Transactions</NavLink>
+        <NavLink to="/wallet">Transactions</NavLink>
         {toggleStats ? (
           <Income onClick={onClick} />
         ) : (
