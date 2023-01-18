@@ -1,9 +1,12 @@
-import { NavLink } from 'react-router-dom';
+import InputTransactionForm from 'components/InputTransactionForm/InputTransactionForm';
 
 const WalletPage = () => {
-  return <h1>Wallet
-              <NavLink to='/stats'>Statistics</NavLink>
-  </h1>;
+  return (
+    <>
+      <h1>Wallet</h1>
+      <InputTransactionForm type="expence" />
+    </>
+  );
 };
 
 export default WalletPage;

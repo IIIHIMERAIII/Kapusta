@@ -6,14 +6,15 @@ export const BtnElement = styled.button`
   justify-content: center;
   min-width: 116px;
   min-height: 44px;
-  font-family: 'Roboto';
+  font-family: inherit;
   font-style: normal;
   font-weight: ${props => (props.status === 'google' ? '500' : '700')};
   font-size: 12px;
   line-height: 1.17;
   letter-spacing: 0.02em;
   text-transform: ${props =>
-    props.status === 'google' ? 'none' : 'uppercase'};
+  props.status === 'google' ? 'none' : 'uppercase'};
+  transition: 350ms ease-in-out;
   color: ${props => (props.status === 'google' ? '#000000' : '#52555f')};
   background-color: ${p => p.theme.colors.PrimaryGray};
   padding: ${props => (props.status === 'google' ? '10px 16px' : '12px 14px')};
