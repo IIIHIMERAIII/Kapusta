@@ -21,7 +21,10 @@ export const Title = styled.p`
 export const Close = styled(BtnElement)`
   min-width: 0px;
   min-height: 0px;
-  border-radius: 0;
+  border-radius: 50%;
+  margin-left: auto;
+  background-color: transparent;
+  transition: 350ms ease-in-out;
 `;
 
 const popup = keyframes`

@@ -21,6 +21,7 @@ export const BtnElement = styled.button`
   border: none;
   filter: drop-shadow(1px 3px 5px rgba(82, 85, 95, 0.15));
   cursor: pointer;
+  transition: 350ms ease-in-out;
 
   &:hover,
   &:focus {
