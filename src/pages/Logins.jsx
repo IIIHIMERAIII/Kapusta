@@ -8,6 +8,7 @@ import {
   Label,
   BtnsWrapper,
   FormWrapper,
+  InputWrapper,
   Form,
   InputsWrapper,
   ImageWrapper,
@@ -16,6 +17,7 @@ import {
   Hint,
   HintLeft,
   ImageWrapperBottom,
+  ErrorText,
 } from './Logins.styled';
 import { NavLink } from '../components/NavLink/NavLink';
 import { Btn } from '../components/Buttons/Btn';
@@ -28,6 +30,7 @@ const LoginPage = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
 
   const onInputChange = event => {
     switch (event.target.name) {
@@ -44,6 +47,12 @@ const LoginPage = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    if (email.trim().length === 0 || password.trim().length === 0) {
+      setError(true);
+      return null;
+    }
+
     dispatch(loginUser({ email, password }));
     resetForm();
   };
@@ -51,6 +60,7 @@ const LoginPage = () => {
   const resetForm = () => {
     setEmail('');
     setPassword('');
+    setError(false);
   };
 
   return (
@@ -71,37 +81,50 @@ const LoginPage = () => {
               Or log in using an email and password, after registering:
             </HintLeft>
             <InputsWrapper>
-              <Label htmlFor="auth-email">
-                Email
+              <InputWrapper>
+                <Label htmlFor="auth-email">
+                  {error && <ErrorText>*</ErrorText>}
+
+                  <span>Email</span>
+                </Label>
                 <Input
                   type="email"
                   id="auth-email"
                   name="email"
                   value={email}
-                  required
                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                   placeholder="your@email.com"
                   onChange={onInputChange}
+                  onInvalid={e => {
+                    setError(true);
+                  }}
                 />
-              </Label>
-              <Label htmlFor="auth-password">
-                Password
+                {error && <ErrorText>This is a required field</ErrorText>}
+              </InputWrapper>
+              <InputWrapper>
+                <Label htmlFor="auth-password">
+                  {error && <ErrorText>*</ErrorText>}
+                  <span>Password</span>
+                </Label>
                 <Input
                   type="password"
                   id="auth-password"
                   name="password"
                   value={password}
-                  required
                   minLength="8"
                   placeholder="••••••••"
                   onChange={onInputChange}
+                  onInvalid={e => {
+                    setError(true);
+                  }}
                 />
-              </Label>
+                {error && <ErrorText>This is a required field</ErrorText>}
+              </InputWrapper>
             </InputsWrapper>
 
             <BtnsWrapper>
               <Btn type="submit" text="Log in" />
-              <NavLink text="Register" to="/register" />
+              <NavLink text="Register" to="/" />
             </BtnsWrapper>
           </Form>
         </FormWrapper>
