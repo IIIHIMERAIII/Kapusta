@@ -60,6 +60,13 @@ const styledComponents = {
     justify-content: center;
     align-items: center;
   `,
+
+  BtnToggleStats: styled.button`
+      padding: 5px;
+    border: none;
+    background-color: transparent;
+
+  `,
 };
 
 export default styledComponents;

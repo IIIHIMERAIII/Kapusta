@@ -1,7 +1,7 @@
 import svg from "../../images/icons_sprite.svg";
 import styledComponents from "./styleExpenses";
 
-const { ListOfBalanceChanges, ItemOfBalanceChanges, TitleOfBalanceChanges, SvgBoxStyle } =
+const { ListOfBalanceChanges, ItemOfBalanceChanges, TitleOfBalanceChanges, SvgBoxStyle, BtnToggleStats } =
   styledComponents;
 
 const Expenses = ({ onClick }) => {
@@ -10,17 +10,17 @@ const Expenses = ({ onClick }) => {
   return (
     <div>
       <div>
-        <button type="button" onClick={onClick}>
+        <BtnToggleStats type="button" onClick={onClick}>
           <svg width="10" height="10">
             <use href={`${svg}#arrow_left`} />
           </svg>
-        </button>{' '}
+        </BtnToggleStats>{' '}
         <TitleOfBalanceChanges>Expenses</TitleOfBalanceChanges>
-        <button type="button" onClick={onClick}>
+        <BtnToggleStats type="button" onClick={onClick}>
           <svg width="10" height="10">
             <use href={`${svg}#arrow_right`} />
           </svg>
-        </button>
+        </BtnToggleStats>
       </div>
 
       {statistics.expenses.expenseTotal !== 0 ? (
