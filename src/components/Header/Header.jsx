@@ -5,12 +5,14 @@ import {
   LogoSvg,
   StyledContainer,
   Img,
+  Avatar,
   Name,
   Line,
   Exit,
   ExitText,
   ExitSvg,
 } from './Header.styled';
+import { useAuth } from 'hooks';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { getToken } from 'redux/auth/authSelectors';
@@ -20,6 +22,7 @@ import { Popup } from 'components/Popup/Popup';
 
 export function Header() {
   const dispatch = useDispatch();
+  const { user } = useAuth();
   const token = useSelector(getToken);
   const [popup, setPopup] = useState({
     isShow: false,
@@ -46,8 +49,12 @@ export function Header() {
         </LogoContainer>
         {token && (
           <StyledContainer>
-            <Img />
-            <Name>qwer</Name>
+            <Img>
+              <Avatar>
+                  {user.email.slice(0, 1).toUpperCase()}
+              </Avatar>
+            </Img>
+            <Name>{user.email}</Name>
             <Line />
             <Exit type="button" onClick={handleExit}>
               <ExitText>Exit</ExitText>
