@@ -76,8 +76,6 @@ export default function InputTransactionForm({ type = 'expence' }) {
   };
 
   const onFormSubmit = () => {
-    console.log();
-
     if (formData.product !== '' && parseFloat(formData.sum) > 0 && category) {
       const transaction = {
         description: formData.product,
@@ -87,8 +85,8 @@ export default function InputTransactionForm({ type = 'expence' }) {
           category.value
         ],
       };
-      console.log(transaction);
       dispatch(addTransactionOp({ token, type, transaction }));
+      onClearForm();
     }
     //else: form is not complete
   };
