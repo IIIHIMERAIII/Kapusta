@@ -14,7 +14,7 @@ import {
 import svg from '../../images/icons_sprite.svg';
 
 export function Header() {
-  const token = 'qwe';
+  const token = null;
 
   return (
     <StyledHeader>
