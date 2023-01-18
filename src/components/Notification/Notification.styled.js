@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const NotificationContainer = styled.div`
+  position: absolute;
+  top: 80%;
+  left: 5%;
+`;
+
 export const Triangle = styled.div`
   position: absolute;
   top: -11px;
