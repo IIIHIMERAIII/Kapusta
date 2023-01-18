@@ -16,5 +16,6 @@ export const theme = {
     SVGColor: '#071F41',
     logoGrey: '#52555F',
     placeholderGrey: '#A6ABB9',
+    inputErrorRed: '#eb5757',
   },
 };

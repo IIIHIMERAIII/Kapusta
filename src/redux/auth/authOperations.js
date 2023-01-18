@@ -9,9 +9,9 @@ const instance = axios.create({
 
 const setToken = token => {
   if (token) {
-    return (instance.defaults.headers.common.authorization = `Bearer ${token}`);
+    return (instance.defaults.headers.common.Authorization = `Bearer ${token}`);
   }
-  instance.defaults.headers.common.authorization = '';
+  instance.defaults.headers.common.Authorization = '';
 };
 
 // instance.interceptors.response.use(
@@ -101,8 +101,8 @@ export const logoutUser = createAsyncThunk(
   'auth/logout',
   async (_, thunkAPI) => {
     try {
-      await axios.post(`/auth/logout`);
-      // unsetToken();
+      await instance.post(`/auth/logout`);
+      setToken(null);
     } catch (error) {
       // console.log(error);
       Notiflix.Notify.failure(`${error.message}`, notifySettings);

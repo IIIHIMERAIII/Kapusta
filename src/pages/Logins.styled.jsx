@@ -189,6 +189,7 @@ export const InputsWrapper = styled.div`
   width: 100%;
   flex-direction: column;
   display: flex;
+  gap: 20px;
 `;
 
 export const BtnsWrapper = styled.div`
@@ -214,20 +215,27 @@ export const Input = styled.input`
   border-radius: 30px;
   border: none;
   color: ${p => p.theme.colors.PrimaryBlack};
+  margin-bottom: 4px;
 `;
 
-export const Label = styled.label`
+export const InputWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: stretch;
   align-items: flex-start;
-  gap: 12px;
+  /* gap: 12px; */
+`;
+
+export const Label = styled.label`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-size: 10px;
-  line-height: 1.15;
+  /* line-height: 1.15; */
   letter-spacing: 0.04em;
   color: ${p => p.theme.colors.PrimaryBlack};
   margin-bottom: 12px;
@@ -235,4 +243,14 @@ export const Label = styled.label`
   @media screen and (min-width: 768px) {
     font-size: 12px;
   }
+`;
+
+export const ErrorText = styled.span`
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1.16;
+  letter-spacing: 0.04em;
+  color: ${p => p.theme.colors.inputErrorRed};
 `;
