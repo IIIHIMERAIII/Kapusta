@@ -6,8 +6,8 @@ export const BtnElement = styled.button`
   justify-content: center;
   min-width: 116px;
   min-height: 44px;
-  font-family: 'Roboto';
-  font-style: normal;
+  /* font-family: 'Roboto';
+  font-style: normal; */
   font-weight: ${props => (props.status === 'google' ? '500' : '700')};
   font-size: 12px;
   line-height: 1.17;
