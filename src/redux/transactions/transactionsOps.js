@@ -19,12 +19,12 @@ export const addTransactionOp = createAsyncThunk(
   async ({ token, type, transaction }, thunkAPI) => {
     try {
       setToken(token);
-      const { data } = await axios.post(
+      const { data } = await instance.post(
         API_TRANSACTION[type].apiAddTransactionEndpoint,
         transaction
       );
-      console.dir(data);
-      return data;
+
+      return { type, data };
     } catch (error) {
       return thunkAPI.rejectWithValue({ error });
     }

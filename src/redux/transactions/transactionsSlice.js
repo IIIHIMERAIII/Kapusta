@@ -5,7 +5,10 @@ const transactionsSlice = createSlice({
   name: 'transactions',
   initialState: {
     balance: 0,
-    transactions: [],
+    transactions: {
+      expence: [],
+      income: [],
+    },
     isLoadinng: false,
     error: null,
   },
@@ -13,17 +16,17 @@ const transactionsSlice = createSlice({
   extraReducers: builder =>
     builder
       .addCase(addTransactionOp.pending, state => {
-        state.transactions.isLoadinng = true;
-        state.transactions.error = null;
+        state.isLoadinng = true;
+        state.error = null;
       })
       .addCase(addTransactionOp.fulfilled, (state, { payload }) => {
-        // state.transactions.isLoading = false;
-        // state.transactions.error = null;
-        console.log('Im addTransactionSlice');
+        state.isLoadinng = false;
+        state.balance = payload.data.newBalance;
+        const newTransaction = payload.data.transaction;
+        state.transactions[payload.type].push(newTransaction);
       })
       .addCase(addTransactionOp.rejected, (state, { payload }) => {
-        state.transactions.isLoading = false;
-        console.log(payload);
+        state.error = payload;
       }),
 });
 

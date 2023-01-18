@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './InputTransactionForm.css';
@@ -10,6 +10,7 @@ import {
   getTransactionCategories,
   API_TRANSACTION,
 } from './api/apiTransactions';
+import { addTransactionOp } from 'redux/transactions/transactionsOps';
 
 export default function InputTransactionForm({ type = 'expence' }) {
   const TRANSACTION_FORM_DATA = {
@@ -65,6 +66,9 @@ export default function InputTransactionForm({ type = 'expence' }) {
   const [date, setDate] = useState(today);
   const [category, setCategory] = useState(null);
 
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.auth.accessToken);
+
   const onClearForm = () => {
     setDate(today);
     setFormData(initialFormData);
@@ -72,18 +76,19 @@ export default function InputTransactionForm({ type = 'expence' }) {
   };
 
   const onFormSubmit = () => {
-    console.log("I'm form submitter ");
+    console.log();
 
     if (formData.product !== '' && parseFloat(formData.sum) > 0 && category) {
       const transaction = {
         description: formData.product,
         amount: parseFloat(formData.sum),
-        date: date,
-        category: Object.values(
-          API_TRANSACTION[type].apiCategories[category.value]
-        ),
+        date: date.toISOString().split('T')[0],
+        category: Object.keys(API_TRANSACTION[type].apiCategories)[
+          category.value
+        ],
       };
       console.log(transaction);
+      dispatch(addTransactionOp({ token, type, transaction }));
     }
     //else: form is not complete
   };
@@ -104,8 +109,6 @@ export default function InputTransactionForm({ type = 'expence' }) {
       return { ...oldData, sum: num };
     });
   };
-
-  const token = useSelector(state => state.auth.token);
 
   const promiseOptions = () =>
     new Promise(resolve => getTransactionCategories(type, token, resolve));
