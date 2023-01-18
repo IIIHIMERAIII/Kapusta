@@ -1,5 +1,7 @@
+import { Balance } from 'components/Balance/Balance';
+
 const WalletPage = () => {
-  return <h1>Wallet</h1>;
+  return <Balance />;
 };
 
 export default WalletPage;

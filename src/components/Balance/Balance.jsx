@@ -1,24 +1,18 @@
-import {
-  BalanceContainer,
-  Text,
-  CurrentBalance,
-  StyledBtn,
-  CurrentBalanceContainer,
-} from './Balance.styled';
-import { Notification } from 'components/Notification/Notification';
+import { BalanceContainer, StyledLink, ReportsSvg } from './Balance.styled';
+import svg from '../../images/icons_sprite.svg';
+import { BalanceFrom } from './BalanceForm';
 
 export function Balance() {
   return (
-    <>
-      <BalanceContainer>
-        <Text>Balance:</Text>
-        <CurrentBalanceContainer>
-          <CurrentBalance>00.00 uah</CurrentBalance>
-          <Notification />
-        </CurrentBalanceContainer>
+    <BalanceContainer>
+      <BalanceFrom />
 
-        <StyledBtn type="button">Confirm</StyledBtn>
-      </BalanceContainer>
-    </>
+      <StyledLink to="">
+        Reports
+        <ReportsSvg>
+          <use href={`${svg}#reports`}></use>
+        </ReportsSvg>
+      </StyledLink>
+    </BalanceContainer>
   );
 }

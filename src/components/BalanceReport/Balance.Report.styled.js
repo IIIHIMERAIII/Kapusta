@@ -23,29 +23,22 @@ export const BalanceContainer = styled.div`
     height: auto;
 
     flex-direction: column-reverse;
+
+    padding-top: 22px;
   }
 `;
 
 export const BalanceForm = styled.div`
-  position: absolute;
-
-  left: 50%;
-
   display: flex;
   align-items: center;
   text-align: center;
 
-  transform: translate(-50%, 0);
-
-  @media screen and (max-width: 768px) {
-    position: static;
-
-    transform: translate(0, 0);
-  }
   @media screen and (max-width: 480px) {
     flex-direction: column;
 
-    margin-top: 40px;
+    order: 2;
+
+    margin-top: 32px;
   }
 `;
 
@@ -58,6 +51,10 @@ export const Text = styled.label`
   color: rgba(82, 85, 95, 0.7);
 
   margin-right: 20px;
+
+  @media screen and (max-width: 480px) {
+    margin: 0;
+  }
 `;
 
 export const CurrentBalance = styled.p`
@@ -87,11 +84,17 @@ export const CurrentBalance = styled.p`
   border-radius: 16px;
   margin-right: 16px;
 
-  @media screen and (max-width: 480px) {
-    width: 140px;
+  @media screen and (max-width: 768px) {
+    margin: 0;
+  }
 
-    padding-right: 16px;
-    border-radius: 22px 0px 0px 22px;
+  @media screen and (max-width: 480px) {
+    width: 183px;
+
+    justify-content: center;
+
+    padding: 0;
+    border-radius: 22px;
     margin: 0;
     margin-top: 8px;
   }
@@ -114,6 +117,10 @@ export const Input = styled.input`
   border: none;
 
   outline: none;
+
+  @media screen and (max-width: 480px) {
+    width: 80px;
+  }
 `;
 
 export const CurrentBalanceContainer = styled.div`
@@ -149,12 +156,8 @@ export const StyledBtn = styled.button`
     background-color: ${p => p.theme.colors.PrimaryOrange};
   }
 
-  @media screen and (max-width: 480px) {
-    width: 140px;
-
-    border-radius: 0px 22px 22px 0px;
-    margin: 0;
-    margin-top: 8px;
+  @media screen and (max-width: 768px) {
+    display: none;
   }
 `;
 
@@ -177,17 +180,88 @@ export const StyledLink = styled(NavLink)`
   &:focus {
     color: ${p => p.theme.colors.PrimaryOrange};
   }
+
+  @media screen and (max-width: 480px) {
+    align-self: flex-start;
+
+    margin-bottom: 22px;
+  }
 `;
 
-export const ReportsSvg = styled.svg`
-  height: 14px;
-  width: 14px;
+export const PeriodContainer = styled.div`
+  width: 100%;
 
-  margin-left: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @media screen and (max-width: 480px) {
+    flex-direction: column;
+  }
+`;
+
+export const MainPageSvg = styled.svg`
+  height: 18px;
+  width: 18px;
+
+  margin-right: 19px;
+
+  @media screen and (max-width: 480px) {
+    margin-right: 0;
+    margin-left: 3px;
+  }
+`;
+
+export const Period = styled.p`
+  font-size: 12px;
+  line-height: 1.67;
+  text-align: center;
+  letter-spacing: 0.04em;
+
+  color: rgba(82, 85, 95, 0.7);
+
+  margin: 0;
+`;
+
+export const PeriodBtn = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: transparent;
+
+  border: none;
+
+  cursor: pointer;
+`;
+
+export const PeriodArrow = styled.svg`
+  height: 14px;
+  width: 12px;
 `;
 
 export const BaseContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const PeriodData = styled.p`
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  color: #000000;
+
+  user-select: none;
+`;
+
+export const MainPageText = styled.p`
+  margin: 0;
+
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;
