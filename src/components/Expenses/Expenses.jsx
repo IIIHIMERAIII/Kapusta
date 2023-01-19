@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import svg from '../../images/icons_sprite.svg';
 import styledComponents from './styleExpenses';
+import { formating } from 'components/Income/Income';
 
 const {
   ListOfBalanceChanges,
@@ -8,6 +9,7 @@ const {
   TitleOfBalanceChanges,
   SvgBoxStyle,
   BtnToggleStats,
+  BoxForSvg,
 } = styledComponents;
 
 const Expenses = ({ onClick }) => {
@@ -40,13 +42,13 @@ const Expenses = ({ onClick }) => {
     <div>
       <div>
         <BtnToggleStats type="button" onClick={onClick}>
-          <svg width="16" height="16">
+          <svg width="10" height="10">
             <use href={`${svg}#arrow_left`} />
           </svg>
-        </BtnToggleStats>{' '}
+        </BtnToggleStats>
         <TitleOfBalanceChanges>Expenses</TitleOfBalanceChanges>
         <BtnToggleStats type="button" onClick={onClick}>
-          <svg width="16" height="16">
+          <svg width="10" height="10">
             <use href={`${svg}#arrow_right`} />
           </svg>
         </BtnToggleStats>
@@ -56,101 +58,102 @@ const Expenses = ({ onClick }) => {
         <ListOfBalanceChanges>
           {products && (
             <ItemOfBalanceChanges>
-              <p>{products.total}</p>
-              <SvgBoxStyle width="56" height="56">
+              <p>{formating(products.total)}</p>
+                <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#products`} />
-              </SvgBoxStyle>
+              </SvgBoxStyle></BoxForSvg>
+                             
               <p>Products</p>
             </ItemOfBalanceChanges>
           )}
           {alcohol && (
             <ItemOfBalanceChanges>
-              <p>{alcohol.total}</p>
-              <SvgBoxStyle width="56" height="56">
+              <p>{formating(alcohol.total)}</p>
+              <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#alcohol`} />
-              </SvgBoxStyle>
+              </SvgBoxStyle></BoxForSvg>
               <p>Alcohol</p>
             </ItemOfBalanceChanges>
           )}
           {entertainment && (
             <ItemOfBalanceChanges>
-              <p>{entertainment.total}</p>
-              <SvgBoxStyle width="56" height="56">
+              <p>{formating(entertainment.total)}</p>
+              <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#entertainment`} />
-              </SvgBoxStyle>
+              </SvgBoxStyle></BoxForSvg>
               <p>Entertainment</p>
             </ItemOfBalanceChanges>
           )}
 
           {health && (
             <ItemOfBalanceChanges>
-              <p>{health.total}</p>
-              <SvgBoxStyle width="56" height="56">
+              <p>{formating(health.total)}</p>
+              <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#health`} />
-              </SvgBoxStyle>
+              </SvgBoxStyle></BoxForSvg>
               <p>Health</p>
             </ItemOfBalanceChanges>
           )}
           {transport && (
             <ItemOfBalanceChanges>
-              <p>{transport.total}</p>
-              <SvgBoxStyle width="56" height="56">
+              <p>{formating(transport.total)}</p>
+              <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#transport`} />
-              </SvgBoxStyle>
+              </SvgBoxStyle></BoxForSvg>
               <p>Transport</p>
             </ItemOfBalanceChanges>
           )}
           {housing && (
             <ItemOfBalanceChanges>
-              <p>{housing.total}</p>
-              <SvgBoxStyle width="56" height="56">
+              <p>{formating(housing.total)}</p>
+              <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#housing`} />
-              </SvgBoxStyle>
+              </SvgBoxStyle></BoxForSvg>
               <p>Housing</p>
             </ItemOfBalanceChanges>
           )}
           {technique && (
             <ItemOfBalanceChanges>
-              <p>{technique.total}</p>
-              <SvgBoxStyle width="56" height="56">
+              <p>{formating(technique.total)}</p>
+              <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#technique`} />
-              </SvgBoxStyle>
+              </SvgBoxStyle></BoxForSvg>
               <p>Technique</p>
             </ItemOfBalanceChanges>
           )}
           {communal && (
             <ItemOfBalanceChanges>
-              <p>{communal.total}</p>
-              <SvgBoxStyle width="56" height="56">
+              <p>{formating(communal.total)}</p>
+              <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#communal`} />
-              </SvgBoxStyle>
+              </SvgBoxStyle></BoxForSvg>
               <p>Communal, communication</p>
             </ItemOfBalanceChanges>
           )}
           {hobbies && (
             <ItemOfBalanceChanges>
-              <p>{hobbies.total}</p>
-              <SvgBoxStyle width="56" height="56">
+              <p>{formating(hobbies.total)}</p>
+              <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#hobbies`} />
-              </SvgBoxStyle>
+              </SvgBoxStyle></BoxForSvg>
               <p>Sports, hobbies</p>
             </ItemOfBalanceChanges>
           )}
           {education && (
             <ItemOfBalanceChanges>
-              <p>{education.total}</p>
-              <SvgBoxStyle width="56" height="56">
+              <p>{formating(education.total)}</p>
+              <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#education`} />
-              </SvgBoxStyle>
+              </SvgBoxStyle></BoxForSvg>
               <p>Education</p>
             </ItemOfBalanceChanges>
           )}
           {other && (
             <ItemOfBalanceChanges>
-              <p>{other.total}</p>
-              <SvgBoxStyle width="56" height="56">
+              <p>{formating(other.total)}</p>
+              <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#other`} />
-              </SvgBoxStyle>
+              </SvgBoxStyle></BoxForSvg>
               <p>Other</p>
             </ItemOfBalanceChanges>
           )}
