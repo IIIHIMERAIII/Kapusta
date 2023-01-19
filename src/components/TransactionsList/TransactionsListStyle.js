@@ -6,13 +6,13 @@ const stylesTransactionsList = {
     width: 625px;
     border-radius: 30px;
     overflow: hidden;
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 768px) {
       width: 100%;
     }
 
-    @media screen and (min-width: 1030px) {
+    @media screen and (min-width: 1280px) {
       width: 750px;
-      margin: 60px 0 0 0;
+      margin: 0;
     }
   `,
   List: styled.ul`
@@ -27,7 +27,8 @@ const stylesTransactionsList = {
   ListHeaderItems: styled.li`
     display: flex;
     align-items: center;
-    height: 35px;
+    justify-content: center;
+    height: 40px;
     padding: 0 20px;
     font-weight: 700;
     font-size: 12px;
@@ -54,7 +55,7 @@ const stylesTransactionsList = {
 
   DescriptionStyle: styled.p`
     width: 170px;
-    @media screen and (min-width: 1030px) {
+    @media screen and (min-width: 1280px) {
       width: 190px;
       margin-right: 35px;
     }
@@ -63,7 +64,7 @@ const stylesTransactionsList = {
   CategoryStyle: styled.p`
     width: 125px;
     text-align: center;
-    @media screen and (min-width: 1030px) {
+    @media screen and (min-width: 1280px) {
       width: 115px;
       margin-right: 50px;
     }
@@ -73,7 +74,7 @@ const stylesTransactionsList = {
     width: 125px;
     text-align: center;
     margin-right: 20px;
-    @media screen and (min-width: 1030px) {
+    @media screen and (min-width: 1280px) {
       width: 150px;
       margin-right: 50px;
     }
