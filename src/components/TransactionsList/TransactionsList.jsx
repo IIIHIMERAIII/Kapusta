@@ -19,8 +19,7 @@ function TransactionsList({ type }) {
       dispatch(fetchIncomeTransactions());
       return;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, [dispatch, type]);
   console.log('transactions', transactions);
   return (
     <ul>

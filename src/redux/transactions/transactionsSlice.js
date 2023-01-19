@@ -12,7 +12,7 @@ const transactionsSlice = createSlice({
     transactions: {
       expense: [],
       income: [],
-      monthStats: [],
+      monthsStats: [],
     },
     isLoadinng: false,
     error: null,
@@ -41,7 +41,8 @@ const transactionsSlice = createSlice({
       .addCase(fetchExpenseTransactions.fulfilled, (state, { payload }) => {
         state.isLoadinng = false;
         state.error = null;
-        state.transactions.monthStats = payload.monthStats;
+        console.log('payload', payload);
+        state.transactions.monthsStats = payload.monthsStats;
         state.transactions.expense = payload.expenses;
       })
       .addCase(fetchExpenseTransactions.rejected, (state, { payload }) => {
@@ -55,7 +56,7 @@ const transactionsSlice = createSlice({
       .addCase(fetchIncomeTransactions.fulfilled, (state, { payload }) => {
         state.isLoadinng = false;
         state.error = null;
-        state.transactions.monthStats = payload.monthStats;
+        state.transactions.monthsStats = payload.monthStats;
         state.transactions.income = payload.incomes;
       })
       .addCase(fetchIncomeTransactions.rejected, (state, { payload }) => {
