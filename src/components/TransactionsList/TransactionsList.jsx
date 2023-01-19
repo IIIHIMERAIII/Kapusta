@@ -10,6 +10,7 @@ import { wordTranslator } from 'utils/wordTranslator';
 import { getParseDate } from 'utils/getParseDate';
 import stylesTransactionsList from './TransactionsListStyle';
 import svg from '../../images/icons_sprite.svg';
+import InputTransactionForm from 'components/InputTransactionForm/InputTransactionForm';
 
 const {
   BoxForList,
