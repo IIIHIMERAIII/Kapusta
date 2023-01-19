@@ -19,7 +19,7 @@ function Summary() {
           .filter(operation => typeof operation[1] === 'number')
           .map(operation => {
             return (
-              <SummaryItems>
+              <SummaryItems key={wordTranslator(operation[0])}>
                 <SummaryText>{wordTranslator(operation[0])}</SummaryText>
                 <SummaryText>{operation[1] + '.00'}</SummaryText>
               </SummaryItems>
