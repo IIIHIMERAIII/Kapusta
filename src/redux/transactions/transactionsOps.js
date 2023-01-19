@@ -68,3 +68,23 @@ export const fetchIncomeTransactions = createAsyncThunk(
     }
   }
 );
+
+export const removeTransaction = createAsyncThunk(
+  'transactions/remove',
+  async (id, { rejectWithValue, getState }) => {
+    const accessToken = getState().auth.token;
+    try {
+      setToken(accessToken);
+      const { data } = await instance.delete(`${id}`);
+      console.log('data', data);
+      return id;
+    } catch ({ response }) {
+      const { status, data } = response;
+      const error = {
+        status,
+        message: data.message,
+      };
+      return rejectWithValue(error);
+    }
+  }
+);
