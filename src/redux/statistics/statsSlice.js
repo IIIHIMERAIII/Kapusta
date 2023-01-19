@@ -5,7 +5,7 @@ const initialState = {
   statistics: null,
   isLoading: false,
   error: null,
-  period: '2020-12',
+  period: '2023-01',
 };
 
 const statusProgress = (state, action) => {

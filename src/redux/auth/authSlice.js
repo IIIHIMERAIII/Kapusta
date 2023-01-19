@@ -28,8 +28,14 @@ export const authSlice = createSlice({
     builder
       .addCase(registerUser.pending, onPending)
       .addCase(registerUser.fulfilled, (state, { payload }) => {
+        console.log(payload);
         state.isLoading = false;
-        state.user = { ...payload };
+        state.refreshToken = payload.refreshToken;
+        state.sid = payload.sid;
+        state.user.email = payload.userData.email;
+        state.user.id = payload.userData.id;
+        state.token = payload.accessToken;
+        state.isLoggedIn = true;
         Notiflix.Notify.success(
           'Acount was successfully created',
           notifySettings
@@ -42,7 +48,6 @@ export const authSlice = createSlice({
       .addCase(loginUser.pending, onPending)
 
       .addCase(loginUser.fulfilled, (state, { payload }) => {
-        // console.log(payload);
         state.isLoading = false;
         state.refreshToken = payload.refreshToken;
         state.sid = payload.sid;
@@ -85,7 +90,6 @@ export const authSlice = createSlice({
       })
       .addCase(fetchCurrentUser.pending, onPending)
       .addCase(fetchCurrentUser.fulfilled, (state, { payload }) => {
-        // console.log(payload);
         state.error = null;
         state.isLoading = false;
         state.accessToken = payload.newAccessToken;
