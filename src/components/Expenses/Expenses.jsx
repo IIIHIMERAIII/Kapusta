@@ -8,6 +8,7 @@ const {
   TitleOfBalanceChanges,
   SvgBoxStyle,
   BtnToggleStats,
+  BoxForSvg,
 } = styledComponents;
 
 const Expenses = ({ onClick }) => {
@@ -40,13 +41,13 @@ const Expenses = ({ onClick }) => {
     <div>
       <div>
         <BtnToggleStats type="button" onClick={onClick}>
-          <svg width="16" height="16">
+          <svg width="10" height="10">
             <use href={`${svg}#arrow_left`} />
           </svg>
-        </BtnToggleStats>{' '}
+        </BtnToggleStats>
         <TitleOfBalanceChanges>Expenses</TitleOfBalanceChanges>
         <BtnToggleStats type="button" onClick={onClick}>
-          <svg width="16" height="16">
+          <svg width="10" height="10">
             <use href={`${svg}#arrow_right`} />
           </svg>
         </BtnToggleStats>
@@ -57,9 +58,10 @@ const Expenses = ({ onClick }) => {
           {products && (
             <ItemOfBalanceChanges>
               <p>{products.total}</p>
-              <SvgBoxStyle width="56" height="56">
+                <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#products`} />
-              </SvgBoxStyle>
+              </SvgBoxStyle></BoxForSvg>
+                             
               <p>Products</p>
             </ItemOfBalanceChanges>
           )}
