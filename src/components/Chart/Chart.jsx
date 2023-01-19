@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import {
   Bar,
   BarChart,
@@ -5,6 +6,12 @@ import {
   ResponsiveContainer,
   XAxis,
 } from 'recharts';
+
+const Container = styled.div`
+  padding: 40px;
+  width: 800px;
+  height: 300px;
+`;
 
 const customLabel = ({ x, y, width, value }) => {
   return (
@@ -14,13 +21,16 @@ const customLabel = ({ x, y, width, value }) => {
   );
 };
 export const Chart = ({ data }) => {
+  // console.log(data);
   return (
-    <ResponsiveContainer width="100%" height="100%">
-      <BarChart data={data}>
-        <XAxis dataKey="name" />
-        <CartesianGrid vertical={false} />
-        <Bar dataKey="cost" fill="#FF751D" label={customLabel} />
-      </BarChart>
-    </ResponsiveContainer>
+    <Container>
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={data}>
+          <XAxis dataKey="name" />
+          <CartesianGrid vertical={false} />
+          <Bar dataKey="cost" fill="#FF751D" label={customLabel} />
+        </BarChart>
+      </ResponsiveContainer>
+    </Container>
   );
 };
