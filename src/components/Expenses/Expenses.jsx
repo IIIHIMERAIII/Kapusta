@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import svg from '../../images/icons_sprite.svg';
 import styledComponents from './styleExpenses';
+import { formating } from 'components/Income/Income';
 
 const {
   ListOfBalanceChanges,
@@ -57,7 +58,7 @@ const Expenses = ({ onClick }) => {
         <ListOfBalanceChanges>
           {products && (
             <ItemOfBalanceChanges>
-              <p>{products.total}</p>
+              <p>{formating(products.total)}</p>
                 <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#products`} />
               </SvgBoxStyle></BoxForSvg>
@@ -67,7 +68,7 @@ const Expenses = ({ onClick }) => {
           )}
           {alcohol && (
             <ItemOfBalanceChanges>
-              <p>{alcohol.total}</p>
+              <p>{formating(alcohol.total)}</p>
               <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#alcohol`} />
               </SvgBoxStyle></BoxForSvg>
@@ -76,7 +77,7 @@ const Expenses = ({ onClick }) => {
           )}
           {entertainment && (
             <ItemOfBalanceChanges>
-              <p>{entertainment.total}</p>
+              <p>{formating(entertainment.total)}</p>
               <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#entertainment`} />
               </SvgBoxStyle></BoxForSvg>
@@ -86,7 +87,7 @@ const Expenses = ({ onClick }) => {
 
           {health && (
             <ItemOfBalanceChanges>
-              <p>{health.total}</p>
+              <p>{formating(health.total)}</p>
               <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#health`} />
               </SvgBoxStyle></BoxForSvg>
@@ -95,7 +96,7 @@ const Expenses = ({ onClick }) => {
           )}
           {transport && (
             <ItemOfBalanceChanges>
-              <p>{transport.total}</p>
+              <p>{formating(transport.total)}</p>
               <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#transport`} />
               </SvgBoxStyle></BoxForSvg>
@@ -104,7 +105,7 @@ const Expenses = ({ onClick }) => {
           )}
           {housing && (
             <ItemOfBalanceChanges>
-              <p>{housing.total}</p>
+              <p>{formating(housing.total)}</p>
               <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#housing`} />
               </SvgBoxStyle></BoxForSvg>
@@ -113,7 +114,7 @@ const Expenses = ({ onClick }) => {
           )}
           {technique && (
             <ItemOfBalanceChanges>
-              <p>{technique.total}</p>
+              <p>{formating(technique.total)}</p>
               <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#technique`} />
               </SvgBoxStyle></BoxForSvg>
@@ -122,7 +123,7 @@ const Expenses = ({ onClick }) => {
           )}
           {communal && (
             <ItemOfBalanceChanges>
-              <p>{communal.total}</p>
+              <p>{formating(communal.total)}</p>
               <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#communal`} />
               </SvgBoxStyle></BoxForSvg>
@@ -131,7 +132,7 @@ const Expenses = ({ onClick }) => {
           )}
           {hobbies && (
             <ItemOfBalanceChanges>
-              <p>{hobbies.total}</p>
+              <p>{formating(hobbies.total)}</p>
               <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#hobbies`} />
               </SvgBoxStyle></BoxForSvg>
@@ -140,7 +141,7 @@ const Expenses = ({ onClick }) => {
           )}
           {education && (
             <ItemOfBalanceChanges>
-              <p>{education.total}</p>
+              <p>{formating(education.total)}</p>
               <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#education`} />
               </SvgBoxStyle></BoxForSvg>
@@ -149,7 +150,7 @@ const Expenses = ({ onClick }) => {
           )}
           {other && (
             <ItemOfBalanceChanges>
-              <p>{other.total}</p>
+              <p>{formating(other.total)}</p>
               <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#other`} />
               </SvgBoxStyle></BoxForSvg>
