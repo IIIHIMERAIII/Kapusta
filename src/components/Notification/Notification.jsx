@@ -20,7 +20,7 @@ export function Notification({ money = false }) {
         setTimeout(() => setShow(false), 10000);
       }, 1000);
     }
-  }, []);
+  }, [money]);
 
   return (
     <>
