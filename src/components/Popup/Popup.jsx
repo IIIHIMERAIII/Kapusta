@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom';
 import { BackDrop, Close, Modal, Title, WrapBtn } from './Popup.styled';
 import { Btn } from 'components/Buttons/Btn';
-import sprite from '../../images/icons_sprite.svg'
+import sprite from '../../images/icons_sprite.svg';
 
 export const Popup = ({ popup, setPopup }) => {
   const handleLogout = () => {
@@ -11,11 +11,12 @@ export const Popup = ({ popup, setPopup }) => {
 
   const closePopup = () => {
     setPopup(prevState => ({ ...prevState, isShow: false }));
+    document.querySelector('#modal').classList.remove('js-action');
   };
 
   const onClickBackDrop = event => {
     if (event.target === event.currentTarget) closePopup();
-    // closePopup();
+    closePopup();
   };
 
   return createPortal(
@@ -23,12 +24,7 @@ export const Popup = ({ popup, setPopup }) => {
       <Modal>
         <Close onClick={closePopup}>
           <svg>
-            <use
-              
-              href={sprite + '#close'}
-              width='12px'
-              height='12px'>
-              </use>
+            <use href={sprite + '#close'} width="12px" height="12px"></use>
           </svg>
         </Close>
         <Title>{popup.title}</Title>
