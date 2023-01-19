@@ -12,6 +12,8 @@ import {
 } from './api/apiTransactions';
 import { addTransactionOp } from 'redux/transactions/transactionsOps';
 import { DatePickerComponent } from 'components/DatePickerComponent/DatePickerComponent';
+import Notiflix from 'notiflix';
+import { notifySettings } from '../../utils/notifySettings';
 
 const selectStyles = {
   control: () => ({
@@ -142,20 +144,44 @@ export default function InputTransactionForm({ type = 'expense' }) {
     setCategory(null);
   };
 
-  const onFormSubmit = () => {
-    if (formData.product !== '' && parseFloat(formData.sum) > 0 && category) {
-      const transaction = {
-        description: formData.product,
-        amount: parseFloat(formData.sum),
-        date: date.toISOString().split('T')[0],
-        category: Object.keys(API_TRANSACTION[type].apiCategories)[
-          category.value
-        ],
-      };
-      dispatch(addTransactionOp({ token, type, transaction }));
-      onClearForm();
+  const isFormValid = (product, category, sum) => {
+    let isValid = true;
+    if (!product) {
+      Notiflix.Notify.warning(
+        'You should enter transaction description',
+        notifySettings
+      );
+      isValid = false;
     }
-    //else: form is not complete
+    if (!category) {
+      Notiflix.Notify.warning(
+        'You should choose transaction category',
+        notifySettings
+      );
+      isValid = false;
+    }
+    if (sum === '' || parseFloat(sum) < 0.01) {
+      Notiflix.Notify.warning(
+        'You should enter transaction amount',
+        notifySettings
+      );
+      isValid = false;
+    }
+    return isValid;
+  };
+
+  const onFormSubmit = () => {
+    if (!isFormValid) return null;
+    const transaction = {
+      description: formData.product,
+      amount: parseFloat(formData.sum),
+      date: date.toISOString().split('T')[0],
+      category: Object.keys(API_TRANSACTION[type].apiCategories)[
+        category.value
+      ],
+    };
+    dispatch(addTransactionOp({ token, type, transaction }));
+    onClearForm();
   };
 
   const validateSumInput = value => {
