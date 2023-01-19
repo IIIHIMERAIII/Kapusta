@@ -3,29 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchExpenseTransactions,
   fetchIncomeTransactions,
+  removeTransaction,
 } from 'redux/transactions/transactionsOps';
 import { selectTransactions } from 'redux/transactions/transactionsSelectors';
 import InputTransactionForm from 'components/InputTransactionForm/InputTransactionForm';
-
+import { wordTranslator } from 'utils/wordTranslator';
+import { getParseDate } from 'utils/getParseDate';
 
 function TransactionsList({ type }) {
   const transactions = useSelector(selectTransactions);
   const dispatch = useDispatch();
-
-  const getDate = operationDate => {
-    const instance = new Date(Date.parse(operationDate));
-    const day = instance.getDate();
-    const getCurrMonth = () => {
-      const month = instance.getMonth() + 1;
-      if (month < 9) {
-        return `0${month}`;
-      }
-      return month;
-    };
-    const month = getCurrMonth();
-    const year = instance.getFullYear();
-    return `${day}.${month}.${year}`;
-  };
 
   useEffect(() => {
     if (type === 'expense') {
@@ -38,27 +25,37 @@ function TransactionsList({ type }) {
     }
   }, [dispatch, type]);
 
-  console.log('transactions', transactions);
-
   return (
     <>
       <InputTransactionForm type={type} />
-    <ul>
-      <li></li>
-      {transactions[type].length !== 0 &&
-        transactions.expense.map(operation => {
-          return (
-            <li key={operation._id}>
-              <p>{getDate(operation.date)}</p>
-              <p>{operation.description}</p>
-              <p>{operation.category}</p>
-              <p>
-                {type === 'expense' && '-'} {operation.amount} UAH.
-              </p>
-              <button>Del</button>
-            </li>
-          );
-        })}
+      <ul>
+        <li style={{ display: 'flex' }}>
+          <p>Date</p>
+          <p>Description</p>
+          <p>Category</p>
+          <p>Sum</p>
+        </li>
+        {transactions[type].length !== 0 &&
+          transactions.expense.map(operation => {
+            return (
+              <li key={operation._id} style={{ display: 'flex' }}>
+                <p>{getParseDate(operation.date)}</p>
+                <p>{operation.description}</p>
+                <p>{wordTranslator(operation.category)}</p>
+                <p>
+                  {type === 'expense' && '-'} {operation.amount} UAH.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    dispatch(removeTransaction(operation._id));
+                  }}
+                >
+                  Del
+                </button>
+              </li>
+            );
+          })}
       </ul>
     </>
   );

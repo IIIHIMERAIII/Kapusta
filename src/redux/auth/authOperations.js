@@ -14,25 +14,40 @@ const setToken = token => {
   instance.defaults.headers.common.Authorization = '';
 };
 
-// instance.interceptors.response.use(
-//   response => response,
-//   async error => {
-//     if (error.response.status === 401) {
-//       const sid = localStorage.getItem('sid');
-//       try {
-//         const { data } = await instance.post('/auth/refresh', { sid });
-//         setToken(data.accessToken);
-//         localStorage.setItem('refreshToken', data.refreshToken);
-
-//         return instance(error.config);
-//       } catch (error) {
-//         return Promise.reject(error);
-//       }
-//     } else {
-//       return Promise.reject(error);
-//     }
-//   }
-// );
+instance.interceptors.response.use(
+  response => response,
+  async error => {
+    if (error.response.status === 401) {
+      const refreshToken = JSON.parse(
+        localStorage.getItem('persist:root')
+      ).refreshToken;
+      const sid = JSON.parse(localStorage.getItem('persist:root')).sid;
+      try {
+        setToken(refreshToken);
+        const { data } = await instance.post('/auth/refresh', { sid });
+        setToken(data.accessToken);
+        return instance(error.config);
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    } else if (error.response.status === 404) {
+      const refreshToken = JSON.parse(
+        localStorage.getItem('persist:root')
+      ).refreshToken;
+      const sid = JSON.parse(localStorage.getItem('persist:root')).sid;
+      try {
+        setToken(refreshToken);
+        const { data } = await instance.post('/auth/refresh', { sid });
+        setToken(data.accessToken);
+        return instance(error.config);
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    } else {
+      return Promise.reject(error);
+    }
+  }
+);
 
 export const fetchCurrentUser = createAsyncThunk(
   'auth/current',
@@ -66,11 +81,15 @@ export const registerUser = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const { data } = await instance.post('/auth/register', userData);
-      if(data) {try {
-        const results = await instance.post('/auth/login', userData);
-      setToken(results.data.accessToken);
-      return results.data;
-      } catch (e) {return e}}
+      if (data) {
+        try {
+          const results = await instance.post('/auth/login', userData);
+          setToken(results.data.accessToken);
+          return results.data;
+        } catch (e) {
+          return e;
+        }
+      }
     } catch (error) {
       if (error.request.status === 409) {
         Notiflix.Notify.warning(
