@@ -6,7 +6,7 @@ const transactionsSlice = createSlice({
   initialState: {
     balance: 0,
     transactions: {
-      expence: [],
+      expense: [],
       income: [],
     },
     isLoadinng: false,
