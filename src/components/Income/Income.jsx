@@ -8,6 +8,7 @@ const {
   TitleOfBalanceChanges,
   SvgBoxStyle,
   BtnToggleStats,
+  BoxForSvg,
 } = styledComponents;
 
 const Income = ({ onClick }) => {
@@ -44,18 +45,18 @@ const Income = ({ onClick }) => {
           {salary && (
             <ItemOfBalanceChanges>
               <p>{salary.total}</p>
-              <SvgBoxStyle width="56" height="56">
+              <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#salary`} />
-              </SvgBoxStyle>
+              </SvgBoxStyle></BoxForSvg>
               <p>Salary</p>
             </ItemOfBalanceChanges>
           )}
           {income && (
             <ItemOfBalanceChanges>
               <p>{income.total}</p>
-              <SvgBoxStyle width="56" height="56">
+              <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#income`} />
-              </SvgBoxStyle>
+              </SvgBoxStyle></BoxForSvg>
               <p>Add. income</p>
             </ItemOfBalanceChanges>
           )}
