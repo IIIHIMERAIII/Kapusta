@@ -3,16 +3,25 @@ import { theme } from 'components/Theme';
 
 const stylesTransactionsList = {
   BoxForList: styled.div`
-    width: 750px;
-    margin: 0;
+    width: 625px;
     border-radius: 30px;
     overflow: hidden;
+    @media screen and (max-width: 800px) {
+      width: 100%;
+    }
+
+    @media screen and (min-width: 1030px) {
+      width: 750px;
+      margin: 60px 0 0 0;
+    }
   `,
   List: styled.ul`
     display: flex;
     flex-direction: column;
     margin: 0;
     padding: 0;
+    max-height: 365px;
+    overflow-y: auto;
   `,
 
   ListHeaderItems: styled.li`
@@ -28,7 +37,7 @@ const stylesTransactionsList = {
     background-color: ${theme.colors.PrimaryGray};
   `,
 
-    ListItems: styled.li`
+  ListItems: styled.li`
     display: flex;
     align-items: center;
     height: 35px;
@@ -44,31 +53,43 @@ const stylesTransactionsList = {
   `,
 
   DescriptionStyle: styled.p`
-    width: 190px;
-    margin-right: 35px;
+    width: 170px;
+    @media screen and (min-width: 1030px) {
+      width: 190px;
+      margin-right: 35px;
+    }
   `,
 
   CategoryStyle: styled.p`
-    width: 115px;
+    width: 125px;
     text-align: center;
-    margin-right: 50px;
+    @media screen and (min-width: 1030px) {
+      width: 115px;
+      margin-right: 50px;
+    }
   `,
 
   AmountStyle: styled.p`
-    width: 150px;
+    width: 125px;
     text-align: center;
-    margin-right: 50px;
+    margin-right: 20px;
+    @media screen and (min-width: 1030px) {
+      width: 150px;
+      margin-right: 50px;
+    }
   `,
 
   BtnForRemove: styled.button`
     display: block;
     border: none;
     border-radius: 50%;
+    width: 20px;
+    height: 20px;
     padding: 0;
     background-color: ${theme.colors.PrimaryGray};
   `,
 
-   SvgBoxStyle: styled.svg`
+  SvgBoxStyle: styled.svg`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -77,10 +98,10 @@ const stylesTransactionsList = {
     fill: ${theme.colors.SVGColor};
     transition: 350ms ease-in-out;
     &:hover {
-    fill: ${theme.colors.PrimaryOrange};
-    stroke: ${theme.colors.PrimaryOrange};
-    transform: scale(1.2);
-  }
+      fill: ${theme.colors.PrimaryOrange};
+      stroke: ${theme.colors.PrimaryOrange};
+      transform: scale(1.2);
+    }
   `,
 };
 

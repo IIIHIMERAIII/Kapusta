@@ -60,7 +60,7 @@ function TransactionsList({ type }) {
                   <CategoryStyle>
                     {wordTranslator(operation.category)}
                   </CategoryStyle>
-                  <AmountStyle>
+                  <AmountStyle style={{ color: `${type === 'expense' ? 'red' : 'green' }`}}>
                     {type === 'expense' && '-'} {operation.amount} UAH.
                   </AmountStyle>
                   <BtnForRemove
