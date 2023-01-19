@@ -75,10 +75,10 @@ const transactionsSlice = createSlice({
           transactions: {
             ...state.transactions,
             expense: state.transactions.expense.filter(
-              operation => operation.id !== payload
+              operation => operation._id !== payload
             ),
             income: state.transactions.income.filter(
-              operation => operation.id !== payload
+              operation => operation._id !== payload
             ),
           },
         };
