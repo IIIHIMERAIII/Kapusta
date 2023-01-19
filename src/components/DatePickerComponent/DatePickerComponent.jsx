@@ -14,6 +14,7 @@ export function DatePickerComponent({ date, handler }) {
         name="date"
         dateFormat="dd.MM.yyyy"
         selected={date}
+        maxDate={date}
         onChange={handler}
       />
     </label>

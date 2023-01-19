@@ -128,12 +128,11 @@ export default function InputTransactionForm({ type = 'expense' }) {
         </svg> */}
         {/* <ReactDatePicker
           className="date-picker__input"
-          // className="date"
           selected={date}
-          // dateFormat="yyyy.MM.dd"
-          onChange={}
+          dateFormat="yyyy.MM.dd"
+          onChange={date => setDate(date)}
           maxDate={date}
-          // name="date"
+          
         /> */}
         <DatePickerComponent
           name="date"
