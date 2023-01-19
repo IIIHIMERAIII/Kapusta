@@ -12,7 +12,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import transactionsReducer from './transactions/transactionsSlice';
-import { statsSlice } from './statistics/statsSlice';
+import statsReducer from './statistics/statsSlice';
 
 const persistConfig = {
   key: 'root',
@@ -26,7 +26,7 @@ export const store = configureStore({
   reducer: {
     auth: persistedReducer,
     transactions: transactionsReducer,
-    statistics: statsSlice.reducer,
+    statistics: statsReducer,
   },
 
   middleware: getDefaultMiddleware =>
