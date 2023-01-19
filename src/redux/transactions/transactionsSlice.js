@@ -41,7 +41,6 @@ const transactionsSlice = createSlice({
       .addCase(fetchExpenseTransactions.fulfilled, (state, { payload }) => {
         state.isLoadinng = false;
         state.error = null;
-        console.log('payload', payload);
         state.transactions.monthsStats = payload.monthsStats;
         state.transactions.expense = payload.expenses;
       })
