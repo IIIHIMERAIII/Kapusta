@@ -3,6 +3,7 @@ import {
   addTransactionOp,
   fetchExpenseTransactions,
   fetchIncomeTransactions,
+  removeTransaction,
 } from './transactionsOps';
 
 const transactionsSlice = createSlice({
@@ -59,6 +60,30 @@ const transactionsSlice = createSlice({
         state.transactions.income = payload.incomes;
       })
       .addCase(fetchIncomeTransactions.rejected, (state, { payload }) => {
+        state.isLoadinng = false;
+        state.error = payload;
+      })
+      .addCase(removeTransaction.pending, state => {
+        state.isLoadinng = true;
+        state.error = null;
+      })
+      .addCase(removeTransaction.fulfilled, (state, { payload }) => {
+        return {
+          ...state,
+          isLoadinng: false,
+          error: null,
+          transactions: {
+            ...state.transactions,
+            expense: state.transactions.expense.filter(
+              operation => operation.id !== payload
+            ),
+            income: state.transactions.income.filter(
+              operation => operation.id !== payload
+            ),
+          },
+        };
+      })
+      .addCase(removeTransaction.rejected, (state, { payload }) => {
         state.isLoadinng = false;
         state.error = payload;
       }),

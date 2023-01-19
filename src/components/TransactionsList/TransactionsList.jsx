@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchExpenseTransactions,
   fetchIncomeTransactions,
+  removeTransaction,
 } from 'redux/transactions/transactionsOps';
 import { selectTransactions } from 'redux/transactions/transactionsSelectors';
 import InputTransactionForm from 'components/InputTransactionForm/InputTransactionForm';
-
 
 function TransactionsList({ type }) {
   const transactions = useSelector(selectTransactions);
@@ -43,22 +43,29 @@ function TransactionsList({ type }) {
   return (
     <>
       <InputTransactionForm type={type} />
-    <ul>
-      <li></li>
-      {transactions[type].length !== 0 &&
-        transactions.expense.map(operation => {
-          return (
-            <li key={operation._id}>
-              <p>{getDate(operation.date)}</p>
-              <p>{operation.description}</p>
-              <p>{operation.category}</p>
-              <p>
-                {type === 'expense' && '-'} {operation.amount} UAH.
-              </p>
-              <button>Del</button>
-            </li>
-          );
-        })}
+      <ul>
+        <li></li>
+        {transactions[type].length !== 0 &&
+          transactions.expense.map(operation => {
+            return (
+              <li key={operation._id}>
+                <p>{getDate(operation.date)}</p>
+                <p>{operation.description}</p>
+                <p>{operation.category}</p>
+                <p>
+                  {type === 'expense' && '-'} {operation.amount} UAH.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    dispatch(removeTransaction(operation._id));
+                  }}
+                >
+                  Del
+                </button>
+              </li>
+            );
+          })}
       </ul>
     </>
   );

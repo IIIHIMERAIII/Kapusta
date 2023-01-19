@@ -66,11 +66,15 @@ export const registerUser = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const { data } = await instance.post('/auth/register', userData);
-      if(data) {try {
-        const results = await instance.post('/auth/login', userData);
-      setToken(results.data.accessToken);
-      return results.data;
-      } catch (e) {return e}}
+      if (data) {
+        try {
+          const results = await instance.post('/auth/login', userData);
+          setToken(results.data.accessToken);
+          return results.data;
+        } catch (e) {
+          return e;
+        }
+      }
     } catch (error) {
       if (error.request.status === 409) {
         Notiflix.Notify.warning(
