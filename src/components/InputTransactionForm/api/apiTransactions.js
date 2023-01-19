@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const API_TRANSACTION = {
-  expence: {
+  expense: {
     apiTransactionsCategoriesEndpoint: '/expense-categories',
     apiAddTransactionEndpoint: '/expense',
     apiCategories: {

@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { theme } from 'components/Theme';
 
 const styledComponents = {
   BoxStats: styled.div`
@@ -29,6 +30,7 @@ const styledComponents = {
     row-gap: 40px;
     column-gap: 30px;
     list-style: none;
+    color: ${theme.colors.TextGray};
     @media screen and (max-width: 630px) {
       column-gap: 10px;
       width: 100%;
@@ -54,11 +56,20 @@ const styledComponents = {
     letter-spacing: 0.02em;
     text-transform: uppercase;
     margin: 0 30px 20px 30px;
+    color: ${theme.colors.PrimaryBlack};
   `,
   SvgBoxStyle: styled.svg`
     display: flex;
     justify-content: center;
     align-items: center;
+    fill: ${theme.colors.SVGColor};
+    transition: 350ms ease-in-out;
+    &:hover {
+    fill: ${theme.colors.PrimaryOrange};
+    background-color: ${theme.colors.PaleOrange};
+    border-radius: 10px;
+    transform: scale(1.2);
+  }
   `,
 
   BtnToggleStats: styled.button`

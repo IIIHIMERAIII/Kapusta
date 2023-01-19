@@ -12,7 +12,7 @@ import {
 } from './api/apiTransactions';
 import { addTransactionOp } from 'redux/transactions/transactionsOps';
 
-export default function InputTransactionForm({ type = 'expence' }) {
+export default function InputTransactionForm({ type = 'expense' }) {
   const TRANSACTION_FORM_DATA = {
     expense: {
       description: 'Product description',

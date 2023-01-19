@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addTransactionOp, fetchTransactions } from './transactionsOps';
+import { addTransactionOp, fetchExpenseTransactions } from './transactionsOps';
 
 const transactionsSlice = createSlice({
   name: 'transactions',
@@ -29,17 +29,17 @@ const transactionsSlice = createSlice({
         state.isLoadinng = false;
         state.error = payload;
       })
-      .addCase(fetchTransactions.pending, state => {
+      .addCase(fetchExpenseTransactions.pending, state => {
         state.isLoadinng = true;
         state.error = null;
       })
-      .addCase(fetchTransactions.fulfilled, (state, { payload }) => {
+      .addCase(fetchExpenseTransactions.fulfilled, (state, { payload }) => {
         state.isLoadinng = false;
         state.error = null;
         console.log('payload', payload);
-        state.transactions = { ...payload };
+        state.transactions.expense = payload.expenses;
       })
-      .addCase(fetchTransactions.rejected, (state, { payload }) => {
+      .addCase(fetchExpenseTransactions.rejected, (state, { payload }) => {
         state.isLoadinng = false;
         state.error = payload;
       }),

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTransactions } from 'redux/transactions/transactionsOps';
+import { fetchExpenseTransactions } from 'redux/transactions/transactionsOps';
 import { selectTransactions } from 'redux/transactions/transactionsSelectors';
 
 function TransactionsList({ type }) {
@@ -8,16 +8,18 @@ function TransactionsList({ type }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchTransactions(type));
+    if (type === 'expense') {
+      dispatch(fetchExpenseTransactions());
+    }
   }, [dispatch, type]);
   console.log('transactions', transactions);
   return (
     <ul>
       <li></li>
-      {/* {transactions.expense.length &&
-        transactions.expenses.map(operation => {
-          return <li key={operation._id}>{'operation.description'}</li>;
-        })} */}
+      {transactions.expense.length !== 0 &&
+        transactions.expense.map(operation => {
+          return <li key={operation._id}>{operation.description}</li>;
+        })}
     </ul>
   );
 }
