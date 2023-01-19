@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectBalance } from 'redux/transactions/transactionsSelectors';
 import {
   Text,
   CurrentBalance,
@@ -9,24 +11,41 @@ import {
   BaseContainer,
 } from './Balance.styled';
 import { Notification } from 'components/Notification/Notification';
+import { Popup } from 'components/Popup/Popup';
+import { fetchUserBalance } from 'redux/transactions/transactionsOps';
+
+export const formating = data => {
+
+  const fixedData = data.toFixed(2);
+  if (data < 10) return '0' + fixedData;
+
+  const dividedData = fixedData.split('.');
+
+  const spacedData = Number(dividedData[0]).toLocaleString().split(',').join(' ');
+
+  return spacedData + '.' + dividedData[1];
+};
+
 
 export function BalanceFrom() {
-  const [value, setValue] = useState(0);
+  const balance = useSelector(selectBalance);
+  const token = useSelector(state => state.auth.accessToken);
 
-  const formating = data => {
-    const fixedData = data.toFixed(2);
-    if (data < 10) return '0' + fixedData;
+  const [popup, setPopup] = useState({
+    isShow: false,
+    title: '',
+    action: null,
+  });
 
-    const dividedData = fixedData.split('.');
+  const dispatch = useDispatch();
 
-    const spacedData = Number(dividedData[0]).toLocaleString().split(',').join(' ');
+  const [value, setValue] = useState(balance ?? 0);
 
-    return spacedData + '.' + dividedData[1];
-  };
-
-  const onChange = evt => {
+  const onBlur = evt => {
     const data = evt.target.value.split(' ').join('');
     const number = Number(data);
+
+    
 
     if (number <= 1000000) {
       setValue(number);
@@ -36,7 +55,16 @@ export function BalanceFrom() {
     }
   };
 
+  const onClick = () => {
+    setPopup({
+      isShow: true,
+      title: 'Are you sure?',
+      action: () => dispatch(fetchUserBalance({value, token})),  
+    });
+  };
+
   return (
+    <>
     <BalanceForm>
       <Text htmlFor="balance">Balance:</Text>
       <BaseContainer>
@@ -47,15 +75,17 @@ export function BalanceFrom() {
               id="balance"
               name="balance"
               defaultValue={formating(value)}
-              onBlur={onChange}
+              onBlur={onBlur}
               pattern="[0-9]"
             />
             uah
           </CurrentBalance>
           <Notification money={value} />
         </CurrentBalanceContainer>
-        <StyledBtn type="button">Confirm</StyledBtn>
+        <StyledBtn type="button" onClick={onClick}>Confirm</StyledBtn>
       </BaseContainer>
     </BalanceForm>
+    {popup.isShow && <Popup popup={popup} setPopup={setPopup} />}
+    </>
   );
 }

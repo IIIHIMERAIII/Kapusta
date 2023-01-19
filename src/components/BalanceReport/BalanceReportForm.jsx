@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Text,
   CurrentBalance,
@@ -7,10 +9,25 @@ import {
   Input,
   BaseContainer,
 } from './Balance.Report.styled';
-import { useState } from 'react';
+import { Popup } from 'components/Popup/Popup';
+import { fetchUserBalance } from 'redux/transactions/transactionsOps';
+import { selectBalance } from 'redux/transactions/transactionsSelectors';
+
+
 
 export function BalanceReportFrom() {
-  const [value, setValue] = useState(0);
+  const balance = useSelector(selectBalance);
+  const token = useSelector(state => state.auth.accessToken);
+
+  const [popup, setPopup] = useState({
+    isShow: false,
+    title: '',
+    action: null,
+  });
+
+  const dispatch = useDispatch();
+
+  const [value, setValue] = useState(balance ?? 0);
 
   const formating = data => {
     const fixedData = data.toFixed(2);
@@ -23,7 +40,7 @@ export function BalanceReportFrom() {
     return spacedData + '.' + dividedData[1];
   };
 
-  const onChange = evt => {
+  const onBlur = evt => {
     const data = evt.target.value.split(' ').join('');
     const number = Number(data);
 
@@ -35,7 +52,16 @@ export function BalanceReportFrom() {
     }
   };
 
+  const onClick = () => {
+    setPopup({
+      isShow: true,
+      title: 'Are you sure?',
+      action: () => dispatch(fetchUserBalance({value, token})),  
+    });
+  };
+
   return (
+    <>
     <BalanceForm>
       <Text htmlFor="balance">Balance:</Text>
       <BaseContainer>
@@ -46,14 +72,17 @@ export function BalanceReportFrom() {
               id="balance"
               name="balance"
               defaultValue={formating(value)}
-              onBlur={onChange}
+              onBlur={onBlur}
               pattern="[0-9]"
             />
             uah
           </CurrentBalance>
         </CurrentBalanceContainer>
-        <StyledBtn type="button">Confirm</StyledBtn>
+        <StyledBtn type="button" onClick={onClick}>Confirm</StyledBtn>
       </BaseContainer>
     </BalanceForm>
+    
+    {popup.isShow && <Popup popup={popup} setPopup={setPopup} />}
+    </>
   );
 }
