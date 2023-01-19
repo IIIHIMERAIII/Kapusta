@@ -11,6 +11,8 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
+import transactionsReducer from './transactions/transactionsSlice';
+import statsReducer from './statistics/statsSlice';
 
 const persistConfig = {
   key: 'root',
@@ -23,6 +25,8 @@ const persistedReducer = persistReducer(persistConfig, authSlice.reducer);
 export const store = configureStore({
   reducer: {
     auth: persistedReducer,
+    transactions: transactionsReducer,
+    statistics: statsReducer,
   },
 
   middleware: getDefaultMiddleware =>

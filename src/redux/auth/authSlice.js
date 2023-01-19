@@ -5,7 +5,7 @@ import {
   registerUser,
   loginUser,
   logoutUser,
-  // fetchCurrentUser,
+  fetchCurrentUser,
 } from './authOperations';
 
 const onPending = state => {
@@ -28,10 +28,8 @@ export const authSlice = createSlice({
     builder
       .addCase(registerUser.pending, onPending)
       .addCase(registerUser.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.isLoading = false;
         state.user = { ...payload };
-        // state.isLoggedIn = true;
         Notiflix.Notify.success(
           'Acount was successfully created',
           notifySettings
@@ -44,7 +42,7 @@ export const authSlice = createSlice({
       .addCase(loginUser.pending, onPending)
 
       .addCase(loginUser.fulfilled, (state, { payload }) => {
-        console.log(payload);
+        // console.log(payload);
         state.isLoading = false;
         state.refreshToken = payload.refreshToken;
         state.sid = payload.sid;
@@ -67,7 +65,7 @@ export const authSlice = createSlice({
         );
       })
       .addCase(logoutUser.pending, onPending)
-      .addCase(logoutUser.fulfilled, (state, action) => {
+      .addCase(logoutUser.fulfilled, (state, _) => {
         state.isLoading = false;
         state.user = { name: null, email: null };
         state.token = null;
@@ -84,25 +82,28 @@ export const authSlice = createSlice({
           'Something went wrong, please try again',
           notifySettings
         );
+      })
+      .addCase(fetchCurrentUser.pending, onPending)
+      .addCase(fetchCurrentUser.fulfilled, (state, { payload }) => {
+        // console.log(payload);
+        state.error = null;
+        state.isLoading = false;
+        state.accessToken = payload.newAccessToken;
+        state.refreshToken = payload.newRefreshToken;
+        state.sid = payload.newSid;
+        Notiflix.Notify.success(
+          `Welcome back, ${state.user.email}!`,
+          notifySettings
+        );
+      })
+      .addCase(fetchCurrentUser.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+        state.user = { email: null, id: null };
+        state.token = null;
+        state.isLoggedIn = false;
+        state.refreshToken = null;
+        state.sid = null;
       });
-    //   .addCase(fetchCurrentUser.pending, onPending)
-    //   .addCase(fetchCurrentUser.fulfilled, (state, { payload }) => {
-    //     state.isLoading = false;
-    //     state.user = payload;
-    //     state.isLoggedIn = true;
-    //     Notiflix.Notify.success(
-    //       `Welcome back, ${payload.name}!`,
-    //       notifySettings
-    //     );
-    //   })
-    //   .addCase(fetchCurrentUser.rejected, (state, { payload }) => {
-    //   state.isLoading = false;
-    //   state.error = payload;
-    //   if (payload === 401) {
-    //     state.user = { name: null, email: null };
-    //     state.token = null;
-    //     state.isLoggedIn = false;
-    //   }
-    // });
   },
 });

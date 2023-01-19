@@ -1,3 +1,4 @@
+import { BtnElement } from 'components/Buttons/Btn.styled';
 import styled, { keyframes } from 'styled-components';
 
 export const WrapBtn = styled.div`
@@ -16,17 +17,25 @@ export const Title = styled.p`
   color: ${p => p.theme.colors.TextGray};
   margin-top: 20px;
 `;
-export const BackDrop = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
-  transition: 250ms ease-in-out;
-`;
 
 export const Close = styled(BtnElement)`
   min-width: 0px;
   min-height: 0px;
-  border-radius: 0;
+  border-radius: 50%;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+
+  svg {
+    width: 11px;
+    height: 11px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const popup = keyframes`
@@ -46,4 +55,11 @@ export const Modal = styled.div`
   padding: 20px;
 
   animation: ${popup} 250ms ease-in-out;
+`;
+
+export const BackDrop = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: 250ms ease-in-out;
 `;

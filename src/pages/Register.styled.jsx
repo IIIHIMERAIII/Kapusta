@@ -109,8 +109,8 @@ export const Hint = styled.p`
   height: auto;
   margin: 0;
   padding: 0;
-  font-family: 'Roboto';
-  font-style: normal;
+
+
   font-weight: 400;
   font-size: 12px;
   letter-spacing: 0.04em;
@@ -122,8 +122,6 @@ export const HintLeft = styled.p`
   height: auto;
   margin: 0;
   padding: 0;
-  font-family: 'Roboto';
-  font-style: normal;
   font-weight: 400;
   font-size: 12px;
   letter-spacing: 0.04em;
@@ -158,8 +156,8 @@ export const LogoWrapper = styled.div`
     display: inline-block;
     margin-left: 20%;
     margin-top: 2%;
-    font-family: 'Roboto';
-    font-style: normal;
+    
+   
     font-weight: 700;
     text-transform: uppercase;
     color: ${p => p.theme.colors.logoGrey};
@@ -186,6 +184,7 @@ export const InputsWrapper = styled.div`
   width: 100%;
   flex-direction: column;
   display: flex;
+  gap: 20px;
 `;
 
 export const BtnsWrapper = styled.div`
@@ -206,25 +205,31 @@ export const Input = styled.input`
   padding: 17px 18px;
   width: 100%;
   font-size: 14px;
+  font-family: 'Roboto';
   placeholder: ${p => p.theme.colors.placeholderGrey};
   background-color: ${p => p.theme.colors.SecondGray};
   border-radius: 30px;
   border: none;
   color: ${p => p.theme.colors.PrimaryBlack};
+  margin-bottom: 4px;
 `;
 
-export const Label = styled.label`
+export const InputWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: stretch;
   align-items: flex-start;
-  gap: 12px;
-  font-family: 'Roboto';
-  font-style: normal;
+  /* gap: 12px; */
+`;
+
+export const Label = styled.label`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   font-weight: 400;
   font-size: 10px;
-  line-height: 1.15;
+  /* line-height: 1.15; */
   letter-spacing: 0.04em;
   color: ${p => p.theme.colors.PrimaryBlack};
   margin-bottom: 12px;
@@ -232,4 +237,13 @@ export const Label = styled.label`
   @media screen and (min-width: 768px) {
     font-size: 12px;
   }
+`;
+
+export const ErrorText = styled.span`
+  
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 1.16;
+  letter-spacing: 0.04em;
+  color: ${p => p.theme.colors.inputErrorRed};
 `;
