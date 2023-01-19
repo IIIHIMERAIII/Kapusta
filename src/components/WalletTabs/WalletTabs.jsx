@@ -1,8 +1,7 @@
-
 import { useState } from 'react';
-import { Container, Box, TabLink } from './styled'
+import { Container, Box, TabLink } from './styled';
 import TransactionsList from 'components/TransactionsList/TransactionsList';
-
+import InputTransactionForm from 'components/InputTransactionForm/InputTransactionForm';
 
 export const Tabs = () => {
   const [activeTab, setActiveTab] = useState('tab1');
@@ -33,10 +32,17 @@ export const Tabs = () => {
       </Box>
 
       <div className="outlet">
-        {activeTab === "tab1" ?
-          <TransactionsList type='expense'/>
-          :
-          <TransactionsList type='income'/>}
+        {activeTab === 'tab1' ? (
+          <>
+            <InputTransactionForm type="expense" />
+            <TransactionsList type="expense" />
+          </>
+        ) : (
+          <>
+            <InputTransactionForm type="income" />
+            <TransactionsList type="income" />
+          </>
+        )}
       </div>
     </Container>
   );
