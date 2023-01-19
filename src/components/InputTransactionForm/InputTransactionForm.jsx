@@ -67,7 +67,8 @@ export default function InputTransactionForm({ type = 'expense' }) {
   const [category, setCategory] = useState(null);
 
   const dispatch = useDispatch();
-  const token = useSelector(state => state.auth.accessToken);
+  //const token = useSelector(state => state.auth.accessToken);
+  const token = useSelector(state => state.auth.token);
 
   const onClearForm = () => {
     setDate(today);
