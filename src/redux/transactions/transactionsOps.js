@@ -34,7 +34,7 @@ export const addTransactionOp = createAsyncThunk(
 export const fetchExpenseTransactions = createAsyncThunk(
   'transactions/getExpense',
   async (_, { rejectWithValue, getState }) => {
-    const accessToken = getState().auth.accessToken;
+    const accessToken = getState().auth.token;
     try {
       setToken(accessToken);
       const { data } = await instance.get('/expense');
@@ -53,7 +53,7 @@ export const fetchExpenseTransactions = createAsyncThunk(
 export const fetchIncomeTransactions = createAsyncThunk(
   'transactions/getIncome',
   async (_, { rejectWithValue, getState }) => {
-    const accessToken = getState().auth.accessToken;
+    const accessToken = getState().auth.token;
     try {
       setToken(accessToken);
       const { data } = await instance.get('/income');
