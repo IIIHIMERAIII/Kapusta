@@ -1,8 +1,6 @@
 
 import { useState } from 'react';
 import { Container, Box, TabLink } from './styled'
-import { Income } from './income';
-import { Expenses } from './expenses';
 import TransactionsList from 'components/TransactionsList/TransactionsList';
 
 
