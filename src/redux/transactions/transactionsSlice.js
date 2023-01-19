@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addTransactionOp, fetchExpenseTransactions } from './transactionsOps';
+import {
+  addTransactionOp,
+  fetchExpenseTransactions,
+  fetchIncomeTransactions,
+} from './transactionsOps';
 
 const transactionsSlice = createSlice({
   name: 'transactions',
@@ -8,6 +12,7 @@ const transactionsSlice = createSlice({
     transactions: {
       expense: [],
       income: [],
+      monthStats: [],
     },
     isLoadinng: false,
     error: null,
@@ -36,10 +41,24 @@ const transactionsSlice = createSlice({
       .addCase(fetchExpenseTransactions.fulfilled, (state, { payload }) => {
         state.isLoadinng = false;
         state.error = null;
-        console.log('payload', payload);
+        state.transactions.monthStats = payload.monthStats;
         state.transactions.expense = payload.expenses;
       })
       .addCase(fetchExpenseTransactions.rejected, (state, { payload }) => {
+        state.isLoadinng = false;
+        state.error = payload;
+      })
+      .addCase(fetchIncomeTransactions.pending, state => {
+        state.isLoadinng = true;
+        state.error = null;
+      })
+      .addCase(fetchIncomeTransactions.fulfilled, (state, { payload }) => {
+        state.isLoadinng = false;
+        state.error = null;
+        state.transactions.monthStats = payload.monthStats;
+        state.transactions.income = payload.incomes;
+      })
+      .addCase(fetchIncomeTransactions.rejected, (state, { payload }) => {
         state.isLoadinng = false;
         state.error = payload;
       }),

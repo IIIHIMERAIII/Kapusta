@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchExpenseTransactions } from 'redux/transactions/transactionsOps';
+import {
+  fetchExpenseTransactions,
+  fetchIncomeTransactions,
+} from 'redux/transactions/transactionsOps';
 import { selectTransactions } from 'redux/transactions/transactionsSelectors';
 
 function TransactionsList({ type }) {
@@ -10,13 +13,19 @@ function TransactionsList({ type }) {
   useEffect(() => {
     if (type === 'expense') {
       dispatch(fetchExpenseTransactions());
+      return;
     }
-  }, [dispatch, type]);
+    if (type === 'income') {
+      dispatch(fetchIncomeTransactions());
+      return;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
   console.log('transactions', transactions);
   return (
     <ul>
       <li></li>
-      {transactions.expense.length !== 0 &&
+      {transactions[type].length !== 0 &&
         transactions.expense.map(operation => {
           return <li key={operation._id}>{operation.description}</li>;
         })}
