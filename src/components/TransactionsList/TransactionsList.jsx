@@ -6,7 +6,6 @@ import {
   removeTransaction,
 } from 'redux/transactions/transactionsOps';
 import { selectTransactions } from 'redux/transactions/transactionsSelectors';
-import InputTransactionForm from 'components/InputTransactionForm/InputTransactionForm';
 import { wordTranslator } from 'utils/wordTranslator';
 import { getParseDate } from 'utils/getParseDate';
 import stylesTransactionsList from './TransactionsListStyle';

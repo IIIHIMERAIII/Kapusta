@@ -75,8 +75,7 @@ export const removeTransaction = createAsyncThunk(
     const accessToken = getState().auth.token;
     try {
       setToken(accessToken);
-      const { data } = await instance.delete(`${id}`);
-      console.log('data', data);
+      await instance.delete(`${id}`);
       return id;
     } catch ({ response }) {
       const { status, data } = response;
