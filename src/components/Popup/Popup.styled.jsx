@@ -21,7 +21,21 @@ export const Title = styled.p`
 export const Close = styled(BtnElement)`
   min-width: 0px;
   min-height: 0px;
-  border-radius: 0;
+  border-radius: 50%;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+
+  svg {
+    width: 11px;
+    height: 11px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const popup = keyframes`
