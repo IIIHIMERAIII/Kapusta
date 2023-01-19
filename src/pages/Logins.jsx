@@ -18,6 +18,7 @@ import {
   HintLeft,
   ImageWrapperBottom,
   ErrorText,
+  GoogleLoginLink,
 } from './Logins.styled';
 import { NavLink } from '../components/NavLink/NavLink';
 import { Btn } from '../components/Buttons/Btn';
@@ -73,8 +74,11 @@ const LoginPage = () => {
         </LogoWrapper>
         <FormWrapper>
           <Hint>You can log in with your Google Account:</Hint>
-
-          <Btn icon={FcGoogle} status="google" text="Google" />
+          <GoogleLoginLink href="https://kapusta-backend.goit.global/auth/google">
+            <FcGoogle />
+            Google
+          </GoogleLoginLink>
+          {/* <Btn icon={FcGoogle} status="google" text="Google" /> */}
 
           <Form onSubmit={handleSubmit}>
             <HintLeft>

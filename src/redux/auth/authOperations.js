@@ -41,7 +41,6 @@ export const fetchCurrentUser = createAsyncThunk(
       const state = getState();
       const sid = state.auth.sid;
       const refreshToken = state.auth.refreshToken;
-      // console.log(getState());
       if (sid && refreshToken) {
         setToken(refreshToken);
         const { data } = await instance.post('/auth/refresh', { sid });
@@ -67,7 +66,11 @@ export const registerUser = createAsyncThunk(
   async (userData, thunkAPI) => {
     try {
       const { data } = await instance.post('/auth/register', userData);
-      return data;
+      if(data) {try {
+        const results = await instance.post('/auth/login', userData);
+      setToken(results.data.accessToken);
+      return results.data;
+      } catch (e) {return e}}
     } catch (error) {
       if (error.request.status === 409) {
         Notiflix.Notify.warning(
@@ -88,7 +91,6 @@ export const loginUser = createAsyncThunk(
     try {
       const { data } = await instance.post('/auth/login', userData);
       setToken(data.accessToken);
-      // console.log(data);
       return data;
     } catch (error) {
       Notiflix.Notify.failure(`${error.message}`, notifySettings);
@@ -104,9 +106,34 @@ export const logoutUser = createAsyncThunk(
       await instance.post(`/auth/logout`);
       setToken(null);
     } catch (error) {
-      // console.log(error);
       Notiflix.Notify.failure(`${error.message}`, notifySettings);
       return thunkAPI.rejectWithValue(error);
     }
   }
 );
+
+export const googleAuthUser = createAsyncThunk(
+  'auth/google',
+  async ({ accessToken, refreshToken, sid }) => {
+    setToken(accessToken);
+    try {
+      const { data } = await instance.get('/user');
+      return { accessToken, refreshToken, sid, data };
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+// export const refreshUserInfo = createAsyncThunk(
+//   'auth/refreshUserInfo',
+//   async () => {
+//     try {
+//       const { data } = await instance.get('/user');
+
+//       return data;
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
+// );

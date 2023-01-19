@@ -8,7 +8,19 @@ const {
   TitleOfBalanceChanges,
   SvgBoxStyle,
   BtnToggleStats,
+  BoxForSvg,
 } = styledComponents;
+
+ export const formating = data => {
+    const fixedData = data.toFixed(2);
+    if (data < 10) return '0' + fixedData;
+
+    const dividedData = fixedData.split('.');
+
+    const spacedData = Number(dividedData[0]).toLocaleString().split(',').join(' ');
+
+    return spacedData + '.' + dividedData[1];
+  };
 
 const Income = ({ onClick }) => {
   const statistics = useSelector(state => state.statistics.statistics);
@@ -43,19 +55,19 @@ const Income = ({ onClick }) => {
         <ListOfBalanceChanges>
           {salary && (
             <ItemOfBalanceChanges>
-              <p>{salary.total}</p>
-              <SvgBoxStyle width="56" height="56">
+              <p>{formating(salary.total)}</p>
+              <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#salary`} />
-              </SvgBoxStyle>
+              </SvgBoxStyle></BoxForSvg>
               <p>Salary</p>
             </ItemOfBalanceChanges>
           )}
           {income && (
             <ItemOfBalanceChanges>
-              <p>{income.total}</p>
-              <SvgBoxStyle width="56" height="56">
+              <p>{formating(income.total)}</p>
+              <BoxForSvg> <SvgBoxStyle>
                 <use href={`${svg}#income`} />
-              </SvgBoxStyle>
+              </SvgBoxStyle></BoxForSvg>
               <p>Add. income</p>
             </ItemOfBalanceChanges>
           )}
