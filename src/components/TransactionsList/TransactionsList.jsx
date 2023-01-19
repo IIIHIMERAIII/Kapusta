@@ -6,9 +6,24 @@ import {
   removeTransaction,
 } from 'redux/transactions/transactionsOps';
 import { selectTransactions } from 'redux/transactions/transactionsSelectors';
-import InputTransactionForm from 'components/InputTransactionForm/InputTransactionForm';
 import { wordTranslator } from 'utils/wordTranslator';
 import { getParseDate } from 'utils/getParseDate';
+import stylesTransactionsList from './TransactionsListStyle';
+import svg from '../../images/icons_sprite.svg';
+import InputTransactionForm from 'components/InputTransactionForm/InputTransactionForm';
+
+const {
+  BoxForList,
+  List,
+  ListItems,
+  BtnForRemove,
+  DateStyle,
+  DescriptionStyle,
+  CategoryStyle,
+  AmountStyle,
+  ListHeaderItems,
+  SvgBoxStyle,
+} = stylesTransactionsList;
 
 function TransactionsList({ type }) {
   const transactions = useSelector(selectTransactions);
@@ -28,35 +43,41 @@ function TransactionsList({ type }) {
   return (
     <>
       <InputTransactionForm type={type} />
-      <ul>
-        <li style={{ display: 'flex' }}>
-          <p>Date</p>
-          <p>Description</p>
-          <p>Category</p>
-          <p>Sum</p>
-        </li>
-        {transactions[type].length !== 0 &&
-          transactions.expense.map(operation => {
-            return (
-              <li key={operation._id} style={{ display: 'flex' }}>
-                <p>{getParseDate(operation.date)}</p>
-                <p>{operation.description}</p>
-                <p>{wordTranslator(operation.category)}</p>
-                <p>
-                  {type === 'expense' && '-'} {operation.amount} UAH.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    dispatch(removeTransaction(operation._id));
-                  }}
-                >
-                  Del
-                </button>
-              </li>
-            );
-          })}
-      </ul>
+      <BoxForList>
+        <List>
+          <ListHeaderItems>
+            <DateStyle>Date</DateStyle>
+            <DescriptionStyle>Description</DescriptionStyle>
+            <CategoryStyle>Category</CategoryStyle>
+            <AmountStyle>Sum</AmountStyle>
+          </ListHeaderItems>
+          {transactions[type].length !== 0 &&
+            transactions.expense.map(operation => {
+              return (
+                <ListItems key={operation._id}>
+                  <DateStyle>{getParseDate(operation.date)}</DateStyle>
+                  <DescriptionStyle>{operation.description}</DescriptionStyle>
+                  <CategoryStyle>
+                    {wordTranslator(operation.category)}
+                  </CategoryStyle>
+                  <AmountStyle style={{ color: `${type === 'expense' ? 'red' : 'green' }`}}>
+                    {type === 'expense' && '-'} {operation.amount} UAH.
+                  </AmountStyle>
+                  <BtnForRemove
+                    type="button"
+                    onClick={() => {
+                      dispatch(removeTransaction(operation._id));
+                    }}
+                  >
+                    <SvgBoxStyle>
+                      <use href={`${svg}#delete`} />
+                    </SvgBoxStyle>{' '}
+                  </BtnForRemove>
+                </ListItems>
+              );
+            })}
+        </List>
+      </BoxForList>
     </>
   );
 }

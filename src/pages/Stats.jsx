@@ -9,6 +9,7 @@ import { getStatistics } from 'redux/statistics/statsOperations';
 const { BoxStats } = styledComponents;
 
 const Statistics = () => {
+
   const token = useSelector(state => state.auth.token);
   const period = useSelector(state => state.statistics.period);
 
