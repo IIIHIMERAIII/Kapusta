@@ -22,6 +22,12 @@ code {
     monospace;
   }
 
+main {
+        display:flex;
+          flex-direction: column;
+          align-items: center;
+}
+
 #modal {
   width: 100%;
   height: 100%;
