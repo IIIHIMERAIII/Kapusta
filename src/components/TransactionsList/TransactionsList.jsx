@@ -5,6 +5,8 @@ import {
   fetchIncomeTransactions,
 } from 'redux/transactions/transactionsOps';
 import { selectTransactions } from 'redux/transactions/transactionsSelectors';
+import InputTransactionForm from 'components/InputTransactionForm/InputTransactionForm';
+
 
 function TransactionsList({ type }) {
   const transactions = useSelector(selectTransactions);
@@ -39,6 +41,8 @@ function TransactionsList({ type }) {
   console.log('transactions', transactions);
 
   return (
+    <>
+      <InputTransactionForm type={type} />
     <ul>
       <li></li>
       {transactions[type].length !== 0 &&
@@ -55,7 +59,8 @@ function TransactionsList({ type }) {
             </li>
           );
         })}
-    </ul>
+      </ul>
+    </>
   );
 }
 
