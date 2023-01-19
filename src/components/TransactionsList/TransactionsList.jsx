@@ -6,7 +6,6 @@ import {
   removeTransaction,
 } from 'redux/transactions/transactionsOps';
 import { selectTransactions } from 'redux/transactions/transactionsSelectors';
-import InputTransactionForm from 'components/InputTransactionForm/InputTransactionForm';
 import { wordTranslator } from 'utils/wordTranslator';
 import { getParseDate } from 'utils/getParseDate';
 
@@ -27,7 +26,6 @@ function TransactionsList({ type }) {
 
   return (
     <>
-      <InputTransactionForm type={type} />
       <ul>
         <li style={{ display: 'flex' }}>
           <p>Date</p>
@@ -36,7 +34,7 @@ function TransactionsList({ type }) {
           <p>Sum</p>
         </li>
         {transactions[type].length !== 0 &&
-          transactions.expense.map(operation => {
+          transactions[type].map(operation => {
             return (
               <li key={operation._id} style={{ display: 'flex' }}>
                 <p>{getParseDate(operation.date)}</p>
