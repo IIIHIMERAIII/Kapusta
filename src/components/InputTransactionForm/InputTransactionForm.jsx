@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ReactDatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+// import ReactDatePicker from 'react-datepicker';
+// import 'react-datepicker/dist/react-datepicker.css';
 import './InputTransactionForm.css';
 import AsyncSelect from 'react-select/async';
 import sprite from 'images/icons_sprite.svg';
@@ -11,6 +11,7 @@ import {
   API_TRANSACTION,
 } from './api/apiTransactions';
 import { addTransactionOp } from 'redux/transactions/transactionsOps';
+import { DatePickerComponent } from 'components/DatePickerComponent/DatePickerComponent';
 
 export default function InputTransactionForm({ type = 'expense' }) {
   const TRANSACTION_FORM_DATA = {
@@ -118,19 +119,28 @@ export default function InputTransactionForm({ type = 'expense' }) {
         className="input-product-form"
         style={{ display: 'flex', alignItems: 'center' }}
       >
-        <svg
+        {/* <svg
           className="input-product-form--calendar-svg"
           width="20"
           height="20"
         >
           <use href={sprite + `#calendar`}></use>
-        </svg>
-        <ReactDatePicker
+        </svg> */}
+        {/* <ReactDatePicker
           className="date-picker__input"
+          // className="date"
           selected={date}
-          onChange={date => setDate(date)}
+          // dateFormat="yyyy.MM.dd"
+          onChange={}
           maxDate={date}
+          // name="date"
+        /> */}
+        <DatePickerComponent
+          name="date"
+          date={date}
+          handler={date => setDate(date)}
         />
+
         <div className="input-product-form__inputs-wrapper">
           <input
             type="text"
