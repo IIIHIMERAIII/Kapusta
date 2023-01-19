@@ -28,7 +28,6 @@ export const authSlice = createSlice({
     builder
       .addCase(registerUser.pending, onPending)
       .addCase(registerUser.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.isLoading = false;
         state.refreshToken = payload.refreshToken;
         state.sid = payload.sid;
