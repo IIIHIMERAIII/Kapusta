@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import {
+  NotificationContainer,
   StyledWindow,
   Triangle,
   NotificationText,
@@ -24,13 +25,15 @@ export function Notification({ money = false }) {
   return (
     <>
       {show && (
-        <StyledWindow style={{ opacity }}>
-          <Triangle />
-          <NotificationText>
-            Hello! To get started, enter the current balance of your account!
-          </NotificationText>
-          <NotificationSubText>You can't spend money until you have it :)</NotificationSubText>
-        </StyledWindow>
+        <NotificationContainer>
+          <StyledWindow style={{ opacity }}>
+            <Triangle />
+            <NotificationText>
+              Hello! To get started, enter the current balance of your account!
+            </NotificationText>
+            <NotificationSubText>You can't spend money until you have it :)</NotificationSubText>
+          </StyledWindow>
+        </NotificationContainer>
       )}
     </>
   );
