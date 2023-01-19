@@ -14,7 +14,7 @@ import { addTransactionOp } from 'redux/transactions/transactionsOps';
 
 export default function InputTransactionForm({ type = 'expence' }) {
   const TRANSACTION_FORM_DATA = {
-    expence: {
+    expense: {
       description: 'Product description',
       selectCategoryPlaceholder: 'Product category',
     },

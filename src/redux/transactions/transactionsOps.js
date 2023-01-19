@@ -30,3 +30,22 @@ export const addTransactionOp = createAsyncThunk(
     }
   }
 );
+
+export const fetchTransactions = createAsyncThunk(
+  'transactions/get',
+  async (type, { rejectWithValue, getState }) => {
+    const accessToken = getState().auth.accessToken;
+    try {
+      setToken(accessToken);
+      const { data } = await instance.get(`/${type}`);
+      return data;
+    } catch ({ response }) {
+      const { status, data } = response;
+      const error = {
+        status,
+        message: data.message,
+      };
+      return rejectWithValue(error);
+    }
+  }
+);
