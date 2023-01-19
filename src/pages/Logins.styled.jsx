@@ -113,8 +113,7 @@ export const Hint = styled.p`
   height: auto;
   margin: 0;
   padding: 0;
-  
- 
+
   font-weight: 400;
   font-size: 12px;
   letter-spacing: 0.04em;
@@ -126,8 +125,7 @@ export const HintLeft = styled.p`
   height: auto;
   margin: 0;
   padding: 0;
-  
- 
+
   font-weight: 400;
   font-size: 12px;
   letter-spacing: 0.04em;
@@ -160,8 +158,7 @@ export const LogoWrapper = styled.div`
     display: inline-block;
     margin-left: 20%;
     margin-top: 2%;
-    
-   
+
     font-weight: 700;
     text-transform: uppercase;
     color: ${p => p.theme.colors.logoGrey};
@@ -245,11 +242,56 @@ export const Label = styled.label`
 `;
 
 export const ErrorText = styled.span`
-  
- 
   font-weight: 400;
   font-size: 10px;
   line-height: 1.16;
   letter-spacing: 0.04em;
   color: ${p => p.theme.colors.inputErrorRed};
+`;
+
+export const GoogleLoginLink = styled.a`
+  box-sizing: border-box;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 116px;
+  min-height: 44px;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: 0.02em;
+  transition: 350ms ease-in-out;
+  color: ${p => p.theme.colors.PrimaryBlack};
+  background-color: ${p => p.theme.colors.PrimaryGray};
+  padding: 10px 16px;
+  border-radius: 26px;
+  border: none;
+  filter: drop-shadow(1px 3px 5px rgba(82, 85, 95, 0.15));
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: white;
+    background-color: ${p => p.theme.colors.PrimaryOrange};
+    filter: drop-shadow(1px 3px 5px rgba(255, 107, 8, 0.35));
+  }
+
+  &:active {
+    background-color: ${p => p.theme.colors.PrimaryOrange};
+    color: white;
+    filter: drop-shadow(1px 3px 5px rgba(255, 107, 8, 0.35));
+  }
+
+  & > svg {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+  }
+
+  @media screen and (min-width: 768px) {
+    min-width: 122px;
+  }
 `;

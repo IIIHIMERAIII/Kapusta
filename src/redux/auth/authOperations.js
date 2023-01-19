@@ -110,3 +110,29 @@ export const logoutUser = createAsyncThunk(
     }
   }
 );
+
+export const googleAuthUser = createAsyncThunk(
+  'auth/google',
+  async ({ accessToken, refreshToken, sid }) => {
+    setToken(accessToken);
+    try {
+      const { data } = await instance.get('/user');
+      return { accessToken, refreshToken, sid, data };
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+// export const refreshUserInfo = createAsyncThunk(
+//   'auth/refreshUserInfo',
+//   async () => {
+//     try {
+//       const { data } = await instance.get('/user');
+
+//       return data;
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
+// );

@@ -2,10 +2,10 @@ import { useEffect, lazy } from 'react';
 import { RestrictedRoute } from '../RestrictedRoute';
 import { PrivateRoute } from '../PrivateRoute';
 import { useDispatch, useSelector } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate, useSearchParams } from 'react-router-dom';
 import { Layout } from './Layout';
-import { fetchCurrentUser } from 'redux/auth/authOperations';
-import { getUser } from 'redux/auth/authSelectors';
+import { fetchCurrentUser, googleAuthUser } from 'redux/auth/authOperations';
+import { getToken } from 'redux/auth/authSelectors';
 
 const RegisterPage = lazy(() => import('../pages/Register'));
 const LoginPage = lazy(() => import('../pages/Logins'));
@@ -14,19 +14,33 @@ const StatsPage = lazy(() => import('../pages/Stats'));
 
 export const App = () => {
   const dispatch = useDispatch();
-  const { email } = useSelector(getUser);
+  const token = useSelector(getToken);
 
   useEffect(() => {
-    if (!email) {
+    if (!token) {
       return;
     }
     dispatch(fetchCurrentUser());
-  }, [dispatch, email]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
+
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const accessToken = searchParams.get('accessToken');
+    const refreshToken = searchParams.get('refreshToken');
+    const sid = searchParams.get('sid');
+    if (!accessToken) return;
+    dispatch(googleAuthUser({ accessToken, refreshToken, sid }));
+    navigate('/wallet');
+  }, [searchParams, dispatch, navigate]);
 
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route
+          index
           path="/"
           element={<RestrictedRoute component={<RegisterPage />} />}
         />
@@ -46,7 +60,7 @@ export const App = () => {
           path="stats"
           element={
             <PrivateRoute redirectTo="/login" component={<StatsPage />} />
-          }   
+          }
         />
         {/* <Route path="*" element={<Navigate to="/login" />} /> */}
       </Route>
