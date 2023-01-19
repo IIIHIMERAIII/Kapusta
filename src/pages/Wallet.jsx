@@ -5,7 +5,7 @@ const WalletPage = () => {
   return (
     <>
       <h1>Wallet</h1>
-      <Balance />;
+      <Balance />
       <InputTransactionForm type="expense" />
     </>
   );
