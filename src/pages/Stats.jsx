@@ -11,7 +11,7 @@ const { BoxStats } = styledComponents
 
 const Statistics = () => {
 
-  const token = useSelector(state => state.auth.accessToken);
+  const token = useSelector(state => state.auth.token);
   const period = useSelector(state => state.statistics.period);
 
   const dispatch = useDispatch();
