@@ -6,8 +6,7 @@ export function Balance() {
   return (
     <BalanceContainer>
       <BalanceFrom />
-
-      <StyledLink to="">
+      <StyledLink to='/statistics'>
         Reports
         <ReportsSvg>
           <use href={`${svg}#reports`}></use>
