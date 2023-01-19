@@ -1,5 +1,6 @@
 import { Link } from 'components/NavLink/NavLink.styled';
 import { useState } from 'react';
+import TransactionsList from 'components/TransactionsList/TransactionsList';
 
 export const Tabs = () => {
   const [activeTab, setActiveTab] = useState('tab1');
@@ -30,7 +31,7 @@ export const Tabs = () => {
       </ul>
 
       <div className="outlet">
-        {/* {activeTab === "tab1" ? <Test1 /> : <Test2 />} */}
+        {activeTab === "tab1" ? <TransactionsList type="expense" /> : <TransactionsList type="income" />}
       </div>
     </div>
   );
