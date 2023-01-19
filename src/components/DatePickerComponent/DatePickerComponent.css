@@ -2,6 +2,10 @@
   background-color: #ff751d;
 }
 
+.react-datepicker__day--keyboard-selected {
+  background-color: #ff751d;
+}
+
 .react-datepicker__header {
   background-color: #f5f6fb;
 }
@@ -15,7 +19,8 @@
   .react-datepicker__triangle::after {
   border-bottom-color: #f5f6fb;
 }
-.react-datepicker__day--selected:hover {
+.react-datepicker__day--selected:hover,
+.react-datepicker__day--selected:focus {
   background-color: #ff751d;
 }
 .react-datepicker-wrapper {
