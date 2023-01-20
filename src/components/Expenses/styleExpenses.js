@@ -68,7 +68,9 @@ const styledComponents = {
     margin: -5px;
     fill: ${theme.colors.SVGColor};
     transition: 350ms ease-in-out;
-    &:hover {
+    &:hover,
+    &:focus,
+    &:active{
     fill: ${theme.colors.PrimaryOrange};
     transform: scale(1.2);
   }
