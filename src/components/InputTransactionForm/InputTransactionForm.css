@@ -1,10 +1,21 @@
 /* @import 'typeface-roboto'; */
+.input-product-form__wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  z-index: 1;
+
+  padding-top: 34px;
+  padding-left: 32px;
+  margin-bottom: 60px;
+}
 
 .input-product-form__wrapper {
   box-sizing: border-box;
 }
 .input-product-form {
-  height: 40px;
+  display: inline-flex;
+  column-gap: 32px;
+  height: 44px;
 }
 
 .input-product-form--calendar-svg {
@@ -34,7 +45,7 @@
 
 .react-datepicker-wrapper {
   width: 72px;
-  margin-right: 32px;
+  /* margin-right: 32px; */
 }
 
 .input-product-form__inputs-wrapper {
@@ -85,4 +96,9 @@
   position: absolute;
   top: 11px;
   right: 11px;
+}
+
+.input-product-form--buttn-group__wrapper {
+  display: inline-flex;
+  column-gap: 16px;
 }

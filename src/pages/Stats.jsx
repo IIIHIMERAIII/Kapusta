@@ -40,7 +40,7 @@ const [toggleStats, setToggleStats] = useState(false);
           <Expenses onClick={onClick} />
         )}
     </>
-  );
+  )
 };
 
 export default Statistics;
