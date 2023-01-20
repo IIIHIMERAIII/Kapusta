@@ -245,6 +245,7 @@ export default function InputTransactionForm({ type = 'expense' }) {
             }
           />
           <AsyncSelect
+            key={type}
             defaultOptions
             placeholder={TRANSACTION_FORM_DATA[type].selectCategoryPlaceholder}
             styles={selectStyles}
