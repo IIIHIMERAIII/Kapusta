@@ -1,13 +1,13 @@
 import { Balance } from 'components/Balance/Balance';
 import { Tabs } from 'components/WalletTabs/WalletTabs';
+import { Main } from 'components/Container/container';
 const WalletPage = () => {
   return (
     <>
-      <main>
-        <h1>Wallet</h1>
+      <Main>
         <Balance />
         <Tabs />
-      </main>
+      </Main>
     </>
   );
 };

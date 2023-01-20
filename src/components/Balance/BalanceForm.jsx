@@ -19,7 +19,7 @@ export const formating = data => {
   if (data < 10) return '0' + fixedData;
 
   const dividedData = fixedData.split('.');
-
+  
   const spacedData = Number(dividedData[0])
     .toLocaleString()
     .split(',')
@@ -86,8 +86,6 @@ export function BalanceFrom() {
           </StyledBtn>
         </BaseContainer>
         {popup.isShow && <Popup popup={popup} setPopup={setPopup} />}
-      </BalanceForm>
-      {popup.isShow && <Popup popup={popup} setPopup={setPopup} />}
     </>
   );
 }
