@@ -22,20 +22,29 @@ export const fetchUserBalance = createAsyncThunk(
   'auth/balance',
   async ({ value, token }, { rejectWithValue }) => {
     try {
+      if (token) {
+        instance.defaults.headers.common.authorization = `Bearer ${token}`;
+      } else {
+        instance.defaults.headers.common.authorization = '';
+      }
+
       if (value !== 0) {
         const { data } = await instance.patch('/user/balance', {
           newBalance: value,
         });
         return data;
       }
-      
-      if(value!==0){
-        const { data } = await baseInstance.patch('/user/balance', {
-        newBalance: value,
-      });
-      return data;
+    } catch ({ response }) {
+      const { status, data } = response;
+      const error = {
+        status,
+        message: data.message,
+      };
+      return rejectWithValue(error);
     }
-      
+  }
+);
+
 export const fetchExpenseTransactions = createAsyncThunk(
   'transactions/getExpense',
   async (_, { rejectWithValue }) => {
