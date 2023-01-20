@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import styledComponents from 'components/Expenses/styleExpenses';
 import { useSelector, useDispatch } from 'react-redux';
 import { getStatistics } from 'redux/statistics/statsOperations';
-import { BackLink } from 'components/BackLink/BackLink';
-
+import { BalanceReport } from 'components/BalanceReport/BalanceReport';
+import { Main } from 'components/Container/container';
 
 const { BoxStats } = styledComponents;
 
@@ -26,16 +26,16 @@ const Statistics = () => {
   };
 
   return (
-    <>
+    <Main>
       <BoxStats>
-        <BackLink />
+        <BalanceReport/>
         {toggleStats ? (
           <Income onClick={onClick} />
         ) : (
           <Expenses onClick={onClick} />
         )}
       </BoxStats>
-    </>
+    </Main>
   );
 };
 
