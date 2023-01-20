@@ -9,7 +9,7 @@ import { Btn } from 'components/Buttons/Btn';
 import {
   getTransactionCategories,
   API_TRANSACTION,
-} from './api/apiTransactions';
+} from '../../api/apiTransactionCategories';
 import { addTransactionOp } from 'redux/transactions/transactionsOps';
 
 export default function InputTransactionForm({ type = 'expense' }) {
