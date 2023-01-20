@@ -9,9 +9,15 @@ import {
   BaseContainer,
 } from './Balance.styled';
 import { Notification } from 'components/Notification/Notification';
+import { Popup } from 'components/Popup/Popup';
 
 export function BalanceFrom() {
   const [value, setValue] = useState(0);
+  const [popup, setPopup] = useState({
+    isShow: false,
+    title: '',
+    action: null,
+  });
 
   const formating = data => {
     const fixedData = data.toFixed(2);
@@ -19,7 +25,10 @@ export function BalanceFrom() {
 
     const dividedData = fixedData.split('.');
 
-    const spacedData = Number(dividedData[0]).toLocaleString().split(',').join(' ');
+    const spacedData = Number(dividedData[0])
+      .toLocaleString()
+      .split(',')
+      .join(' ');
 
     return spacedData + '.' + dividedData[1];
   };
@@ -34,6 +43,15 @@ export function BalanceFrom() {
     } else {
       evt.target.value = formating(value);
     }
+  };
+
+  const onClick = () => {
+    setPopup({
+      isShow: true,
+      title: 'Are you sure?',
+      action: () => console.log('action'),
+    });
+    document.querySelector('#modal').classList.add('js-action');
   };
 
   return (
@@ -54,8 +72,11 @@ export function BalanceFrom() {
           </CurrentBalance>
           <Notification money={value} />
         </CurrentBalanceContainer>
-        <StyledBtn type="button">Confirm</StyledBtn>
+        <StyledBtn type="button" onClick={onClick}>
+          Confirm
+        </StyledBtn>
       </BaseContainer>
+      {popup.isShow && <Popup popup={popup} setPopup={setPopup} />}
     </BalanceForm>
   );
 }
