@@ -1,10 +1,11 @@
 import Income from 'components/Income/Income';
 import Expenses from 'components/Expenses/Expenses';
 import { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
 import styledComponents from 'components/Expenses/styleExpenses';
 import { useSelector, useDispatch } from 'react-redux';
 import { getStatistics } from 'redux/statistics/statsOperations';
+import { BackLink } from 'components/BackLink/BackLink';
+
 
 const { BoxStats } = styledComponents;
 
@@ -27,7 +28,7 @@ const Statistics = () => {
   return (
     <>
       <BoxStats>
-        <NavLink to="/wallet">Transactions</NavLink>
+        <BackLink />
         {toggleStats ? (
           <Income onClick={onClick} />
         ) : (
