@@ -57,7 +57,7 @@ export const fetchUserBalance = createAsyncThunk(
         return data;
       }
     } catch (error) {
-      return thunkAPI.rejectWithValue({ error })
+      return rejectWithValue({ error })
     }
   }
 )
