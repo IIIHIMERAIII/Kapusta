@@ -41,20 +41,24 @@ export const addTransactionOp = createAsyncThunk(
   }
 );
 
-export const fetchUserBalance = createAsyncThunk(
-  'auth/balance',
-  async ({value, token}, { rejectWithValue }) => {
-    try {
-      if (token) {
-        baseInstance.defaults.headers.common.authorization = `Bearer ${token}`;
-      }else{
-        baseInstance.defaults.headers.common.authorization = '';
-      }
-      
-      if(value!==0){const { data } = await baseInstance.patch('/user/balance', {
-        newBalance: value,
-      });
-      return data;}
+// export const fetchUserBalance = createAsyncThunk(
+//   'auth/balance',
+//   async ({ value, token }, { rejectWithValue }) => {
+//     try {
+//       if (token) {
+//         baseInstance.defaults.headers.common.authorization = `Bearer ${token}`;
+//       } else {
+//         baseInstance.defaults.headers.common.authorization = '';
+//       }
+//       if (value !== 0) {
+//         const { data } = await baseInstance.patch('/user/balance', {
+//           newBalance: value,
+//         });
+//         return data;
+//       }
+//     }
+//   }
+// )
       
 export const fetchExpenseTransactions = createAsyncThunk(
   'transactions/getExpense',
@@ -94,21 +98,21 @@ export const fetchIncomeTransactions = createAsyncThunk(
   }
 );
 
-export const removeTransaction = createAsyncThunk(
-  'transactions/remove',
-  async (id, { rejectWithValue }) => {
-    // const accessToken = getState().auth.token;
-    try {
-      // setToken(accessToken);
-      const { data } = await instance.delete(`transaction/${id}`);
-      return { id, data };
-    } catch ({ response }) {
-      const { status, data } = response;
-      const error = {
-        status,
-        message: data.message,
-      };
-      return rejectWithValue(error);
-    }
-  }
-);
+      export const removeTransaction = createAsyncThunk(
+        'transactions/remove',
+        async (id, { rejectWithValue }) => {
+          // const accessToken = getState().auth.token;
+          try {
+            // setToken(accessToken);
+            const { data } = await instance.delete(`transaction/${id}`);
+            return { id, data };
+          } catch ({ response }) {
+            const { status, data } = response;
+            const error = {
+              status,
+              message: data.message,
+            };
+            return rejectWithValue(error);
+          }
+        }
+      );
