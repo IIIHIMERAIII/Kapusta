@@ -42,7 +42,6 @@ function TransactionsList({ type }) {
 
   return (
     <>
-      <InputTransactionForm type={type} />
       <BoxForList>
         <List>
           <ListHeaderItems>
