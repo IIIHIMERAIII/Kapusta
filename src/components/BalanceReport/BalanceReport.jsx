@@ -11,6 +11,7 @@ import {
   PeriodBtn,
   StyledLink,
   MainPageText,
+  MounthBox,
 } from './Balance.Report.styled';
 import { BalanceReportFrom } from './BalanceReportForm';
 
@@ -47,7 +48,7 @@ export function BalanceReport() {
 
         <BalanceReportFrom />
 
-        <div>
+        <MounthBox>
           <Period>Current period</Period>
           <BaseContainer>
             <PeriodBtn type="button" onClick={prevMonth}>
@@ -62,7 +63,7 @@ export function BalanceReport() {
               </PeriodArrow>
             </PeriodBtn>
           </BaseContainer>
-        </div>
+        </MounthBox>
       </PeriodContainer>
     </BalanceContainer>
   );
