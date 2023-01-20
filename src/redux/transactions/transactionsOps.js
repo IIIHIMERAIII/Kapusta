@@ -41,24 +41,26 @@ export const addTransactionOp = createAsyncThunk(
   }
 );
 
-// export const fetchUserBalance = createAsyncThunk(
-//   'auth/balance',
-//   async ({ value, token }, { rejectWithValue }) => {
-//     try {
-//       if (token) {
-//         baseInstance.defaults.headers.common.authorization = `Bearer ${token}`;
-//       } else {
-//         baseInstance.defaults.headers.common.authorization = '';
-//       }
-//       if (value !== 0) {
-//         const { data } = await baseInstance.patch('/user/balance', {
-//           newBalance: value,
-//         });
-//         return data;
-//       }
-//     }
-//   }
-// )
+export const fetchUserBalance = createAsyncThunk(
+  'auth/balance',
+  async ({ value, token }, { rejectWithValue }) => {
+    try {
+      if (token) {
+        baseInstance.defaults.headers.common.authorization = `Bearer ${token}`;
+      } else {
+        baseInstance.defaults.headers.common.authorization = '';
+      }
+      if (value !== 0) {
+        const { data } = await baseInstance.patch('/user/balance', {
+          newBalance: value,
+        });
+        return data;
+      }
+    } catch (error) {
+      return thunkAPI.rejectWithValue({ error })
+    }
+  }
+)
       
 export const fetchExpenseTransactions = createAsyncThunk(
   'transactions/getExpense',
