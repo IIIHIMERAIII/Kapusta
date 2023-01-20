@@ -6,10 +6,11 @@ const styledComponents = {
     display: block;
     text-align: center;
     width: 700px;
+    height: 350px;
     padding: 20px;
     border-radius: 30px;
-    margin: 0 auto;
-
+    margin: 0 auto 40px auto;
+    background-color: ${theme.colors.PrimaryWhite};
     @media screen and (max-width: 800px) {
       width: 100%;
       padding: 5px 5px;

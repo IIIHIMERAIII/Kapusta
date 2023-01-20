@@ -38,7 +38,7 @@ export function BalanceReport() {
   return (
     <BalanceContainer>
       <PeriodContainer>
-        <StyledLink to="">
+        <StyledLink to="/wallet">
           <MainPageSvg>
             <use href={`${svg}#arrow_back`}></use>
           </MainPageSvg>
