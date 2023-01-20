@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import Notiflix from 'notiflix';
 import { notifySettings } from '../../utils/notifySettings';
 
-const instance = axios.create({
+export const instance = axios.create({
   baseURL: 'https://kapusta-backend.goit.global',
 });
 
@@ -18,19 +18,6 @@ instance.interceptors.response.use(
   response => response,
   async error => {
     if (error.response.status === 401) {
-      const refreshToken = JSON.parse(
-        localStorage.getItem('persist:root')
-      ).refreshToken;
-      const sid = JSON.parse(localStorage.getItem('persist:root')).sid;
-      try {
-        setToken(refreshToken);
-        const { data } = await instance.post('/auth/refresh', { sid });
-        setToken(data.accessToken);
-        return instance(error.config);
-      } catch (error) {
-        return Promise.reject(error);
-      }
-    } else if (error.response.status === 404) {
       const refreshToken = JSON.parse(
         localStorage.getItem('persist:root')
       ).refreshToken;

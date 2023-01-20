@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { loginUser } from 'redux/auth/authOperations';
 import {
   addTransactionOp,
   fetchExpenseTransactions,
@@ -72,18 +73,32 @@ const transactionsSlice = createSlice({
           ...state,
           isLoadinng: false,
           error: null,
+          balance: payload.data.newBalance,
           transactions: {
             ...state.transactions,
             expense: state.transactions.expense.filter(
-              operation => operation._id !== payload
+              operation => operation._id !== payload.id
             ),
             income: state.transactions.income.filter(
-              operation => operation._id !== payload
+              operation => operation._id !== payload.id
             ),
           },
         };
       })
       .addCase(removeTransaction.rejected, (state, { payload }) => {
+        state.isLoadinng = false;
+        state.error = payload;
+      })
+      .addCase(loginUser.pending, state => {
+        state.isLoadinng = true;
+        state.error = null;
+      })
+      .addCase(loginUser.fulfilled, (state, { payload }) => {
+        state.isLoadinng = false;
+        state.error = null;
+        state.balance = payload.userData.balance;
+      })
+      .addCase(loginUser.rejected, (state, { payload }) => {
         state.isLoadinng = false;
         state.error = payload;
       }),
