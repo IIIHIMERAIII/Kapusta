@@ -85,6 +85,7 @@ export function BalanceFrom() {
             Confirm
           </StyledBtn>
         </BaseContainer>
+        </BalanceForm>
         {popup.isShow && <Popup popup={popup} setPopup={setPopup} />}
     </>
   );
