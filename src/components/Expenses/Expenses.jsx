@@ -26,7 +26,7 @@ const Expenses = ({ onClick }) => {
   };
   const filtredData = () => {
     const data = statistics.data.expenses.expensesData;
-    console.log(data);
+    // console.log(data);
     if (!filter) return;
     const [_, expenses] = Object.entries(data).filter(
       el => el[0] === filter
@@ -230,7 +230,7 @@ const Expenses = ({ onClick }) => {
       ) : (
         <div>Empty</div>
       )}
-      <Chart data={filtredData()} />
+      {filter && <Chart data={filtredData()} />}
     </div>
   );
 };

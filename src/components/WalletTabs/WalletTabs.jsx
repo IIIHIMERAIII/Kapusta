@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Container, Box, TabLink } from './styled';
+import { Container, Box, TabLink, TransactWrapper } from './styled';
 import TransactionsList from 'components/TransactionsList/TransactionsList';
 import InputTransactionForm from 'components/InputTransactionForm/InputTransactionForm';
+import Summary from 'components/Summary/Summary';
 
 export const Tabs = () => {
   const [activeTab, setActiveTab] = useState('tab1');
@@ -35,12 +36,18 @@ export const Tabs = () => {
         {activeTab === 'tab1' ? (
           <>
             <InputTransactionForm type="expense" />
-            <TransactionsList type="expense" />
+            <TransactWrapper>
+              <TransactionsList type="expense" />
+              <Summary />
+            </TransactWrapper>
           </>
         ) : (
           <>
             <InputTransactionForm type="income" />
-            <TransactionsList type="income" />
+            <TransactWrapper>
+              <TransactionsList type="income" />
+              <Summary />
+            </TransactWrapper>
           </>
         )}
       </div>
