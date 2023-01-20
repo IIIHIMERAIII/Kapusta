@@ -28,17 +28,14 @@ export const fetchUserBalance = createAsyncThunk(
         });
         return data;
       }
-    } catch ({ response }) {
-      const { status, data } = response;
-      const error = {
-        status,
-        message: data.message,
-      };
-      return rejectWithValue(error);
+      
+      if(value!==0){
+        const { data } = await baseInstance.patch('/user/balance', {
+        newBalance: value,
+      });
+      return data;
     }
-  }
-);
-
+      
 export const fetchExpenseTransactions = createAsyncThunk(
   'transactions/getExpense',
   async (_, { rejectWithValue }) => {
