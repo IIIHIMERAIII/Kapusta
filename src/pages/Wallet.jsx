@@ -4,7 +4,6 @@ const WalletPage = () => {
   return (
     <>
       <main>
-        <h1>Wallet</h1>
         <Balance />
         <Tabs />
       </main>
