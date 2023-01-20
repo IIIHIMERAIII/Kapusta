@@ -17,7 +17,7 @@ export const TabLink = styled(Link)`
 `;
 
 export const Outlet = styled.div`
-margin-top: 32px;
+  margin-top: 0px;
 `;
 
 export const TransactWrapper = styled.div`
