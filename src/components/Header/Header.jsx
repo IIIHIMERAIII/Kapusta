@@ -36,6 +36,7 @@ export function Header() {
       title: 'Do you really want to leave?',
       action: () => dispatch(logoutUser()),
     });
+    document.querySelector('#modal').classList.add('js-action')
   };
 
   return (
@@ -51,7 +52,7 @@ export function Header() {
           <StyledContainer>
             <Img>
               <Avatar>
-                  {user.email.slice(0, 1).toUpperCase()}
+                {user?.email && user.email.slice(0, 1).toUpperCase()}
               </Avatar>
             </Img>
             <Name>{user.email}</Name>

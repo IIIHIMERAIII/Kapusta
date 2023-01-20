@@ -1,37 +1,56 @@
-import { Link } from "components/NavLink/NavLink.styled";
-import { useState } from "react";
+import { useState } from 'react';
+import { Container, Box, TabLink, TransactWrapper } from './styled';
+import TransactionsList from 'components/TransactionsList/TransactionsList';
+import InputTransactionForm from 'components/InputTransactionForm/InputTransactionForm';
+import Summary from 'components/Summary/Summary';
 
 export const Tabs = () => {
-  const [activeTab, setActiveTab] = useState("tab1");
+  const [activeTab, setActiveTab] = useState('tab1');
   //  Functions to handle Tab Switching
   const handleTab1 = () => {
     // update the state to tab1
-    setActiveTab("tab1");
+    setActiveTab('tab1');
   };
   const handleTab2 = () => {
     // update the state to tab2
-    setActiveTab("tab2");
+    setActiveTab('tab2');
   };
   return (
-    <div className="Tabs">
-      <ul className="nav">
-        <Link
-          className={activeTab === "tab1" ? "active" : ""}
+    <Container>
+      <Box>
+        <TabLink
+          className={activeTab === 'tab1' ? 'active' : ''}
           onClick={handleTab1}
         >
-          Tab 1
-        </Link>
-        <Link
-          className={activeTab === "tab2" ? "active" : ""}
+          Expenses
+        </TabLink>
+        <TabLink
+          className={activeTab === 'tab2' ? 'active' : ''}
           onClick={handleTab2}
         >
-          Tab 2
-        </Link>
-      </ul>
- 
+          income
+        </TabLink>
+      </Box>
+
       <div className="outlet">
-        {activeTab === "tab1" ? <Test1 /> : <Test2 />}
+        {activeTab === 'tab1' ? (
+          <>
+            <InputTransactionForm type="expense" />
+            <TransactWrapper>
+              <TransactionsList type="expense" />
+              <Summary />
+            </TransactWrapper>
+          </>
+        ) : (
+          <>
+            <InputTransactionForm type="income" />
+            <TransactWrapper>
+              <TransactionsList type="income" />
+              <Summary />
+            </TransactWrapper>
+          </>
+        )}
       </div>
-    </div>
+    </Container>
   );
 };

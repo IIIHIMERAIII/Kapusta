@@ -6,6 +6,7 @@ import {
   loginUser,
   logoutUser,
   fetchCurrentUser,
+  googleAuthUser,
 } from './authOperations';
 
 const onPending = state => {
@@ -29,7 +30,12 @@ export const authSlice = createSlice({
       .addCase(registerUser.pending, onPending)
       .addCase(registerUser.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.user = { ...payload };
+        state.refreshToken = payload.refreshToken;
+        state.sid = payload.sid;
+        state.user.email = payload.userData.email;
+        state.user.id = payload.userData.id;
+        state.token = payload.accessToken;
+        state.isLoggedIn = true;
         Notiflix.Notify.success(
           'Acount was successfully created',
           notifySettings
@@ -42,7 +48,6 @@ export const authSlice = createSlice({
       .addCase(loginUser.pending, onPending)
 
       .addCase(loginUser.fulfilled, (state, { payload }) => {
-        // console.log(payload);
         state.isLoading = false;
         state.refreshToken = payload.refreshToken;
         state.sid = payload.sid;
@@ -85,10 +90,9 @@ export const authSlice = createSlice({
       })
       .addCase(fetchCurrentUser.pending, onPending)
       .addCase(fetchCurrentUser.fulfilled, (state, { payload }) => {
-        // console.log(payload);
         state.error = null;
         state.isLoading = false;
-        state.accessToken = payload.newAccessToken;
+        state.token = payload.newAccessToken;
         state.refreshToken = payload.newRefreshToken;
         state.sid = payload.newSid;
         Notiflix.Notify.success(
@@ -104,6 +108,21 @@ export const authSlice = createSlice({
         state.isLoggedIn = false;
         state.refreshToken = null;
         state.sid = null;
+      })
+      .addCase(googleAuthUser.pending, onPending)
+      .addCase(googleAuthUser.fulfilled, (state, { payload }) => {
+        state.refreshToken = payload.refreshToken;
+        state.token = payload.accessToken;
+        state.sid = payload.sid;
+        state.isLoggedIn = true;
+        state.user.email = payload.data.email;
+        state.isLoading = false;
+        // console.log(payload);
+      })
+      .addCase(googleAuthUser.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+        // console.log(payload);
       });
   },
 });

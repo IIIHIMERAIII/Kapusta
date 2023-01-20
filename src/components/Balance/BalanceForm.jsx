@@ -15,14 +15,12 @@ import { Popup } from 'components/Popup/Popup';
 import { fetchUserBalance } from 'redux/transactions/transactionsOps';
 
 export const formating = data => {
-
   const fixedData = data.toFixed(2);
   if (data < 10) return '0' + fixedData;
 
   const dividedData = fixedData.split('.');
-
+  
   const spacedData = Number(dividedData[0]).toLocaleString().split(',').join(' ');
-
   return spacedData + '.' + dividedData[1];
 };
 
@@ -84,6 +82,7 @@ export function BalanceFrom() {
         </CurrentBalanceContainer>
         <StyledBtn type="button" onClick={onClick}>Confirm</StyledBtn>
       </BaseContainer>
+      {popup.isShow && <Popup popup={popup} setPopup={setPopup} />}
     </BalanceForm>
     {popup.isShow && <Popup popup={popup} setPopup={setPopup} />}
     </>

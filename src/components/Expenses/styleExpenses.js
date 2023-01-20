@@ -42,7 +42,7 @@ const styledComponents = {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
 
     font-size: 12px;
     line-height: 14px;
@@ -62,12 +62,25 @@ const styledComponents = {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 56px;
+    height: 56px;
+    margin: -5px;
     fill: ${theme.colors.SVGColor};
     transition: 350ms ease-in-out;
     &:hover {
     fill: ${theme.colors.PrimaryOrange};
+    transform: scale(1.2);
+  }
+  `,
+
+  BoxForSvg: styled.div`
+    background-color: ${theme.colors.PrimaryGray};
+    border-radius: 30px;
+    width: 46px;
+    height: 46px;
+    margin: -5px -5px 0 0;
+    &:hover {
     background-color: ${theme.colors.PaleOrange};
-    border-radius: 10px;
     transform: scale(1.2);
   }
   `,
@@ -76,7 +89,6 @@ const styledComponents = {
       padding: 5px;
     border: none;
     background-color: transparent;
-
   `,
 };
 

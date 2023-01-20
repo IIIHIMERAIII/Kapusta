@@ -36,8 +36,6 @@ export const addTransactionOp = createAsyncThunk(
   }
 );
 
-
-
 export const fetchUserBalance = createAsyncThunk(
   'auth/balance',
   async ({value, token}, { rejectWithValue }) => {
@@ -53,6 +51,52 @@ export const fetchUserBalance = createAsyncThunk(
       });
       return data;}
       
+export const fetchExpenseTransactions = createAsyncThunk(
+  'transactions/getExpense',
+  async (_, { rejectWithValue, getState }) => {
+    const accessToken = getState().auth.token;
+    try {
+      setToken(accessToken);
+      const { data } = await instance.get('/expense');
+      return data;
+    } catch ({ response }) {
+      const { status, data } = response;
+      const error = {
+        status,
+        message: data.message,
+      };
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const fetchIncomeTransactions = createAsyncThunk(
+  'transactions/getIncome',
+  async (_, { rejectWithValue, getState }) => {
+    const accessToken = getState().auth.token;
+    try {
+      setToken(accessToken);
+      const { data } = await instance.get('/income');
+      return data;
+    } catch ({ response }) {
+      const { status, data } = response;
+      const error = {
+        status,
+        message: data.message,
+      };
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const removeTransaction = createAsyncThunk(
+  'transactions/remove',
+  async (id, { rejectWithValue, getState }) => {
+    const accessToken = getState().auth.token;
+    try {
+      setToken(accessToken);
+      await instance.delete(`${id}`);
+      return id;
     } catch ({ response }) {
       const { status, data } = response;
       const error = {
