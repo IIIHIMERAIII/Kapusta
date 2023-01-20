@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loginUser } from 'redux/auth/authOperations';
 import { 
-  fetchUserBalance
+  fetchUserBalance,
   addTransactionOp,
   fetchExpenseTransactions,
   fetchIncomeTransactions,
