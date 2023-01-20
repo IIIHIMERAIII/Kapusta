@@ -16,6 +16,7 @@ import { notifySettings } from '../../utils/notifySettings';
 
 const selectStyles = {
   control: () => ({
+    zIndex: '1000',
     boxSizing: 'border-box',
     width: '168px',
     height: '40px',
@@ -37,7 +38,9 @@ const selectStyles = {
   }),
   menu: () => ({
     boxSizing: 'border-box',
-    width: '182px',
+    position: 'absolute',
+    // width: '182px',
+    width: '168px',
     backgroundColor: '#ffffff',
     zIndex: '100',
     border: '2px solid #F5F6FB',
@@ -208,7 +211,7 @@ export default function InputTransactionForm({ type = 'expense' }) {
     <div className="input-product-form__wrapper">
       <form
         className="input-product-form"
-        style={{ display: 'flex', alignItems: 'center' }}
+        //    style={{ display: 'flex', alignItems: 'center' }}
       >
         {/* <svg
           className="input-product-form--calendar-svg"
@@ -267,8 +270,10 @@ export default function InputTransactionForm({ type = 'expense' }) {
             <use href={sprite + `#calculator`}></use>
           </svg>
         </div>
-        <Btn text="INPUT" onClick={onFormSubmit} />
-        <Btn text="CLEAR" onClick={onClearForm} />
+        <div className="input-product-form--buttn-group__wrapper">
+          <Btn text="INPUT" onClick={onFormSubmit} />
+          <Btn text="CLEAR" onClick={onClearForm} />
+        </div>
       </form>
     </div>
   );

@@ -16,6 +16,10 @@ export const TabLink = styled(Link)`
   border-bottom-right-radius: 0;
 `;
 
+export const Outlet = styled.div`
+margin-top: 32px;
+`;
+
 export const TransactWrapper = styled.div`
   display: flex;
   justify-content: space-between;
