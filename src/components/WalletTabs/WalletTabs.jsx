@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, Box, TabLink, TransactWrapper } from './styled';
+import { Container, Box, TabLink, Outlet, TransactWrapper } from './styled';
 import TransactionsList from 'components/TransactionsList/TransactionsList';
 import InputTransactionForm from 'components/InputTransactionForm/InputTransactionForm';
 import Summary from 'components/Summary/Summary';
@@ -32,7 +32,7 @@ export const Tabs = () => {
         </TabLink>
       </Box>
 
-      <div className="outlet">
+      <Outlet>
         {activeTab === 'tab1' ? (
           <>
             <InputTransactionForm type="expense" />
@@ -50,7 +50,7 @@ export const Tabs = () => {
             </TransactWrapper>
           </>
         )}
-      </div>
+      </Outlet>
     </Container>
   );
 };
