@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import ReactDatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+//import 'react-datepicker/dist/react-datepicker.css';
 import './InputTransactionForm.css';
 import AsyncSelect from 'react-select/async';
 import sprite from 'images/icons_sprite.svg';
@@ -9,7 +8,7 @@ import { Btn } from 'components/Buttons/Btn';
 import {
   getTransactionCategories,
   API_TRANSACTION,
-} from './api/apiTransactions';
+} from '../../api/apiTransactionCategories';
 import { addTransactionOp } from 'redux/transactions/transactionsOps';
 import { DatePickerComponent } from 'components/DatePickerComponent/DatePickerComponent';
 import Notiflix from 'notiflix';
@@ -165,13 +164,14 @@ export default function InputTransactionForm({ type = 'expense' }) {
         'You should enter transaction amount',
         notifySettings
       );
+      debugger;
       isValid = false;
     }
     return isValid;
   };
 
   const onFormSubmit = () => {
-    if (!isFormValid) return null;
+    if (!isFormValid()) return null;
     const transaction = {
       description: formData.product,
       amount: parseFloat(formData.sum),
@@ -202,13 +202,13 @@ export default function InputTransactionForm({ type = 'expense' }) {
   };
 
   const promiseOptions = () =>
-    new Promise(resolve => getTransactionCategories(type, token, resolve));
+    new Promise(resolve => getTransactionCategories(type, resolve));
 
   return (
     <div className="input-product-form__wrapper">
       <form
         className="input-product-form"
-        style={{ display: 'flex', alignItems: 'center' }}
+        //    style={{ display: 'flex', alignItems: 'center' }}
       >
         {/* <svg
           className="input-product-form--calendar-svg"
@@ -267,8 +267,10 @@ export default function InputTransactionForm({ type = 'expense' }) {
             <use href={sprite + `#calculator`}></use>
           </svg>
         </div>
-        <Btn text="INPUT" onClick={onFormSubmit} />
-        <Btn text="CLEAR" onClick={onClearForm} />
+        <div className="input-product-form--buttn-group__wrapper">
+          <Btn text="INPUT" onClick={onFormSubmit} />
+          <Btn text="CLEAR" onClick={onClearForm} />
+        </div>
       </form>
     </div>
   );

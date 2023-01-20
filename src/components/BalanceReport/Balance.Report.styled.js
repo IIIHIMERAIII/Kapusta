@@ -265,3 +265,6 @@ export const MainPageText = styled.p`
     display: none;
   }
 `;
+export const MounthBox = styled.div`
+min-width: 150px;
+`;

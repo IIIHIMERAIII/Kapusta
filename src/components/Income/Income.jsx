@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import svg from '../../images/icons_sprite.svg';
 import styledComponents from 'components/Expenses/styleExpenses';
+import { formating } from 'components/Balance/BalanceForm';
 
 const {
   ListOfBalanceChanges,
@@ -9,18 +10,8 @@ const {
   SvgBoxStyle,
   BtnToggleStats,
   BoxForSvg,
+  BoxStats,
 } = styledComponents;
-
- export const formating = data => {
-    const fixedData = data.toFixed(2);
-    if (data < 10) return '0' + fixedData;
-
-    const dividedData = fixedData.split('.');
-
-    const spacedData = Number(dividedData[0]).toLocaleString().split(',').join(' ');
-
-    return spacedData + '.' + dividedData[1];
-  };
 
 const Income = ({ onClick }) => {
   const statistics = useSelector(state => state.statistics.statistics);
@@ -37,7 +28,8 @@ const Income = ({ onClick }) => {
   } = statistics.data;
 
   return (
-    <div>
+    <>
+      <BoxStats>
       <div>
         <BtnToggleStats type="button" onClick={onClick}>
           <svg width="10" height="10">
@@ -75,7 +67,10 @@ const Income = ({ onClick }) => {
       ) : (
         <div>Empty</div>
       )}
-    </div>
+      </BoxStats>
+      <BoxStats>
+      </BoxStats>
+</>
   );
 };
 

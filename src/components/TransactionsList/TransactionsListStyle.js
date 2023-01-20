@@ -16,15 +16,16 @@ const stylesTransactionsList = {
     }
   `,
   List: styled.ul`
+    position: relative;
     display: flex;
     flex-direction: column;
     margin: 0;
     padding: 0;
-    max-height: 365px;
-    overflow-y: auto;
+    max-height: 385px;
   `,
 
   ListHeaderItems: styled.li`
+    position: sticky;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,8 +57,11 @@ const stylesTransactionsList = {
   DescriptionStyle: styled.p`
     width: 170px;
     @media screen and (min-width: 1280px) {
-      width: 190px;
       margin-right: 35px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 168px;
     }
   `,
 

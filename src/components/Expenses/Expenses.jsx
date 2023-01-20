@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import svg from '../../images/icons_sprite.svg';
 import styledComponents from './styleExpenses';
-import { formating } from 'components/Income/Income';
+import { formating } from 'components/Balance/BalanceForm';
 import { Chart } from 'components/Chart/Chart';
 import { useState } from 'react';
 
@@ -12,6 +12,7 @@ const {
   SvgBoxStyle,
   BtnToggleStats,
   BoxForSvg,
+  BoxStats,
 } = styledComponents;
 
 const Expenses = ({ onClick }) => {
@@ -76,7 +77,8 @@ const Expenses = ({ onClick }) => {
   } = statistics.data;
 
   return (
-    <div>
+    <>
+    <BoxStats>
       <div>
         <BtnToggleStats type="button">
           <svg width="10" height="10" onClick={onClick}>
@@ -230,8 +232,11 @@ const Expenses = ({ onClick }) => {
       ) : (
         <div>Empty</div>
       )}
+    </BoxStats>
+      <BoxStats>
       {filter && <Chart data={filtredData()} />}
-    </div>
+    </BoxStats>
+    </>
   );
 };
 
