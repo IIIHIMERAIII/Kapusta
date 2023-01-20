@@ -10,7 +10,6 @@ import { wordTranslator } from 'utils/wordTranslator';
 import { getParseDate } from 'utils/getParseDate';
 import stylesTransactionsList from './TransactionsListStyle';
 import svg from '../../images/icons_sprite.svg';
-import InputTransactionForm from 'components/InputTransactionForm/InputTransactionForm';
 
 const {
   BoxForList,
@@ -42,7 +41,6 @@ function TransactionsList({ type }) {
 
   return (
     <>
-      <InputTransactionForm type={type} />
       <BoxForList>
         <List>
           <ListHeaderItems>
@@ -52,7 +50,7 @@ function TransactionsList({ type }) {
             <AmountStyle>Sum</AmountStyle>
           </ListHeaderItems>
           {transactions[type].length !== 0 &&
-            transactions.expense.map(operation => {
+            transactions[type].map(operation => {
               return (
                 <ListItems key={operation._id}>
                   <DateStyle>{getParseDate(operation.date)}</DateStyle>
@@ -60,8 +58,10 @@ function TransactionsList({ type }) {
                   <CategoryStyle>
                     {wordTranslator(operation.category)}
                   </CategoryStyle>
-                  <AmountStyle style={{ color: `${type === 'expense' ? 'red' : 'green' }`}}>
-                    {type === 'expense' && '-'} {operation.amount} UAH.
+                  <AmountStyle
+                    style={{ color: `${type === 'expense' ? 'red' : 'green'}` }}
+                  >
+                    {type === 'expense' && '-'} {operation.amount}.00 UAH.
                   </AmountStyle>
                   <BtnForRemove
                     type="button"

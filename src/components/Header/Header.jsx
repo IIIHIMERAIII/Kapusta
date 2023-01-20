@@ -36,6 +36,7 @@ export function Header() {
       title: 'Do you really want to leave?',
       action: () => dispatch(logoutUser()),
     });
+    document.querySelector('#modal').classList.add('js-action')
   };
 
   return (
