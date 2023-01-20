@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
+  fetchUserBalance
   addTransactionOp,
   fetchExpenseTransactions,
   fetchIncomeTransactions,
   removeTransaction,
 } from './transactionsOps';
+
 
 const transactionsSlice = createSlice({
   name: 'transactions',
@@ -84,6 +85,17 @@ const transactionsSlice = createSlice({
         };
       })
       .addCase(removeTransaction.rejected, (state, { payload }) => {
+        state.isLoadinng = false;
+        state.error = payload;
+      }).addCase(fetchUserBalance.pending, (state) => {
+        state.isLoadinng = true;
+        state.error = null;
+      }).addCase(fetchUserBalance.fulfilled, (state, { payload }) => {
+        state.error = null;
+        state.isLoadinng = false;
+        
+        (payload && (state.balance = payload.newBalance))
+      }).addCase(fetchUserBalance.rejected, (state, { payload }) => {
         state.isLoadinng = false;
         state.error = payload;
       }),
