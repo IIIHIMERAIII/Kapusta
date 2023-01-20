@@ -122,7 +122,7 @@ const RegisterPage = () => {
             <BtnsWrapper>
               <Btn type="submit" text="Register" />
 
-              <NavLink text="Log in" to="/login" />
+              <NavLink text="Log in" to="/" />
             </BtnsWrapper>
           </Form>
         </FormWrapper>
