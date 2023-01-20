@@ -167,14 +167,13 @@ export default function InputTransactionForm({ type = 'expense' }) {
         'You should enter transaction amount',
         notifySettings
       );
-      debugger;
       isValid = false;
     }
     return isValid;
   };
 
   const onFormSubmit = () => {
-    if (!isFormValid()) return null;
+    if (!isFormValid(formData.product, category, formData.sum)) return null;
     const transaction = {
       description: formData.product,
       amount: parseFloat(formData.sum),
