@@ -1,9 +1,9 @@
-import axios from 'axios';
+import { instance } from 'redux/auth/authOperations';
 
 export const API_TRANSACTION = {
   expense: {
-    apiTransactionsCategoriesEndpoint: '/expense-categories',
-    apiAddTransactionEndpoint: '/expense',
+    apiTransactionsCategoriesEndpoint: 'transaction/expense-categories',
+    apiAddTransactionEndpoint: 'transaction/expense',
     apiCategories: {
       Продукты: 'Products',
       Алкоголь: 'Alcohol',
@@ -19,8 +19,8 @@ export const API_TRANSACTION = {
     },
   },
   income: {
-    apiTransactionsCategoriesEndpoint: '/income-categories',
-    apiAddTransactionEndpoint: '/income',
+    apiTransactionsCategoriesEndpoint: 'transaction/income-categories',
+    apiAddTransactionEndpoint: 'transaction/income',
     apiCategories: {
       'З/П': 'Salary',
       'Доп. доход': 'AddIncome',
@@ -28,20 +28,8 @@ export const API_TRANSACTION = {
   },
 };
 
-const instance = axios.create({
-  baseURL: 'https://kapusta-backend.goit.global/transaction',
-});
-
-const setToken = token => {
-  if (token) {
-    return (instance.defaults.headers.common.authorization = `Bearer ${token}`);
-  }
-  instance.defaults.headers.common.authorization = '';
-};
-
-export const getTransactionCategories = async (type, token, resolve) => {
+export const getTransactionCategories = async (type, resolve) => {
   try {
-    setToken(token);
     const { data } = await instance.get(
       API_TRANSACTION[type].apiTransactionsCategoriesEndpoint
     );
@@ -56,9 +44,6 @@ export const getTransactionCategories = async (type, token, resolve) => {
     }
     resolve(objData);
   } catch (error) {
-    setToken();
     throw error;
   }
 };
-
-export default instance;
