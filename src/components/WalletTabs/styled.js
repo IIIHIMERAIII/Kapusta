@@ -20,5 +20,4 @@ export const TransactWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding-top: 60px;
 `;
