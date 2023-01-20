@@ -1,18 +1,14 @@
-import {
-  Container,
-  ImageWrapper,
-  LogoWrapper,
-  ContentWrapper,
-  ImageWrapperBottom,
-} from './Logins.styled';
+import { Container, LogoWrapper, ContentWrapper } from './Logins.styled';
 
 import Logo from '../images/title_kapusta.png';
 import { AuthForm } from 'components/AuthForm/AuthForm';
+import { AnimatedCabbagesBg } from 'components/AnimatedBg/AnimatedBg';
+import { AnimatedBottomCabbages } from 'components/AnimatedCabbagesBottom/AnimatedCabbagesBottom';
 
 const LoginPage = () => {
   return (
     <Container>
-      <ImageWrapper />
+      <AnimatedCabbagesBg />
       <ContentWrapper>
         <LogoWrapper>
           <img src={Logo} alt="Logo" loading="lazy" />
@@ -26,9 +22,8 @@ const LoginPage = () => {
           navLinkAdress="/register"
           hintText="Or log in using an email and password, after registering:"
         />
-
       </ContentWrapper>
-      <ImageWrapperBottom />
+      <AnimatedBottomCabbages />
     </Container>
   );
 };
