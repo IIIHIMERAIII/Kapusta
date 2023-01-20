@@ -16,6 +16,7 @@ import { notifySettings } from '../../utils/notifySettings';
 
 const selectStyles = {
   control: () => ({
+    zIndex: '1000',
     boxSizing: 'border-box',
     width: '168px',
     height: '40px',
@@ -37,7 +38,9 @@ const selectStyles = {
   }),
   menu: () => ({
     boxSizing: 'border-box',
-    width: '182px',
+    position: 'absolute',
+    // width: '182px',
+    width: '168px',
     backgroundColor: '#ffffff',
     zIndex: '100',
     border: '2px solid #F5F6FB',
