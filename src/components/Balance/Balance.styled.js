@@ -26,6 +26,28 @@ export const BalanceContainer = styled.div`
   }
 `;
 
+export const AbsoluteContainer = styled(BalanceContainer)`
+  box-sizing: border-box;
+
+  top: 97px;
+
+  width: 100%;
+
+  position: absolute;
+
+  margin: 0 auto;
+  padding: 0 91px;
+  @media screen and (max-width: 768px) {
+    padding: 0 32px;
+  }
+
+  @media screen and (max-width: 480px) {
+    top: 96px;
+
+    padding: 0 20px;
+  }
+`;
+
 export const BalanceForm = styled.div`
   position: absolute;
 
