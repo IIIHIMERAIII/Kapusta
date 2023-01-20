@@ -1,37 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { Balance } from 'components/Balance/Balance';
-import { API_TRANSACTION } from 'components/InputTransactionForm/api/apiTransactions';
 import { instance } from 'redux/auth/authOperations';
-
-// const instance = axios.create({
-//   baseURL: 'https://kapusta-backend.goit.global/transaction',
-// });
-// const setToken = token => {
-//   if (token) {
-//     return (instance.defaults.headers.common.authorization = `Bearer ${token}`);
-//   }
-//   instance.defaults.headers.common.authorization = '';
-// };
-const baseInstance = axios.create({
-  baseURL: 'https://kapusta-backend.goit.global',
-});
-
-const setToken = token => {
-  if (token) {
-    return (instance.defaults.headers.common.authorization = `Bearer ${token}`);
-  }
-  instance.defaults.headers.common.authorization = '';
-};
+import { API_TRANSACTION } from 'api/apiTransactionCategories';
 
 export const addTransactionOp = createAsyncThunk(
   'transactions/ADD',
 
   async ({ type, transaction }, thunkAPI) => {
     try {
-      // setToken(token);
       const { data } = await instance.post(
-        `transaction/${API_TRANSACTION[type].apiAddTransactionEndpoint}`,
+        API_TRANSACTION[type].apiAddTransactionEndpoint,
         transaction
       );
       return { type, data };
@@ -43,25 +20,29 @@ export const addTransactionOp = createAsyncThunk(
 
 export const fetchUserBalance = createAsyncThunk(
   'auth/balance',
-  async ({value, token}, { rejectWithValue }) => {
+  async ({ value, token }, { rejectWithValue }) => {
     try {
-      if (token) {
-        baseInstance.defaults.headers.common.authorization = `Bearer ${token}`;
-      }else{
-        baseInstance.defaults.headers.common.authorization = '';
+      if (value !== 0) {
+        const { data } = await instance.patch('/user/balance', {
+          newBalance: value,
+        });
+        return data;
       }
-      
-      if(value!==0){const { data } = await baseInstance.patch('/user/balance', {
-        newBalance: value,
-      });
-      return data;}
-      
+    } catch ({ response }) {
+      const { status, data } = response;
+      const error = {
+        status,
+        message: data.message,
+      };
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const fetchExpenseTransactions = createAsyncThunk(
   'transactions/getExpense',
   async (_, { rejectWithValue }) => {
-    // const accessToken = getState().auth.token;
     try {
-      // setToken(accessToken);
       const { data } = await instance.get('transaction/expense');
       return data;
     } catch ({ response }) {
@@ -78,9 +59,7 @@ export const fetchExpenseTransactions = createAsyncThunk(
 export const fetchIncomeTransactions = createAsyncThunk(
   'transactions/getIncome',
   async (_, { rejectWithValue }) => {
-    // const accessToken = getState().auth.token;
     try {
-      // setToken(accessToken);
       const { data } = await instance.get('transaction/income');
       return data;
     } catch ({ response }) {
@@ -97,9 +76,7 @@ export const fetchIncomeTransactions = createAsyncThunk(
 export const removeTransaction = createAsyncThunk(
   'transactions/remove',
   async (id, { rejectWithValue }) => {
-    // const accessToken = getState().auth.token;
     try {
-      // setToken(accessToken);
       const { data } = await instance.delete(`transaction/${id}`);
       return { id, data };
     } catch ({ response }) {
