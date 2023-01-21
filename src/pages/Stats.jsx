@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getStatistics } from 'redux/statistics/statsOperations';
 import { BalanceReport } from 'components/BalanceReport/BalanceReport'
 import TotalStatistics from 'components/TotalStatistics/TotalStatistics';
+import { Main, Bg } from 'components/Container/container';
 
 
 
@@ -31,7 +32,8 @@ const [toggleStats, setToggleStats] = useState(false);
   };
 
   return (
-    <>
+    <Bg>
+      <Main>
       <BalanceReport />
       <TotalStatistics expenses={ statistics.data.expenses.expenseTotal} income={ statistics.data.incomes.incomeTotal} />
         {toggleStats ? (
@@ -39,7 +41,8 @@ const [toggleStats, setToggleStats] = useState(false);
         ) : (
           <Expenses onClick={onClick} />
         )}
-    </>
+      </Main>
+    </Bg>
   )
 };
 
