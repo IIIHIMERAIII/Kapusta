@@ -11,7 +11,8 @@ export const addTransactionOp = createAsyncThunk(
         API_TRANSACTION[type].apiAddTransactionEndpoint,
         transaction
       );
-      return { type, data };
+      const summary = await instance.get(`transaction/${type}`);
+      return { type, data, monthsStats: summary.data.monthsStats };
     } catch (error) {
       return thunkAPI.rejectWithValue({ error });
     }
@@ -20,14 +21,8 @@ export const addTransactionOp = createAsyncThunk(
 
 export const fetchUserBalance = createAsyncThunk(
   'auth/balance',
-  async ({ value, token }, { rejectWithValue }) => {
+  async ({ value }, { rejectWithValue }) => {
     try {
-      if (token) {
-        instance.defaults.headers.common.authorization = `Bearer ${token}`;
-      } else {
-        instance.defaults.headers.common.authorization = '';
-      }
-
       if (value !== 0) {
         const { data } = await instance.patch('/user/balance', {
           newBalance: value,
@@ -81,10 +76,15 @@ export const fetchIncomeTransactions = createAsyncThunk(
 
 export const removeTransaction = createAsyncThunk(
   'transactions/remove',
-  async (id, { rejectWithValue }) => {
+  async ({ id, type }, { rejectWithValue }) => {
     try {
       const { data } = await instance.delete(`transaction/${id}`);
-      return { id, data };
+      const summary = await instance.get(`transaction/${type}`);
+      return {
+        id,
+        newBalance: data.newBalance,
+        monthsStats: summary.data.monthsStats,
+      };
     } catch ({ response }) {
       const { status, data } = response;
       const error = {

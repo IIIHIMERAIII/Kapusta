@@ -92,9 +92,8 @@ export const authSlice = createSlice({
       .addCase(fetchCurrentUser.fulfilled, (state, { payload }) => {
         state.error = null;
         state.isLoading = false;
-        state.token = payload.newAccessToken;
-        state.refreshToken = payload.newRefreshToken;
-        state.sid = payload.newSid;
+        state.user.email = payload.email;
+
         Notiflix.Notify.success(
           `Welcome back, ${state.user.email}!`,
           notifySettings
@@ -117,12 +116,10 @@ export const authSlice = createSlice({
         state.isLoggedIn = true;
         state.user.email = payload.data.email;
         state.isLoading = false;
-        // console.log(payload);
       })
       .addCase(googleAuthUser.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
-        // console.log(payload);
       });
   },
 });

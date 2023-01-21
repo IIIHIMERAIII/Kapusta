@@ -3,7 +3,9 @@ import styled from 'styled-components';
 export const SummaryList = styled.ul`
   padding: 0;
   margin: 0;
-  border-radius: 30px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
   overflow: hidden;
   list-style: none;
   display: flex;

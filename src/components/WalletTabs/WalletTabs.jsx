@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import { Container, Box, TabLink, Outlet, TransactWrapper } from './styled';
+import {
+  Container,
+  Box,
+  TabLink,
+  Outlet,
+  TransactWrapper,
+  SummaryWrapper,
+} from './styled';
 import TransactionsList from 'components/TransactionsList/TransactionsList';
 import InputTransactionForm from 'components/InputTransactionForm/InputTransactionForm';
 import Summary from 'components/Summary/Summary';
@@ -38,7 +45,9 @@ export const Tabs = () => {
             <InputTransactionForm type="expense" />
             <TransactWrapper>
               <TransactionsList type="expense" />
-              <Summary />
+              <SummaryWrapper>
+                <Summary />
+              </SummaryWrapper>
             </TransactWrapper>
           </>
         ) : (
