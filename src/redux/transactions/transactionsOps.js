@@ -21,14 +21,8 @@ export const addTransactionOp = createAsyncThunk(
 
 export const fetchUserBalance = createAsyncThunk(
   'auth/balance',
-  async ({ value, token }, { rejectWithValue }) => {
+  async ({ value }, { rejectWithValue }) => {
     try {
-      if (token) {
-        instance.defaults.headers.common.authorization = `Bearer ${token}`;
-      } else {
-        instance.defaults.headers.common.authorization = '';
-      }
-
       if (value !== 0) {
         const { data } = await instance.patch('/user/balance', {
           newBalance: value,
