@@ -23,5 +23,11 @@ export const Outlet = styled.div`
 export const TransactWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100%;
+`;
+
+export const SummaryWrapper = styled.div`
+  display: none;
+  @media screen and (min-width: 1280px) {
+    display: block;
+  }
 `;

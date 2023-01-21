@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { loginUser } from 'redux/auth/authOperations';
-import { 
+import {
   fetchUserBalance,
   addTransactionOp,
   fetchExpenseTransactions,
@@ -32,6 +32,7 @@ const transactionsSlice = createSlice({
         state.balance = payload.data.newBalance;
         const newTransaction = payload.data.transaction;
         state.transactions[payload.type].push(newTransaction);
+        state.transactions.monthsStats = payload.monthsStats;
       })
       .addCase(addTransactionOp.rejected, (state, { payload }) => {
         state.isLoadinng = false;
@@ -74,7 +75,7 @@ const transactionsSlice = createSlice({
           ...state,
           isLoadinng: false,
           error: null,
-          balance: payload.data.newBalance,
+          balance: payload.newBalance,
           transactions: {
             ...state.transactions,
             expense: state.transactions.expense.filter(
@@ -83,6 +84,7 @@ const transactionsSlice = createSlice({
             income: state.transactions.income.filter(
               operation => operation._id !== payload.id
             ),
+            monthsStats: { ...payload.monthsStats },
           },
         };
       })
@@ -99,16 +101,18 @@ const transactionsSlice = createSlice({
         state.error = null;
         state.balance = payload.userData.balance;
       })
-      .addCase(loginUser.rejected, (state, { payload }) => {
-      }).addCase(fetchUserBalance.pending, (state) => {
+      .addCase(loginUser.rejected, (state, { payload }) => {})
+      .addCase(fetchUserBalance.pending, state => {
         state.isLoadinng = true;
         state.error = null;
-      }).addCase(fetchUserBalance.fulfilled, (state, { payload }) => {
+      })
+      .addCase(fetchUserBalance.fulfilled, (state, { payload }) => {
         state.error = null;
         state.isLoadinng = false;
-        
-        (payload && (state.balance = payload.newBalance))
-      }).addCase(fetchUserBalance.rejected, (state, { payload }) => {
+
+        payload && (state.balance = payload.newBalance);
+      })
+      .addCase(fetchUserBalance.rejected, (state, { payload }) => {
         state.isLoadinng = false;
         state.error = payload;
       }),

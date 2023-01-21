@@ -10,6 +10,8 @@ import { wordTranslator } from 'utils/wordTranslator';
 import { getParseDate } from 'utils/getParseDate';
 import stylesTransactionsList from './TransactionsListStyle';
 import svg from '../../images/icons_sprite.svg';
+import { formattingSum } from 'utils/formattingSum';
+import { sortTransactions } from 'utils/sortTransactions';
 
 const {
   BoxForList,
@@ -22,12 +24,21 @@ const {
   AmountStyle,
   ListHeaderItems,
   SvgBoxStyle,
+  CategoryHeaderStyle,
+  AmountHeaderStyle,
+  DescriptionHeaderStyle,
+  DateHeaderStyle,
 } = stylesTransactionsList;
 
 function TransactionsList({ type }) {
   const transactions = useSelector(selectTransactions);
   const dispatch = useDispatch();
 
+  // const clientWidth = window.matchMedia('(min-width: 350px)');
+  // console.log('clientWidth :>> ', clientWidth);
+  document.addEventListener('resize', event => {
+    console.log('event :>> ', event);
+  });
   useEffect(() => {
     if (type === 'expense') {
       dispatch(fetchExpenseTransactions());
@@ -42,15 +53,15 @@ function TransactionsList({ type }) {
   return (
     <>
       <BoxForList>
+        <ListHeaderItems>
+          <DateHeaderStyle>Date</DateHeaderStyle>
+          <DescriptionHeaderStyle>Description</DescriptionHeaderStyle>
+          <CategoryHeaderStyle>Category</CategoryHeaderStyle>
+          <AmountHeaderStyle>Sum</AmountHeaderStyle>
+        </ListHeaderItems>
         <List>
-          <ListHeaderItems>
-            <DateStyle>Date</DateStyle>
-            <DescriptionStyle>Description</DescriptionStyle>
-            <CategoryStyle>Category</CategoryStyle>
-            <AmountStyle>Sum</AmountStyle>
-          </ListHeaderItems>
           {transactions[type].length !== 0 &&
-            transactions[type].map(operation => {
+            sortTransactions(transactions[type]).map(operation => {
               return (
                 <ListItems key={operation._id}>
                   <DateStyle>{getParseDate(operation.date)}</DateStyle>
@@ -58,15 +69,14 @@ function TransactionsList({ type }) {
                   <CategoryStyle>
                     {wordTranslator(operation.category)}
                   </CategoryStyle>
-                  <AmountStyle
-                    style={{ color: `${type === 'expense' ? 'red' : 'green'}` }}
-                  >
-                    {type === 'expense' && '-'} {operation.amount}.00 UAH.
+                  <AmountStyle type={type}>
+                    {type === 'expense' && '-'}{' '}
+                    {formattingSum(operation.amount)} UAH.
                   </AmountStyle>
                   <BtnForRemove
                     type="button"
                     onClick={() => {
-                      dispatch(removeTransaction(operation._id));
+                      dispatch(removeTransaction({ id: operation._id, type }));
                     }}
                   >
                     <SvgBoxStyle>
