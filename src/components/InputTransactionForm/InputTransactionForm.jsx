@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //import 'react-datepicker/dist/react-datepicker.css';
 import './InputTransactionForm.css';
 import AsyncSelect from 'react-select/async';
+import Select from 'react-select';
 import sprite from 'images/icons_sprite.svg';
 import { Btn } from 'components/Buttons/Btn';
 import {
@@ -42,7 +43,7 @@ const selectStyles = {
     // width: '182px',
     width: '168px',
     backgroundColor: '#ffffff',
-    zIndex: '100',
+    zIndex: '200',
     border: '2px solid #F5F6FB',
     boxShadow: '0px 3px 4px rgba(170, 178, 197, 0.4)',
   }),
@@ -94,37 +95,12 @@ export default function InputTransactionForm({ type = 'expense' }) {
     },
   };
 
-  // const multiSelectStyles = {
-  //   option: (defaultStyles, state) => ({
-  //     ...defaultStyles,
-  //     color: state.isSelected ? '#52555F' : '#C7CCDC',
-  //     backgroundColor: state.isSelected ? '#a0a0a0' : '#ffffff',
-  //     fontSize: '12px',
-  //   }),
-  //   control: defaultStyles => ({
-  //     ...defaultStyles,
+  const selectOptionsSheme = {
+    income: [],
+    expense: [],
+  };
 
-  //     width: '168px',
-  //     height: '40px',
-  //     fontSize: '12px',
-  //     boxShadow: 'none',
-
-  //     color: '#C7CCDC',
-  //     border: 'none',
-  //     borderLeft: '#F5F6FB 1px solid',
-  //     borderRight: '#F5F6FB 1px solid',
-  //   }),
-  //   singleValue: defaultStyles => ({
-  //     ...defaultStyles,
-  //     fontSize: '12px',
-  //     color: '#C7CCDC',
-  //   }),
-  //   placeholder: defaultStyles => ({
-  //     ...defaultStyles,
-  //     //  color: '#C7CCDC',
-  //     fontSize: '12px',
-  //   }),
-  // };
+  const selectOptions = useRef(selectOptionsSheme);
 
   const today = new Date();
   const initialFormData = {
@@ -135,10 +111,33 @@ export default function InputTransactionForm({ type = 'expense' }) {
   const [formData, setFormData] = useState(initialFormData);
   const [date, setDate] = useState(today);
   const [category, setCategory] = useState(null);
+  const [isOptionsLoading, setIsOptionsLoading] = useState(false);
+
+  useEffect(() => {
+    const getSelectOptions = async () => {
+      try {
+        setIsOptionsLoading(true);
+        const data = await getTransactionCategories(type);
+
+        selectOptions.current[type] = data.map((option, i) => {
+          return {
+            value: i,
+            label: API_TRANSACTION[type].apiCategories[option] ?? 'Other',
+          };
+        });
+      } catch (error) {
+        Notiflix.Notify.error(`Server error: ${error.message}`, notifySettings);
+        console.error(error);
+      } finally {
+        setIsOptionsLoading(false);
+      }
+    };
+
+    if (selectOptions.current[type].length > 0) return;
+    getSelectOptions();
+  }, [type]);
 
   const dispatch = useDispatch();
-  //const token = useSelector(state => state.auth.accessToken);
-  const token = useSelector(state => state.auth.token);
 
   const onClearForm = () => {
     setDate(today);
@@ -182,7 +181,7 @@ export default function InputTransactionForm({ type = 'expense' }) {
         category.value
       ],
     };
-    dispatch(addTransactionOp({ token, type, transaction }));
+    dispatch(addTransactionOp({ type, transaction }));
     onClearForm();
   };
 
@@ -205,6 +204,8 @@ export default function InputTransactionForm({ type = 'expense' }) {
 
   const promiseOptions = () =>
     new Promise(resolve => getTransactionCategories(type, resolve));
+
+  console.log(selectOptions.current[type]);
 
   return (
     <div className="input-product-form__wrapper">
@@ -232,12 +233,12 @@ export default function InputTransactionForm({ type = 'expense' }) {
               })
             }
           />
-          <AsyncSelect
-            key={type}
+          <Select
             defaultOptions
             placeholder={TRANSACTION_FORM_DATA[type].selectCategoryPlaceholder}
             styles={selectStyles}
-            loadOptions={promiseOptions}
+            loadOptions={selectOptions.current[type]}
+            isLoading={isOptionsLoading}
             closeMenuOnSelect={true}
             onChange={selectedOption => setCategory(selectedOption)}
             value={category}

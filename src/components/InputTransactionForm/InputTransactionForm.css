@@ -51,6 +51,7 @@
 .input-product-form__inputs-wrapper {
   display: inline-flex;
   position: relative;
+  overflow: hidden;
 
   width: 578px;
   height: 40px;
@@ -95,7 +96,7 @@
 .input-product-form--calc-svg {
   position: absolute;
   top: 11px;
-  right: 11px;
+  right: 16px;
 }
 
 .input-product-form--buttn-group__wrapper {
