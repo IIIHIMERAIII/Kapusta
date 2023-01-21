@@ -1,3 +1,5 @@
+import { useMediaQuery } from '@react-hook/media-query';
+
 import {
   Bar,
   BarChart,
@@ -23,49 +25,44 @@ const customLabelVertical = ({ x, y, value }) => {
   );
 };
 export const Chart = ({ data }) => {
-  const isMobile = useMedia();
+  const matches = useMediaQuery('only screen and (min-width: 420px)');
 
   return (
     <>
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          layout="horizontal"
-          data={data}
-          // width={800}
-          // height={800}
-          margin={{ top: 15, right: 15, bottom: 15, left: 15 }}
-          barCategoryGap={1}
-        >
-          {/* <XAxis hide /> */}
-          <XAxis dataKey="name" type="category" />
-          <CartesianGrid vertical={false} />
-          <Bar
-            dataKey="cost"
-            fill="#FF751D"
-            label={customLabelHorizontal}
-            barSize={50}
-          />
-        </BarChart>
-      </ResponsiveContainer>
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          layout="vertical"
-          data={data}
-          // width={100%}
-          // height={800}
-          margin={{ top: 15, right: 15, bottom: 15, left: 15 }}
-          barCategoryGap={1}
-        >
-          {/* <XAxis hide /> */}
-          <YAxis dataKey="name" type="category" />
-          <CartesianGrid vertical={false} />
-          <Bar
-            dataKey="cost"
-            fill="#FF751D"
-            label={customLabelVertical}
-            barSize={50}
-          />
-        </BarChart>
+        {matches ? (
+          <BarChart
+            layout="horizontal"
+            data={data}
+            margin={{ top: 15, right: 15, bottom: 15, left: 15 }}
+            barCategoryGap={1}
+          >
+            <XAxis dataKey="name" type="category" />
+            <CartesianGrid vertical={false} />
+            <Bar
+              dataKey="cost"
+              fill="#FF751D"
+              label={customLabelHorizontal}
+              barSize={50}
+            />
+          </BarChart>
+        ) : (
+          <BarChart
+            layout="vertical"
+            data={data}
+            margin={{ top: 15, right: 15, bottom: 15, left: 15 }}
+            barCategoryGap={1}
+          >
+            <YAxis dataKey="name" type="category" />
+            <CartesianGrid vertical={false} />
+            <Bar
+              dataKey="cost"
+              fill="#FF751D"
+              label={customLabelVertical}
+              barSize={50}
+            />
+          </BarChart>
+        )}
       </ResponsiveContainer>
     </>
   );
