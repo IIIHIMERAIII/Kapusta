@@ -17,7 +17,8 @@ const Income = ({ onClick }) => {
   const statistics = useSelector(state => state.statistics.statistics);
 
   if (!statistics) {
-    return;
+    return (
+      <TitleOfBalanceChanges>"No data to display!"</TitleOfBalanceChanges>);
   }
 
   const {
@@ -65,7 +66,7 @@ const Income = ({ onClick }) => {
           )}
         </ListOfBalanceChanges>
       ) : (
-        <div>Empty</div>
+      <TitleOfBalanceChanges>"No data to display!"</TitleOfBalanceChanges>
       )}
       </BoxStats>
       <BoxStats>

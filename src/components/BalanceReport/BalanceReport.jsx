@@ -14,9 +14,14 @@ import {
   MounthBox,
 } from './Balance.Report.styled';
 import { BalanceReportFrom } from './BalanceReportForm';
+import { currentPeriod } from 'redux/statistics/statsSlice';
+import { getStatistics } from 'redux/statistics/statsOperations';
+import { useSelector, useDispatch } from 'react-redux';
 
 export function BalanceReport() {
-  const [month, setMonth] = useState(1);
+  const [month, setMonthes] = useState(1);
+  const statePeriod = useSelector(state => state.statistics.period);
+  const dispatch = useDispatch();
 
   const getDate = idx => {
     const objDate = new Date();
@@ -32,9 +37,31 @@ export function BalanceReport() {
     return `${month} ${year}`;
   };
 
-  const nextMonth = () => setMonth(prevState => prevState + 1);
+  const nextMonth = () => {
+    setMonthes(prevState => prevState + 1);
 
-  const prevMonth = () => setMonth(prevState => prevState - 1);
+    const newPeriod = new Date(JSON.parse(statePeriod)) 
+    newPeriod.setDate(1);
+    newPeriod.setMonth(new Date(JSON.parse(statePeriod)).getMonth() + 1);
+    const month = newPeriod.getMonth() + 1
+    const period = `${newPeriod.getFullYear()}-${month > 10 ? month : `0${month}`}`
+   
+    dispatch(currentPeriod(JSON.stringify(newPeriod)))
+    dispatch(getStatistics({ period }))
+  }
+
+  const prevMonth = () => {
+    setMonthes(prevState => prevState - 1);
+
+    const newPeriod = new Date(JSON.parse(statePeriod)) 
+    newPeriod.setDate(1);
+    newPeriod.setMonth(new Date(JSON.parse(statePeriod)).getMonth() - 1);
+    const month = newPeriod.getMonth() + 1
+    const period = `${newPeriod.getFullYear()}-${month > 10 ? month : `0${month}`}`
+   
+    dispatch(currentPeriod(JSON.stringify(newPeriod)))
+    dispatch(getStatistics({ period }))
+  }
 
   return (
     <BalanceContainer>

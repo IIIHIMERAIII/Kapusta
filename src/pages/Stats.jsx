@@ -3,26 +3,36 @@ import Expenses from 'components/Expenses/Expenses';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getStatistics } from 'redux/statistics/statsOperations';
-import { BalanceReport } from 'components/BalanceReport/BalanceReport'
+import { BalanceReport } from 'components/BalanceReport/BalanceReport';
 import TotalStatistics from 'components/TotalStatistics/TotalStatistics';
+import styledComponents from 'components/Expenses/styleExpenses';
+import { currentPeriod } from 'redux/statistics/statsSlice';
 
-
+const { BoxForBalance } = styledComponents;
 
 const Statistics = () => {
-const [toggleStats, setToggleStats] = useState(false);
+  const [toggleStats, setToggleStats] = useState(false);
 
-  const token = useSelector(state => state.auth.token);
-  const period = useSelector(state => state.statistics.period);
+  const statePeriod = useSelector(state => state.statistics.period);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getStatistics({ token, period }));
-  }, [dispatch, period, token]);
+    if (!statePeriod) {
+    const objDate = new Date();
+    const year = objDate.getFullYear();
+    const month = objDate.getMonth() + 1
+      
+    const period = `${year}-${month > 10 ? month : `0${month}`}`
+    dispatch(currentPeriod(JSON.stringify(objDate)))
+    dispatch(getStatistics({ period }))
+    }
+
+  }, [dispatch, statePeriod]);
 
   const statistics = useSelector(state => state.statistics.statistics);
 
-    if (!statistics) {
+  if (!statistics) {
     return;
   }
 
@@ -32,15 +42,20 @@ const [toggleStats, setToggleStats] = useState(false);
 
   return (
     <>
-      <BalanceReport />
-      <TotalStatistics expenses={ statistics.data.expenses.expenseTotal} income={ statistics.data.incomes.incomeTotal} />
-        {toggleStats ? (
-          <Income onClick={onClick} />
-        ) : (
-          <Expenses onClick={onClick} />
-        )}
+      <BoxForBalance>
+        <BalanceReport />
+      </BoxForBalance>
+      <TotalStatistics
+        expenses={statistics.data.expenses.expenseTotal}
+        income={statistics.data.incomes.incomeTotal}
+      />
+      {toggleStats ? (
+        <Income onClick={onClick} />
+      ) : (
+        <Expenses onClick={onClick} />
+      )}
     </>
-  )
+  );
 };
 
 export default Statistics;
