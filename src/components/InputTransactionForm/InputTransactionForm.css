@@ -4,8 +4,8 @@
   flex-wrap: nowrap;
   z-index: 1;
 
-  padding-top: 34px;
-  padding-left: 32px;
+  /* padding-top: 34px;
+  padding-left: 32px; */
   margin-bottom: 60px;
 }
 
@@ -95,7 +95,7 @@
 .input-product-form--calc-svg {
   position: absolute;
   top: 11px;
-  right: 11px;
+  right: 16px;
 }
 
 .input-product-form--buttn-group__wrapper {
