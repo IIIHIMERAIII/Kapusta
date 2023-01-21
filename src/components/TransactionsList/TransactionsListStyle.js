@@ -2,6 +2,20 @@ import styled from 'styled-components';
 import { theme } from 'components/Theme';
 
 const stylesTransactionsList = {
+  DataWrapper: styled.div`
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column-reverse;
+    @media screen and (min-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+    }
+  `,
+
+  DateDescrWrapper: styled.div`
+    display: flex;
+  `,
+
   BoxForList: styled.div`
     width: 625px;
     @media screen and (min-width: 768px) {
@@ -109,6 +123,7 @@ const stylesTransactionsList = {
       border-right: 2px solid ${theme.colors.PrimaryGray};
     }
   `,
+
   DateStyle: styled.p`
     width: 85px;
     margin-right: 25px;
@@ -127,9 +142,11 @@ const stylesTransactionsList = {
   CategoryStyle: styled.p`
     font-weight: 700;
     width: 125px;
-    text-align: center;
+    margin: 0;
+
     @media screen and (min-width: 768px) {
       font-weight: 400;
+      text-align: center;
     }
     @media screen and (min-width: 1280px) {
       width: 115px;
