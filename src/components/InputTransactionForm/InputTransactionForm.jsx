@@ -212,24 +212,10 @@ export default function InputTransactionForm({ type = 'expense' }) {
         className="input-product-form"
         //    style={{ display: 'flex', alignItems: 'center' }}
       >
-        {/* <svg
-          className="input-product-form--calendar-svg"
-          width="20"
-          height="20"
-        >
-          <use href={sprite + `#calendar`}></use>
-        </svg> */}
-        {/* <ReactDatePicker
-          className="date-picker__input"
-          selected={date}
-          dateFormat="yyyy.MM.dd"
-          onChange={date => setDate(date)}
-          maxDate={date}
-          
-        /> */}
         <DatePickerComponent
           name="date"
           date={date}
+          maxDate={today}
           handler={date => setDate(date)}
         />
 
