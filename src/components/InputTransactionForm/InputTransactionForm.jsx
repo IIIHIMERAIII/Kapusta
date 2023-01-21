@@ -83,7 +83,7 @@ const selectStyles = {
   },
 };
 
-export default function InputTransactionForm({ type = 'expense' }) {
+export default function InputTransactionForm({ type }) {
   const TRANSACTION_FORM_DATA = {
     expense: {
       description: 'Product description',
@@ -113,6 +113,8 @@ export default function InputTransactionForm({ type = 'expense' }) {
   const [category, setCategory] = useState(null);
   const [isOptionsLoading, setIsOptionsLoading] = useState(false);
 
+  const [ssum, setssum] = useState(0);
+
   useEffect(() => {
     const getSelectOptions = async () => {
       try {
@@ -130,6 +132,7 @@ export default function InputTransactionForm({ type = 'expense' }) {
         console.error(error);
       } finally {
         setIsOptionsLoading(false);
+        console.log('UseEffect running');
       }
     };
 
@@ -202,17 +205,10 @@ export default function InputTransactionForm({ type = 'expense' }) {
     });
   };
 
-  const promiseOptions = () =>
-    new Promise(resolve => getTransactionCategories(type, resolve));
-
-  console.log(selectOptions.current[type]);
-
+  console.log('RENDER FORM. Type is', type);
   return (
     <div className="input-product-form__wrapper">
-      <form
-        className="input-product-form"
-        //    style={{ display: 'flex', alignItems: 'center' }}
-      >
+      <form className="input-product-form">
         <DatePickerComponent
           name="date"
           date={date}
@@ -234,15 +230,17 @@ export default function InputTransactionForm({ type = 'expense' }) {
             }
           />
           <Select
+            key={type}
             defaultOptions
             placeholder={TRANSACTION_FORM_DATA[type].selectCategoryPlaceholder}
             styles={selectStyles}
-            loadOptions={selectOptions.current[type]}
+            options={selectOptions.current[type]}
             isLoading={isOptionsLoading}
             closeMenuOnSelect={true}
             onChange={selectedOption => setCategory(selectedOption)}
             value={category}
           />
+
           <input
             type="text"
             value={formData.sum}
@@ -250,7 +248,6 @@ export default function InputTransactionForm({ type = 'expense' }) {
             name="product"
             placeholder="0.00"
             onChange={e => validateSumInput(e.target.value)}
-            required
           />
           <svg className="input-product-form--calc-svg" width="20" height="20">
             <use href={sprite + `#calculator`}></use>

@@ -4,8 +4,8 @@
   flex-wrap: nowrap;
   z-index: 1;
 
-  padding-top: 34px;
-  padding-left: 32px;
+  /* padding-top: 34px;
+  padding-left: 32px; */
   margin-bottom: 60px;
 }
 
@@ -51,7 +51,6 @@
 .input-product-form__inputs-wrapper {
   display: inline-flex;
   position: relative;
-  overflow: hidden;
 
   width: 578px;
   height: 40px;
