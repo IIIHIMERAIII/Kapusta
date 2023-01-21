@@ -33,16 +33,13 @@ export const getTransactionCategories = async (type, resolve) => {
     const { data } = await instance.get(
       API_TRANSACTION[type].apiTransactionsCategoriesEndpoint
     );
-    const objData = [];
-
-    for (let i = 0; i < data.length; i++) {
-      const apiCategory = data[i];
-      objData[i] = {
+    const optionsArray = data.map((option, i) => {
+      return {
         value: i,
-        label: API_TRANSACTION[type].apiCategories[apiCategory] || 'Other',
+        label: API_TRANSACTION[type].apiCategories[option] || 'Other',
       };
-    }
-    resolve(objData);
+    });
+    resolve(optionsArray);
   } catch (error) {
     throw error;
   }
