@@ -26,7 +26,6 @@ const customLabelVertical = ({ x, y, value }) => {
 };
 export const Chart = ({ data }) => {
   const matches = useMediaQuery('only screen and (min-width: 420px)');
-  console.log(matches);
 
   return (
     <>
