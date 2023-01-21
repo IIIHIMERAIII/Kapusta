@@ -7,6 +7,7 @@ import { BalanceReport } from 'components/BalanceReport/BalanceReport';
 import TotalStatistics from 'components/TotalStatistics/TotalStatistics';
 import styledComponents from 'components/Expenses/styleExpenses';
 import { currentPeriod } from 'redux/statistics/statsSlice';
+import { Bg } from 'components/Container/container';
 
 const { BoxForBalance } = styledComponents;
 
@@ -41,7 +42,7 @@ const Statistics = () => {
   };
 
   return (
-    <>
+    <Bg>
       <BoxForBalance>
         <BalanceReport />
       </BoxForBalance>
@@ -54,7 +55,7 @@ const Statistics = () => {
       ) : (
         <Expenses onClick={onClick} />
       )}
-    </>
+    </Bg>
   );
 };
 

@@ -28,6 +28,8 @@ const {
   AmountHeaderStyle,
   DescriptionHeaderStyle,
   DateHeaderStyle,
+  DataWrapper,
+  DateDescrWrapper,
 } = stylesTransactionsList;
 
 function TransactionsList({ type }) {
@@ -64,11 +66,17 @@ function TransactionsList({ type }) {
             sortTransactions(transactions[type]).map(operation => {
               return (
                 <ListItems key={operation._id}>
-                  <DateStyle>{getParseDate(operation.date)}</DateStyle>
-                  <DescriptionStyle>{operation.description}</DescriptionStyle>
-                  <CategoryStyle>
-                    {wordTranslator(operation.category)}
-                  </CategoryStyle>
+                  <DataWrapper>
+                    <DateDescrWrapper>
+                      <DateStyle>{getParseDate(operation.date)}</DateStyle>
+                      <DescriptionStyle>
+                        {operation.description}
+                      </DescriptionStyle>
+                    </DateDescrWrapper>
+                    <CategoryStyle>
+                      {wordTranslator(operation.category)}
+                    </CategoryStyle>
+                  </DataWrapper>
                   <AmountStyle type={type}>
                     {type === 'expense' && '-'}{' '}
                     {formattingSum(operation.amount)} UAH.

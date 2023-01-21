@@ -31,7 +31,6 @@ const Expenses = ({ onClick }) => {
   };
   const filtredData = () => {
     const data = statistics.data.expenses.expensesData;
-    // console.log(data);
     if (!filter) return;
     const [_, expenses] = Object.entries(data).filter(
       el => el[0] === filter
@@ -221,9 +220,7 @@ const Expenses = ({ onClick }) => {
               </ItemOfBalanceChanges>
             )}
           </ListOfBalanceChanges>
-        ) : (
-            <TitleOfBalanceChanges>"No data to display!"</TitleOfBalanceChanges>
-        )}
+        ) : (<TitleOfBalanceChanges>"No data to display!"</TitleOfBalanceChanges>)}
       </BoxStats>
       {filter && (
         <BoxStats>
