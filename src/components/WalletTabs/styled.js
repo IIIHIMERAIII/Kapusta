@@ -14,14 +14,26 @@ export const TabLink = styled(Link)`
   height: 40px;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  box-shadow: none;
+  filter:none;
 `;
 
 export const Outlet = styled.div`
   margin-top: 0px;
+  background-color: white;
+  border-radius: 0px 30px 30px 30px;
+  padding: 32px 32px 61px 32px;
+  box-shadow: 0px 10px 60px rgba(170, 178, 197, 0.2);
 `;
 
 export const TransactWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100%;
+`;
+
+export const SummaryWrapper = styled.div`
+  display: none;
+  @media screen and (min-width: 1280px) {
+    display: block;
+  }
 `;

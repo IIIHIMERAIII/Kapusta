@@ -37,26 +37,21 @@ instance.interceptors.response.use(
 );
 
 export const fetchCurrentUser = createAsyncThunk(
-  'auth/current',
+  'auth/info',
   async (_, { getState, rejectWithValue }) => {
     try {
       const state = getState();
-      const sid = state.auth.sid;
-      const refreshToken = state.auth.refreshToken;
-      if (sid && refreshToken) {
-        setToken(refreshToken);
-        const { data } = await instance.post('/auth/refresh', { sid });
-        setToken(data.newAccessToken);
-        return data;
-      }
-      return;
+
+      const accessToken = state.auth.token;
+      setToken(accessToken);
+      const { data } = await instance.get('/user');
+      return data;
     } catch ({ response }) {
       const { status, data } = response;
       const error = {
         status,
         message: data.message,
       };
-      console.log('error :>> ', error);
       Notiflix.Notify.failure(`${error.message}`, notifySettings);
       return rejectWithValue(error);
     }
@@ -120,26 +115,18 @@ export const logoutUser = createAsyncThunk(
 
 export const googleAuthUser = createAsyncThunk(
   'auth/google',
-  async ({ accessToken, refreshToken, sid }) => {
+  async ({ accessToken, refreshToken, sid }, { rejectWithValue }) => {
     setToken(accessToken);
     try {
       const { data } = await instance.get('/user');
       return { accessToken, refreshToken, sid, data };
-    } catch (error) {
-      console.log(error);
+    } catch ({ response }) {
+      const { status, data } = response;
+      const error = {
+        status,
+        message: data.message,
+      };
+      return rejectWithValue(error);
     }
   }
 );
-
-// export const refreshUserInfo = createAsyncThunk(
-//   'auth/refreshUserInfo',
-//   async () => {
-//     try {
-//       const { data } = await instance.get('/user');
-
-//       return data;
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
-// );

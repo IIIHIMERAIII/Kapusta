@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { selectTransactions } from 'redux/transactions/transactionsSelectors';
+import { formattingSum } from 'utils/formattingSum';
 import { wordTranslator } from 'utils/wordTranslator';
 import {
   SummaryItems,
@@ -21,7 +22,7 @@ function Summary() {
             return (
               <SummaryItems key={wordTranslator(operation[0])}>
                 <SummaryText>{wordTranslator(operation[0])}</SummaryText>
-                <SummaryText>{operation[1] + '.00'}</SummaryText>
+                <SummaryText>{formattingSum(operation[1])}</SummaryText>
               </SummaryItems>
             );
           })}
