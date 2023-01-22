@@ -34,7 +34,7 @@ export const Chart = ({ data }) => {
           <BarChart
             layout="horizontal"
             data={data}
-            margin={{ top: 15, right: 15, bottom: 15, left: 15 }}
+            margin={{ top: 30, right: 15, bottom: 15, left: 15 }}
             barCategoryGap={1}
           >
             <XAxis dataKey="name" type="category" />
@@ -50,7 +50,7 @@ export const Chart = ({ data }) => {
           <BarChart
             layout="vertical"
             data={data}
-            margin={{ top: 15, right: 15, bottom: 15, left: 15 }}
+            margin={{ top: 15, right: 30, bottom: 15, left: 15 }}
             barCategoryGap={1}
           >
             <YAxis dataKey="name" type="category" />
