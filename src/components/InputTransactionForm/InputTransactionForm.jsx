@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //import 'react-datepicker/dist/react-datepicker.css';
 import './InputTransactionForm.css';
 import Select from 'react-select';
 import sprite from 'images/icons_sprite.svg';
 import { Btn } from 'components/Buttons/Btn';
-import { API_TRANSACTION,   getTransactionCategories, } from '../../api/apiTransactionCategories';
+import { API_TRANSACTION } from '../../api/apiTransactionCategories';
 import {
   addTransactionOp,
   fetchCategoriesOp,
@@ -19,75 +19,7 @@ import {
   selectTransactionsOptions,
   selectTransactionsOptionsLength,
 } from 'redux/transactions/transactionsSelectors';
-
-
-const selectStyles = {
-  control: () => ({
-    zIndex: '1000',
-    boxSizing: 'border-box',
-    width: '168px',
-    height: '40px',
-    backgroundColor: '#ffffff',
-    color: '#C7CCDC',
-    fontSize: '12px',
-    boxShadow: 'none',
-    fontWeight: '400',
-    fontFamily: "Roboto,'Open Sans','Helvetica Neue', sans-serif",
-    lineHeight: '1.15',
-    letterSpacing: '0.02em',
-    display: 'flex',
-    alignItems: 'center',
-    borderLeft: '2px solid #F5F6FB',
-    borderRight: '2px solid #F5F6FB',
-    borderTop: 'none',
-    borderBottom: 'none',
-    paddingLeft: '20px',
-  }),
-  menu: () => ({
-    boxSizing: 'border-box',
-    position: 'absolute',
-    // width: '182px',
-    width: '168px',
-    backgroundColor: '#ffffff',
-    zIndex: '200',
-    border: '2px solid #F5F6FB',
-    boxShadow: '0px 3px 4px rgba(170, 178, 197, 0.4)',
-  }),
-  valueContainer: styles => ({
-    ...styles,
-    padding: '0',
-  }),
-  singleValue: styles => ({
-    ...styles,
-    color: '#C7CCDC',
-  }),
-  indicatorSeparator: () => ({
-    // ...styles,
-    display: 'none',
-  }),
-  dropdownIndicator: (styles, { isFocused, isSelected }) => ({
-    ...styles,
-    color: isFocused ? '#52555F' : '#C7CCDC',
-    transform: isFocused ? 'rotate(180deg)' : null,
-  }),
-  option: (_, { isDisabled, isFocused }) => {
-    return {
-      height: '32px',
-      paddingLeft: '20px',
-      display: 'flex',
-      alignItems: 'center',
-      fontSize: '12px',
-      boxShadow: 'none',
-      fontWeight: '400',
-      fontFamily: "Roboto,'Open Sans','Helvetica Neue', sans-serif",
-      lineHeight: '1.15',
-      letterSpacing: '0.02em',
-      color: isFocused ? '#52555F' : '#C7CCDC',
-      cursor: isDisabled ? 'not-allowed' : 'default',
-      backgroundColor: isFocused ? '#F5F6FB' : '#ffffff',
-    };
-  },
-};
+import { selectStyles } from './selectStyles';
 
 export default function InputTransactionForm({ type }) {
   const TRANSACTION_FORM_DATA = {
@@ -101,12 +33,6 @@ export default function InputTransactionForm({ type }) {
     },
   };
 
-  const selectOptionsSheme = {
-    income: [],
-    expense: [],
-  };
-
-  const selectOptions = useRef(selectOptionsSheme);
   const today = new Date();
   const initialFormData = {
     product: '',
@@ -116,34 +42,6 @@ export default function InputTransactionForm({ type }) {
   const [formData, setFormData] = useState(initialFormData);
   const [date, setDate] = useState(today);
   const [category, setCategory] = useState(null);
-  const [isOptionsLoading, setIsOptionsLoading] = useState(false);
-
-  const [ssum, setssum] = useState(0);
-
-  useEffect(() => {
-    const getSelectOptions = async () => {
-      try {
-        setIsOptionsLoading(true);
-        const data = await getTransactionCategories(type);
-
-        selectOptions.current[type] = data.map((option, i) => {
-          return {
-            value: i,
-            label: API_TRANSACTION[type].apiCategories[option] ?? 'Other',
-          };
-        });
-      } catch (error) {
-        Notiflix.Notify.error(`Server error: ${error.message}`, notifySettings);
-        console.error(error);
-      } finally {
-        setIsOptionsLoading(false);
-        console.log('UseEffect running');
-      }
-    };
-
-    if (selectOptions.current[type].length > 0) return;
-    getSelectOptions();
-  }, [type]);
 
   const dispatch = useDispatch();
   const transactionsOptions = useSelector(selectTransactionsOptions);
@@ -158,7 +56,6 @@ export default function InputTransactionForm({ type }) {
     dispatch(fetchCategoriesOp(type));
     // eslint-disable-next-line
   }, [type]);
-
 
   const onClearForm = () => {
     setDate(today);
@@ -223,9 +120,6 @@ export default function InputTransactionForm({ type }) {
     });
   };
 
-
-  console.log('RENDER FORM. Type is', type);
-
   return (
     <div className="input-product-form__wrapper">
       <form className="input-product-form">
@@ -280,3 +174,4 @@ export default function InputTransactionForm({ type }) {
     </div>
   );
 }
+Footer
