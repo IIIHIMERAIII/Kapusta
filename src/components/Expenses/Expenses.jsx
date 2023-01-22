@@ -27,7 +27,6 @@ const Expenses = ({ onClick }) => {
     );
   }
   const onItemClick = event => {
-    console.log(event.currentTarget.id);
     setFilter(event.currentTarget.id);
   };
   const filtredData = () => {
