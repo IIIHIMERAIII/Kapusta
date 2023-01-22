@@ -28,18 +28,12 @@ export const API_TRANSACTION = {
   },
 };
 
-export const getTransactionCategories = async (type, resolve) => {
+export const getTransactionCategories = async type => {
   try {
     const { data } = await instance.get(
       API_TRANSACTION[type].apiTransactionsCategoriesEndpoint
     );
-    const optionsArray = data.map((option, i) => {
-      return {
-        value: i,
-        label: API_TRANSACTION[type].apiCategories[option] || 'Other',
-      };
-    });
-    resolve(optionsArray);
+    return data;
   } catch (error) {
     throw error;
   }
