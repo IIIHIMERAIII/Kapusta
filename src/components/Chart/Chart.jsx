@@ -45,6 +45,7 @@ export const Chart = ({ data }) => {
               fill="#FF751D"
               label={customLabelHorizontal}
               barSize={50}
+              radius={[15, 15, 0, 0]}
             >
               {data.map((_, index) => {
                 switch (index % 3) {
@@ -66,13 +67,15 @@ export const Chart = ({ data }) => {
             margin={{ top: 15, right: 30, bottom: 15, left: 15 }}
             barCategoryGap={1}
           >
+            <XAxis axisLine={false} type="number" hide />
             <YAxis dataKey="name" type="category" />
             <CartesianGrid vertical={false} />
             <Bar
               dataKey="cost"
               fill="#FF751D"
               label={customLabelVertical}
-              barSize={50}
+              barSize={20}
+              radius={[0, 15, 15, 0]}
             >
               {data.map((_, index) => {
                 switch (index % 3) {
