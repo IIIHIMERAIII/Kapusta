@@ -6,7 +6,7 @@ import AsyncSelect from 'react-select/async';
 import Select from 'react-select';
 import sprite from 'images/icons_sprite.svg';
 import { Btn } from 'components/Buttons/Btn';
-import { API_TRANSACTION } from '../../api/apiTransactionCategories';
+import { API_TRANSACTION,   getTransactionCategories, } from '../../api/apiTransactionCategories';
 import {
   addTransactionOp,
   fetchCategoriesOp,
@@ -20,7 +20,7 @@ import {
   selectTransactionsOptions,
   selectTransactionsOptionsLength,
 } from 'redux/transactions/transactionsSelectors';
-import { selectStyles } from './selectStyles';
+
 
 const selectStyles = {
   control: () => ({
