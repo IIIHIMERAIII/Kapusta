@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //import 'react-datepicker/dist/react-datepicker.css';
-import './InputTransactionForm.css';
+import './styles/InputTransactionForm.css';
 import Select from 'react-select';
 import sprite from 'images/icons_sprite.svg';
 import { Btn } from 'components/Buttons/Btn';
@@ -19,7 +19,15 @@ import {
   selectTransactionsOptions,
   selectTransactionsOptionsLength,
 } from 'redux/transactions/transactionsSelectors';
-import { selectStyles } from './selectStyles';
+import { selectStyles } from './styles/selectStyles';
+import {
+  ButtonsWrapper,
+  InputAmount,
+  InputForm,
+  InputGroupWrapper,
+  InputProduct,
+  MainContainer,
+} from './styles/InputTransactionForm.styled';
 
 export default function InputTransactionForm({ type }) {
   const TRANSACTION_FORM_DATA = {
@@ -121,16 +129,16 @@ export default function InputTransactionForm({ type }) {
   };
 
   return (
-    <div className="input-product-form__wrapper">
-      <form className="input-product-form">
+    <MainContainer>
+      <InputForm>
         <DatePickerComponent
           name="date"
           date={date}
           maxDate={today}
           handler={date => setDate(date)}
         />
-        <div className="input-product-form__inputs-wrapper">
-          <input
+        <InputGroupWrapper>
+          <InputProduct
             type="text"
             value={formData.product}
             className="input-product-form__input product-description"
@@ -154,7 +162,7 @@ export default function InputTransactionForm({ type }) {
             value={category}
           />
 
-          <input
+          <InputAmount
             type="text"
             value={formData.sum}
             className="input-product-form__input product-amount"
@@ -165,13 +173,12 @@ export default function InputTransactionForm({ type }) {
           <svg className="input-product-form--calc-svg" width="20" height="20">
             <use href={sprite + `#calculator`}></use>
           </svg>
-        </div>
-        <div className="input-product-form--buttn-group__wrapper">
+        </InputGroupWrapper>
+        <ButtonsWrapper>
           <Btn text="INPUT" onClick={onFormSubmit} />
           <Btn text="CLEAR" onClick={onClearForm} />
-        </div>
-      </form>
-    </div>
+        </ButtonsWrapper>
+      </InputForm>
+    </MainContainer>
   );
 }
-Footer
