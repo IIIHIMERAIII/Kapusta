@@ -3,8 +3,8 @@ import styled from '@emotion/styled';
 export const MainContainer = styled.div`
   box-sizing: border-box;
 
-  position: relative;
-  z-index: 1;
+  /* position: relative;
+  z-index: 1; */
 
   @media screen and (min-width: 768px) and (max-width: 1279.5px) {
     width: 624px;
