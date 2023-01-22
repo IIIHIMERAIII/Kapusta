@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //import 'react-datepicker/dist/react-datepicker.css';
 import './InputTransactionForm.css';
-import AsyncSelect from 'react-select/async';
 import Select from 'react-select';
 import sprite from 'images/icons_sprite.svg';
 import { Btn } from 'components/Buttons/Btn';
