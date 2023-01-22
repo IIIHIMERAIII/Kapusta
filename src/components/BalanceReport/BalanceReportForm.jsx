@@ -12,6 +12,8 @@ import {
 import { Popup } from 'components/Popup/Popup';
 import { fetchUserBalance } from 'redux/transactions/transactionsOps';
 import { selectBalance } from 'redux/transactions/transactionsSelectors';
+import Notiflix from 'notiflix';
+import { notifySettings } from 'utils/notifySettings';
 
 
 
@@ -44,6 +46,14 @@ export function BalanceReportFrom() {
     const data = evt.target.value.split(' ').join('');
     const number = Number(data);
 
+    if(number<1){
+      evt.target.value=formating(value);
+      Notiflix.Notify.warning(
+        `The minimum value is 01.00!`,
+        notifySettings
+      );
+      return;
+    }
     if (number <= 1000000) {
       setValue(number);
       evt.target.value = formating(number);
@@ -58,6 +68,7 @@ export function BalanceReportFrom() {
       title: 'Are you sure?',
       action: () => dispatch(fetchUserBalance({value, token})),  
     });
+    document.querySelector('#modal').classList.add('js-action')
   };
 
   return (

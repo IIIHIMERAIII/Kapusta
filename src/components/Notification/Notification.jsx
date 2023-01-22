@@ -8,7 +8,7 @@ import {
   NotificationSubText,
 } from './Notification.styled';
 
-export function Notification({ money = false }) {
+export function Notification({ money = false, }) {
   const [show, setShow] = useState(false);
   const [opacity, setOpacity] = useState(0);
   useEffect(() => {
@@ -25,7 +25,7 @@ export function Notification({ money = false }) {
   return (
     <>
       {show && (
-        <NotificationContainer>
+        <NotificationContainer onClick={() => setShow(false)}>
           <StyledWindow style={{ opacity }}>
             <Triangle />
             <NotificationText>

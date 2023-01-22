@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectBalance } from 'redux/transactions/transactionsSelectors';
 import {
@@ -9,10 +10,14 @@ import {
   BalanceForm,
   Input,
   BaseContainer,
+  PortalContainer,
+  AbsoluteContainer,
 } from './Balance.styled';
 import { Notification } from 'components/Notification/Notification';
 import { Popup } from 'components/Popup/Popup';
 import { fetchUserBalance } from 'redux/transactions/transactionsOps';
+import { notifySettings } from '../../utils/notifySettings';
+import Notiflix from 'notiflix';
 
 export const formating = data => {
   const fixedData = data.toFixed(2);
@@ -20,10 +25,7 @@ export const formating = data => {
 
   const dividedData = fixedData.split('.');
 
-  const spacedData = Number(dividedData[0])
-    .toLocaleString()
-    .split(',')
-    .join(' ');
+  const spacedData = Number(dividedData[0]).toLocaleString().split(',').join(' ');
   return spacedData + '.' + dividedData[1];
 };
 
@@ -45,6 +47,14 @@ export function BalanceFrom() {
     const data = evt.target.value.split(' ').join('');
     const number = Number(data);
 
+    if(number<1){
+      evt.target.value=formating(value);
+      Notiflix.Notify.warning(
+        `The minimum value is 01.00!`,
+        notifySettings
+      );
+      return;
+    }
     if (number <= 1000000) {
       setValue(number);
       evt.target.value = formating(number);
@@ -79,7 +89,16 @@ export function BalanceFrom() {
               />
               uah
             </CurrentBalance>
-            <Notification money={value} />
+            {createPortal(
+              <AbsoluteContainer>
+                <BalanceForm>
+                  <PortalContainer>
+                    <Notification money={value} />
+                  </PortalContainer>
+                </BalanceForm>
+              </AbsoluteContainer>,
+              document.querySelector('#balance')
+            )}
           </CurrentBalanceContainer>
           <StyledBtn type="button" onClick={onClick}>
             Confirm

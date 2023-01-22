@@ -29,7 +29,7 @@ export const fetchUserBalance = createAsyncThunk(
   'auth/balance',
   async ({ value }, { rejectWithValue }) => {
     try {
-      if (value !== 0) {
+      if (value >= 1) {
         const { data } = await instance.patch('/user/balance', {
           newBalance: value,
         });
