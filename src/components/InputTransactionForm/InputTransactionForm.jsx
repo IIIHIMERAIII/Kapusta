@@ -6,14 +6,21 @@ import AsyncSelect from 'react-select/async';
 import Select from 'react-select';
 import sprite from 'images/icons_sprite.svg';
 import { Btn } from 'components/Buttons/Btn';
+import { API_TRANSACTION } from '../../api/apiTransactionCategories';
 import {
-  getTransactionCategories,
-  API_TRANSACTION,
-} from '../../api/apiTransactionCategories';
-import { addTransactionOp } from 'redux/transactions/transactionsOps';
+  addTransactionOp,
+  fetchCategoriesOp,
+} from 'redux/transactions/transactionsOps';
 import { DatePickerComponent } from 'components/DatePickerComponent/DatePickerComponent';
 import Notiflix from 'notiflix';
 import { notifySettings } from '../../utils/notifySettings';
+
+import {
+  selectisLoadingOptions,
+  selectTransactionsOptions,
+  selectTransactionsOptionsLength,
+} from 'redux/transactions/transactionsSelectors';
+import { selectStyles } from './selectStyles';
 
 const selectStyles = {
   control: () => ({
@@ -101,7 +108,6 @@ export default function InputTransactionForm({ type }) {
   };
 
   const selectOptions = useRef(selectOptionsSheme);
-
   const today = new Date();
   const initialFormData = {
     product: '',
@@ -141,6 +147,19 @@ export default function InputTransactionForm({ type }) {
   }, [type]);
 
   const dispatch = useDispatch();
+  const transactionsOptions = useSelector(selectTransactionsOptions);
+  const transactionsOptionsLength = useSelector(
+    selectTransactionsOptionsLength
+  );
+  const isLoadingOpts = useSelector(selectisLoadingOptions);
+
+  useEffect(() => {
+    if (transactionsOptionsLength || isLoadingOpts) return;
+
+    dispatch(fetchCategoriesOp(type));
+    // eslint-disable-next-line
+  }, [type]);
+
 
   const onClearForm = () => {
     setDate(today);
@@ -205,7 +224,9 @@ export default function InputTransactionForm({ type }) {
     });
   };
 
+
   console.log('RENDER FORM. Type is', type);
+
   return (
     <div className="input-product-form__wrapper">
       <form className="input-product-form">
@@ -215,7 +236,6 @@ export default function InputTransactionForm({ type }) {
           maxDate={today}
           handler={date => setDate(date)}
         />
-
         <div className="input-product-form__inputs-wrapper">
           <input
             type="text"
@@ -234,8 +254,8 @@ export default function InputTransactionForm({ type }) {
             defaultOptions
             placeholder={TRANSACTION_FORM_DATA[type].selectCategoryPlaceholder}
             styles={selectStyles}
-            options={selectOptions.current[type]}
-            isLoading={isOptionsLoading}
+            options={transactionsOptions[type] ?? []}
+            isLoading={isLoadingOpts}
             closeMenuOnSelect={true}
             onChange={selectedOption => setCategory(selectedOption)}
             value={category}

@@ -6,6 +6,7 @@ import {
   fetchExpenseTransactions,
   fetchIncomeTransactions,
   removeTransaction,
+  fetchCategoriesOp,
 } from './transactionsOps';
 
 const transactionsSlice = createSlice({
@@ -16,6 +17,11 @@ const transactionsSlice = createSlice({
       expense: [],
       income: [],
       monthsStats: [],
+    },
+    transactionsOptions: {
+      expense: [],
+      income: [],
+      isLoadinng: false,
     },
     isLoadinng: false,
     error: null,
@@ -115,6 +121,19 @@ const transactionsSlice = createSlice({
       .addCase(fetchUserBalance.rejected, (state, { payload }) => {
         state.isLoadinng = false;
         state.error = payload;
+      })
+      .addCase(fetchCategoriesOp.pending, state => {
+        state.transactionsOptions.isLoadinng = true;
+      })
+      .addCase(
+        fetchCategoriesOp.fulfilled,
+        (state, { payload: { type, optionsArray } }) => {
+          state.transactionsOptions.isLoadinng = false;
+          state.transactionsOptions[type] = optionsArray;
+        }
+      )
+      .addCase(fetchCategoriesOp.rejected, (state, { payload }) => {
+        state.transactionsOptions.isLoadinng = false;
       }),
 });
 
