@@ -51,7 +51,8 @@ export const AbsoluteContainer = styled(BalanceContainer)`
   }
 
   @media screen and (max-width: 480px) {
-    top: 96px;
+    top: 232px;
+    left: -22px;
 
     padding: 0 20px;
   }
