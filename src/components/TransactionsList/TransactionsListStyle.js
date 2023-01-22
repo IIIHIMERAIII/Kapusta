@@ -17,12 +17,12 @@ const stylesTransactionsList = {
   `,
 
   BoxForList: styled.div`
-    width: 625px;
+    max-width: 625px;
     @media screen and (min-width: 768px) {
       position: relative;
     }
     @media screen and (min-width: 1280px) {
-      width: 746px;
+      max-width: 746px;
     }
   `,
 
@@ -89,20 +89,21 @@ const stylesTransactionsList = {
     gap: 8px;
     margin: 0;
     padding: 0;
+    overflow-y: auto;
+    max-height: 180px;
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: ${theme.colors.PrimaryOrange};
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-track {
+      background-color: ${theme.colors.PrimaryGray};
+    }
     @media screen and (min-width: 768px) {
       gap: 0px;
-      overflow-y: auto;
       max-height: 344px;
-      ::-webkit-scrollbar {
-        width: 7px;
-      }
-      ::-webkit-scrollbar-thumb {
-        background-color: ${theme.colors.PrimaryOrange};
-        border-radius: 2px;
-      }
-      ::-webkit-scrollbar-track {
-        background-color: ${theme.colors.PrimaryGray};
-      }
     }
     @media screen and (min-width: 1280px) {
       max-height: 400px;
@@ -112,7 +113,7 @@ const stylesTransactionsList = {
   ListItems: styled.li`
     display: flex;
     align-items: center;
-    height: 35px;
+    min-height: 55px;
     padding: 0 20px;
     font-size: 12px;
     line-height: 14px;
