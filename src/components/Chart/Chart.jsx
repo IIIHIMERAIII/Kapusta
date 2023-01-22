@@ -4,6 +4,7 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
   ResponsiveContainer,
   XAxis,
   YAxis,
@@ -44,7 +45,19 @@ export const Chart = ({ data }) => {
               fill="#FF751D"
               label={customLabelHorizontal}
               barSize={50}
-            />
+            >
+              {data.map((_, index) => {
+                switch (index % 3) {
+                  case 0:
+                    return <Cell key={`cell-${index}`} fill="#FF751D" />;
+                  case 1:
+                  case 2:
+                    return <Cell key={`cell-${index}`} fill="#FED9BF" />;
+                  default:
+                    return <Cell key={`cell-${index}`} fill="#FF751D" />;
+                }
+              })}
+            </Bar>
           </BarChart>
         ) : (
           <BarChart
@@ -60,7 +73,19 @@ export const Chart = ({ data }) => {
               fill="#FF751D"
               label={customLabelVertical}
               barSize={50}
-            />
+            >
+              {data.map((_, index) => {
+                switch (index % 3) {
+                  case 0:
+                    return <Cell key={`cell-${index}`} fill="#FF751D" />;
+                  case 1:
+                  case 2:
+                    return <Cell key={`cell-${index}`} fill="#FED9BF" />;
+                  default:
+                    return <Cell key={`cell-${index}`} fill="#FF751D" />;
+                }
+              })}
+            </Bar>
           </BarChart>
         )}
       </ResponsiveContainer>
