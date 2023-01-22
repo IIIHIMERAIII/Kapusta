@@ -5,7 +5,7 @@ const initialState = {
   statistics: null,
   isLoading: false,
   error: null,
-  period: '2023-01',
+  period: '',
 };
 
 const statusProgress = (state, action) => {
@@ -21,6 +21,10 @@ export const statsSlice = createSlice({
   name: 'statistics',
   initialState,
   reducers: {
+    currentPeriod: (state, action) => {
+      state.period = action.payload ;
+      
+    },
   },
   extraReducers: builder => {
     builder
@@ -37,5 +41,7 @@ export const statsSlice = createSlice({
       })
   },
 });
+
+export const { currentPeriod } = statsSlice.actions;
 
 export default statsSlice.reducer;

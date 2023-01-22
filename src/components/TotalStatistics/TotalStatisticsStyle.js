@@ -5,7 +5,7 @@ const TotalStatsStyle = {
     BoxStats: styled.div`
     display: block;
     text-align: center;
-    width: 700px;
+    width: 705px;
     padding: 15px;
     border-radius: 30px;
     margin: 0 auto 30px auto;
@@ -16,7 +16,7 @@ const TotalStatsStyle = {
     }
 
     @media screen and (min-width: 1030px) {
-      width: 1030px;
+      width: 1035px;
     }
   `,
   List: styled.ul`

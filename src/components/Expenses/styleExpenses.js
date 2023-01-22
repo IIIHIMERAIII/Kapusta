@@ -2,22 +2,35 @@ import styled from '@emotion/styled';
 import { theme } from 'components/Theme';
 
 const styledComponents = {
+  BoxForBalance: styled.div`    
+  display: block;
+    width: 705px;
+    padding: 0;
+    margin: 0 auto 30px auto;
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+
+    @media screen and (min-width: 1280px) {
+      width: 1035px;
+    }
+`,
   BoxStats: styled.div`
     display: block;
     text-align: center;
-    width: 700px;
+    width: 705px;
     height: 350px;
     padding: 20px;
     border-radius: 30px;
     margin: 0 auto 40px auto;
     background-color: ${theme.colors.PrimaryWhite};
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 768px) {
       width: 100%;
       padding: 5px 5px;
     }
 
-    @media screen and (min-width: 1030px) {
-      width: 1030px;
+    @media screen and (min-width: 1280px) {
+      width: 1035px;
     }
   `,
   ListOfBalanceChanges: styled.ul`

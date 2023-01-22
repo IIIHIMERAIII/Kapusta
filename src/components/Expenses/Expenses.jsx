@@ -20,7 +20,11 @@ const Expenses = ({ onClick }) => {
   const [filter, setFilter] = useState();
 
   if (!statistics) {
-    return;
+    return (
+      <BoxStats>
+        <TitleOfBalanceChanges>"No data to display!"</TitleOfBalanceChanges>
+      </BoxStats>
+    );
   }
   const onItemClick = event => {
     setFilter(event.currentTarget.id);
@@ -216,11 +220,13 @@ const Expenses = ({ onClick }) => {
               </ItemOfBalanceChanges>
             )}
           </ListOfBalanceChanges>
-        ) : (
-          <div>Empty</div>
-        )}
+        ) : (<TitleOfBalanceChanges>"No data to display!"</TitleOfBalanceChanges>)}
       </BoxStats>
-      <BoxStats>{filter && <Chart data={filtredData()} />}</BoxStats>
+      {filter && (
+        <BoxStats>
+          <Chart data={filtredData()} />{' '}
+        </BoxStats>
+      )}
     </>
   );
 };
