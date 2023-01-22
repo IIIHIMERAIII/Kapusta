@@ -1,88 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //import 'react-datepicker/dist/react-datepicker.css';
 import './InputTransactionForm.css';
-import AsyncSelect from 'react-select/async';
+import Select from 'react-select';
 import sprite from 'images/icons_sprite.svg';
 import { Btn } from 'components/Buttons/Btn';
+import { API_TRANSACTION } from '../../api/apiTransactionCategories';
 import {
-  getTransactionCategories,
-  API_TRANSACTION,
-} from '../../api/apiTransactionCategories';
-import { addTransactionOp } from 'redux/transactions/transactionsOps';
+  addTransactionOp,
+  fetchCategoriesOp,
+} from 'redux/transactions/transactionsOps';
 import { DatePickerComponent } from 'components/DatePickerComponent/DatePickerComponent';
 import Notiflix from 'notiflix';
 import { notifySettings } from '../../utils/notifySettings';
 
-const selectStyles = {
-  control: () => ({
-    zIndex: '1000',
-    boxSizing: 'border-box',
-    width: '168px',
-    height: '40px',
-    backgroundColor: '#ffffff',
-    color: '#C7CCDC',
-    fontSize: '12px',
-    boxShadow: 'none',
-    fontWeight: '400',
-    fontFamily: "Roboto,'Open Sans','Helvetica Neue', sans-serif",
-    lineHeight: '1.15',
-    letterSpacing: '0.02em',
-    display: 'flex',
-    alignItems: 'center',
-    borderLeft: '2px solid #F5F6FB',
-    borderRight: '2px solid #F5F6FB',
-    borderTop: 'none',
-    borderBottom: 'none',
-    paddingLeft: '20px',
-  }),
-  menu: () => ({
-    boxSizing: 'border-box',
-    position: 'absolute',
-    // width: '182px',
-    width: '168px',
-    backgroundColor: '#ffffff',
-    zIndex: '100',
-    border: '2px solid #F5F6FB',
-    boxShadow: '0px 3px 4px rgba(170, 178, 197, 0.4)',
-  }),
-  valueContainer: styles => ({
-    ...styles,
-    padding: '0',
-  }),
-  singleValue: styles => ({
-    ...styles,
-    color: '#C7CCDC',
-  }),
-  indicatorSeparator: () => ({
-    // ...styles,
-    display: 'none',
-  }),
-  dropdownIndicator: (styles, { isFocused, isSelected }) => ({
-    ...styles,
-    color: isFocused ? '#52555F' : '#C7CCDC',
-    transform: isFocused ? 'rotate(180deg)' : null,
-  }),
-  option: (_, { isDisabled, isFocused }) => {
-    return {
-      height: '32px',
-      paddingLeft: '20px',
-      display: 'flex',
-      alignItems: 'center',
-      fontSize: '12px',
-      boxShadow: 'none',
-      fontWeight: '400',
-      fontFamily: "Roboto,'Open Sans','Helvetica Neue', sans-serif",
-      lineHeight: '1.15',
-      letterSpacing: '0.02em',
-      color: isFocused ? '#52555F' : '#C7CCDC',
-      cursor: isDisabled ? 'not-allowed' : 'default',
-      backgroundColor: isFocused ? '#F5F6FB' : '#ffffff',
-    };
-  },
-};
+import {
+  selectisLoadingOptions,
+  selectTransactionsOptions,
+  selectTransactionsOptionsLength,
+} from 'redux/transactions/transactionsSelectors';
+import { selectStyles } from './selectStyles';
 
-export default function InputTransactionForm({ type = 'expense' }) {
+export default function InputTransactionForm({ type }) {
   const TRANSACTION_FORM_DATA = {
     expense: {
       description: 'Product description',
@@ -93,38 +32,6 @@ export default function InputTransactionForm({ type = 'expense' }) {
       selectCategoryPlaceholder: 'Income category',
     },
   };
-
-  // const multiSelectStyles = {
-  //   option: (defaultStyles, state) => ({
-  //     ...defaultStyles,
-  //     color: state.isSelected ? '#52555F' : '#C7CCDC',
-  //     backgroundColor: state.isSelected ? '#a0a0a0' : '#ffffff',
-  //     fontSize: '12px',
-  //   }),
-  //   control: defaultStyles => ({
-  //     ...defaultStyles,
-
-  //     width: '168px',
-  //     height: '40px',
-  //     fontSize: '12px',
-  //     boxShadow: 'none',
-
-  //     color: '#C7CCDC',
-  //     border: 'none',
-  //     borderLeft: '#F5F6FB 1px solid',
-  //     borderRight: '#F5F6FB 1px solid',
-  //   }),
-  //   singleValue: defaultStyles => ({
-  //     ...defaultStyles,
-  //     fontSize: '12px',
-  //     color: '#C7CCDC',
-  //   }),
-  //   placeholder: defaultStyles => ({
-  //     ...defaultStyles,
-  //     //  color: '#C7CCDC',
-  //     fontSize: '12px',
-  //   }),
-  // };
 
   const today = new Date();
   const initialFormData = {
@@ -137,8 +44,18 @@ export default function InputTransactionForm({ type = 'expense' }) {
   const [category, setCategory] = useState(null);
 
   const dispatch = useDispatch();
-  //const token = useSelector(state => state.auth.accessToken);
-  const token = useSelector(state => state.auth.token);
+  const transactionsOptions = useSelector(selectTransactionsOptions);
+  const transactionsOptionsLength = useSelector(
+    selectTransactionsOptionsLength
+  );
+  const isLoadingOpts = useSelector(selectisLoadingOptions);
+
+  useEffect(() => {
+    if (transactionsOptionsLength || isLoadingOpts) return;
+
+    dispatch(fetchCategoriesOp(type));
+    // eslint-disable-next-line
+  }, [type]);
 
   const onClearForm = () => {
     setDate(today);
@@ -182,7 +99,7 @@ export default function InputTransactionForm({ type = 'expense' }) {
         category.value
       ],
     };
-    dispatch(addTransactionOp({ token, type, transaction }));
+    dispatch(addTransactionOp({ type, transaction }));
     onClearForm();
   };
 
@@ -203,22 +120,15 @@ export default function InputTransactionForm({ type = 'expense' }) {
     });
   };
 
-  const promiseOptions = () =>
-    new Promise(resolve => getTransactionCategories(type, resolve));
-
   return (
     <div className="input-product-form__wrapper">
-      <form
-        className="input-product-form"
-        //    style={{ display: 'flex', alignItems: 'center' }}
-      >
+      <form className="input-product-form">
         <DatePickerComponent
           name="date"
           date={date}
           maxDate={today}
           handler={date => setDate(date)}
         />
-
         <div className="input-product-form__inputs-wrapper">
           <input
             type="text"
@@ -232,16 +142,18 @@ export default function InputTransactionForm({ type = 'expense' }) {
               })
             }
           />
-          <AsyncSelect
+          <Select
             key={type}
             defaultOptions
             placeholder={TRANSACTION_FORM_DATA[type].selectCategoryPlaceholder}
             styles={selectStyles}
-            loadOptions={promiseOptions}
+            options={transactionsOptions[type] ?? []}
+            isLoading={isLoadingOpts}
             closeMenuOnSelect={true}
             onChange={selectedOption => setCategory(selectedOption)}
             value={category}
           />
+
           <input
             type="text"
             value={formData.sum}
@@ -249,7 +161,6 @@ export default function InputTransactionForm({ type = 'expense' }) {
             name="product"
             placeholder="0.00"
             onChange={e => validateSumInput(e.target.value)}
-            required
           />
           <svg className="input-product-form--calc-svg" width="20" height="20">
             <use href={sprite + `#calculator`}></use>
