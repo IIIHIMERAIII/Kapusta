@@ -26,11 +26,20 @@ export const BalanceContainer = styled.div`
   }
 `;
 
+export const PortalContainer = styled.div`
+  height: 0;
+  width: 125px;
+
+  padding-left: 68px;
+  padding-right: 141px;
+`;
+
 export const AbsoluteContainer = styled(BalanceContainer)`
   box-sizing: border-box;
 
-  top: 97px;
+  top: 144px;
 
+  height: 0;
   width: 100%;
 
   position: absolute;
@@ -70,6 +79,8 @@ export const BalanceForm = styled.div`
     margin-top: 40px;
   }
 `;
+
+export const BalanceFormNotification = styled(BalanceForm)``;
 
 export const Text = styled.label`
   font-weight: 500;

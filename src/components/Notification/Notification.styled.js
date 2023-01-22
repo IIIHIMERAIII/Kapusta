@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const NotificationContainer = styled.div`
   position: absolute;
-  top: 80%;
-  left: 5%;
+  top: -5px;
+  left: 23%;
 `;
 
 export const Triangle = styled.div`
@@ -51,6 +51,7 @@ export const StyledWindow = styled.div`
 export const NotificationText = styled.p`
   font-size: 14px;
   line-height: 1.43;
+  text-align: left;
 
   color: white;
 
