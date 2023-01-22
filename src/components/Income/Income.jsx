@@ -31,7 +31,6 @@ const Income = ({ onClick }) => {
   } = statistics.data;
 
   const onItemClick = event => {
-    console.log(event.currentTarget.id);
     setFilter(event.currentTarget.id);
   };
   const filtredData = () => {
