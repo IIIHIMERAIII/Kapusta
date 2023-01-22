@@ -27,6 +27,7 @@ const Expenses = ({ onClick }) => {
     );
   }
   const onItemClick = event => {
+    console.log(event.currentTarget.id);
     setFilter(event.currentTarget.id);
   };
   const filtredData = () => {
@@ -84,7 +85,7 @@ const Expenses = ({ onClick }) => {
         {expenseTotal ? (
           <ListOfBalanceChanges>
             {products && (
-              <ItemOfBalanceChanges>
+              <ItemOfBalanceChanges onClick={onItemClick} id="Продукты">
                 <p>{formating(products.total)}</p>
                 <BoxForSvg>
                   {' '}
@@ -220,7 +221,9 @@ const Expenses = ({ onClick }) => {
               </ItemOfBalanceChanges>
             )}
           </ListOfBalanceChanges>
-        ) : (<TitleOfBalanceChanges>"No data to display!"</TitleOfBalanceChanges>)}
+        ) : (
+          <TitleOfBalanceChanges>"No data to display!"</TitleOfBalanceChanges>
+        )}
       </BoxStats>
       {filter && (
         <BoxStats>

@@ -20,8 +20,7 @@ const Income = ({ onClick }) => {
   const [filter, setFilter] = useState();
 
   if (!statistics) {
-    return (
-      <TitleOfBalanceChanges>"No data to display!"</TitleOfBalanceChanges>);
+    return <TitleOfBalanceChanges>"No data to display!"</TitleOfBalanceChanges>;
   }
 
   const {
@@ -31,21 +30,8 @@ const Income = ({ onClick }) => {
     },
   } = statistics.data;
 
-  // const test = [
-  //   {
-  //     name: 'Pork',
-  //     cost: 2300,
-  //   },
-  //   {
-  //     name: 'Beaf',
-  //     cost: 4000,
-  //   },
-  //   {
-  //     name: 'Tree',
-  //     cost: 300,
-  //   },
-  // ];
   const onItemClick = event => {
+    console.log(event.currentTarget.id);
     setFilter(event.currentTarget.id);
   };
   const filtredData = () => {
@@ -67,41 +53,49 @@ const Income = ({ onClick }) => {
   return (
     <>
       <BoxStats>
-      <div>
-        <BtnToggleStats type="button" onClick={onClick}>
-          <svg width="10" height="10">
-            <use href={`${svg}#arrow_left`} />
-          </svg>
-        </BtnToggleStats>
-        <TitleOfBalanceChanges>Income</TitleOfBalanceChanges>
-        <BtnToggleStats type="button" onClick={onClick}>
-          <svg width="10" height="10">
-            <use href={`${svg}#arrow_right`} />
-          </svg>
-        </BtnToggleStats>
-      </div>
-      {incomeTotal ? (
-        <ListOfBalanceChanges>
-          {salary && (
-            <ItemOfBalanceChanges>
-              <p>{formating(salary.total)}</p>
-              <BoxForSvg> <SvgBoxStyle>
-                <use href={`${svg}#salary`} />
-              </SvgBoxStyle></BoxForSvg>
-              <p>Salary</p>
-            </ItemOfBalanceChanges>
-          )}
-          {income && (
-            <ItemOfBalanceChanges>
-              <p>{formating(income.total)}</p>
-              <BoxForSvg> <SvgBoxStyle>
-                <use href={`${svg}#income`} />
-              </SvgBoxStyle></BoxForSvg>
-              <p>Add. income</p>
-            </ItemOfBalanceChanges>
-          )}
-        </ListOfBalanceChanges>
-      ) : ( <TitleOfBalanceChanges>"No data to display!"</TitleOfBalanceChanges>)}
+        <div>
+          <BtnToggleStats type="button" onClick={onClick}>
+            <svg width="10" height="10">
+              <use href={`${svg}#arrow_left`} />
+            </svg>
+          </BtnToggleStats>
+          <TitleOfBalanceChanges>Income</TitleOfBalanceChanges>
+          <BtnToggleStats type="button" onClick={onClick}>
+            <svg width="10" height="10">
+              <use href={`${svg}#arrow_right`} />
+            </svg>
+          </BtnToggleStats>
+        </div>
+        {incomeTotal ? (
+          <ListOfBalanceChanges>
+            {salary && (
+              <ItemOfBalanceChanges onClick={onItemClick} id="З/П">
+                <p>{formating(salary.total)}</p>
+                <BoxForSvg>
+                  {' '}
+                  <SvgBoxStyle>
+                    <use href={`${svg}#salary`} />
+                  </SvgBoxStyle>
+                </BoxForSvg>
+                <p>Salary</p>
+              </ItemOfBalanceChanges>
+            )}
+            {income && (
+              <ItemOfBalanceChanges onClick={onItemClick} id="Доп. доход">
+                <p>{formating(income.total)}</p>
+                <BoxForSvg>
+                  {' '}
+                  <SvgBoxStyle>
+                    <use href={`${svg}#income`} />
+                  </SvgBoxStyle>
+                </BoxForSvg>
+                <p>Add. income</p>
+              </ItemOfBalanceChanges>
+            )}
+          </ListOfBalanceChanges>
+        ) : (
+          <TitleOfBalanceChanges>"No data to display!"</TitleOfBalanceChanges>
+        )}
       </BoxStats>
       <BoxStats>{filter && <Chart data={filtredData()} />}</BoxStats>
     </>
