@@ -1,3 +1,5 @@
+import Notiflix from 'notiflix';
+import { notifySettings } from '../../utils/notifySettings';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { instance } from 'redux/auth/authOperations';
 import { API_TRANSACTION } from 'api/apiTransactionCategories';
@@ -14,6 +16,10 @@ export const addTransactionOp = createAsyncThunk(
       const summary = await instance.get(`transaction/${type}`);
       return { type, data, monthsStats: summary.data.monthsStats };
     } catch (error) {
+      Notiflix.Notify.warning(
+        `Server error (during fetching categories): ${error.message}`,
+        notifySettings
+      );
       return thunkAPI.rejectWithValue({ error });
     }
   }
@@ -92,6 +98,54 @@ export const removeTransaction = createAsyncThunk(
         message: data.message,
       };
       return rejectWithValue(error);
+    }
+  }
+);
+
+// export const API_TRANSACTION = {
+//   expense: {
+//     apiTransactionsCategoriesEndpoint: 'transaction/expense-categories',
+//     apiAddTransactionEndpoint: 'transaction/expense',
+//     apiCategories: {
+//       Продукты: 'Products',
+//       Алкоголь: 'Alcohol',
+//       Развлечения: 'Entertainment',
+//       Здоровье: 'Health',
+//       Транспорт: 'Transport',
+//       'Всё для дома': 'Housekeeping',
+//       Техника: 'Electronics',
+//       'Коммуналка и связь': 'Communications',
+//       'Спорт и хобби': 'Activities',
+//       Образование: 'Education',
+//       Прочее: 'Other',
+//     },
+//   },
+//   income: {
+//     apiTransactionsCategoriesEndpoint: 'transaction/income-categories',
+//     apiAddTransactionEndpoint: 'transaction/income',
+//     apiCategories: {
+//       'З/П': 'Salary',
+//       'Доп. доход': 'AddIncome',
+//     },
+//   },
+// };
+
+export const fetchCategoriesOp = createAsyncThunk(
+  'transactions/fetchCategories',
+  async (type, thunkAPI) => {
+    try {
+      const { data } = await instance.get(
+        API_TRANSACTION[type].apiTransactionsCategoriesEndpoint
+      );
+      const optionsArray = data.map((option, i) => {
+        return {
+          value: i,
+          label: API_TRANSACTION[type].apiCategories[option] ?? 'Other',
+        };
+      });
+      return { type, optionsArray };
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
