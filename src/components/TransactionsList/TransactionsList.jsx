@@ -30,14 +30,15 @@ const {
   DateHeaderStyle,
   DataWrapper,
   DateDescrWrapper,
+  DescriptionStyleMobileWrapper,
+  DescriptionStyleTabletWrapper,
+  AmountWrapper,
 } = stylesTransactionsList;
 
 function TransactionsList({ type }) {
   const transactions = useSelector(selectTransactions);
   const dispatch = useDispatch();
 
-  // const clientWidth = window.matchMedia('(min-width: 350px)');
-  // console.log('clientWidth :>> ', clientWidth);
   document.addEventListener('resize', event => {
     console.log('event :>> ', event);
   });
@@ -67,30 +68,41 @@ function TransactionsList({ type }) {
               return (
                 <ListItems key={operation._id}>
                   <DataWrapper>
+                    <DescriptionStyleMobileWrapper>
+                      <DescriptionStyle>
+                        {operation.description.split(' ').slice(0, 2).join(' ')}
+                      </DescriptionStyle>
+                    </DescriptionStyleMobileWrapper>
                     <DateDescrWrapper>
                       <DateStyle>{getParseDate(operation.date)}</DateStyle>
-                      <DescriptionStyle>
-                        {operation.description}
-                      </DescriptionStyle>
+                      <DescriptionStyleTabletWrapper>
+                        <DescriptionStyle>
+                          {operation.description}
+                        </DescriptionStyle>
+                      </DescriptionStyleTabletWrapper>
+                      <CategoryStyle>
+                        {wordTranslator(operation.category)}
+                      </CategoryStyle>
                     </DateDescrWrapper>
-                    <CategoryStyle>
-                      {wordTranslator(operation.category)}
-                    </CategoryStyle>
                   </DataWrapper>
-                  <AmountStyle type={type}>
-                    {type === 'expense' && '-'}{' '}
-                    {formattingSum(operation.amount)} UAH.
-                  </AmountStyle>
-                  <BtnForRemove
-                    type="button"
-                    onClick={() => {
-                      dispatch(removeTransaction({ id: operation._id, type }));
-                    }}
-                  >
-                    <SvgBoxStyle>
-                      <use href={`${svg}#delete`} />
-                    </SvgBoxStyle>{' '}
-                  </BtnForRemove>
+                  <AmountWrapper>
+                    <AmountStyle type={type}>
+                      {type === 'expense' && '-'}{' '}
+                      {formattingSum(operation.amount)} UAH.
+                    </AmountStyle>
+                    <BtnForRemove
+                      type="button"
+                      onClick={() => {
+                        dispatch(
+                          removeTransaction({ id: operation._id, type })
+                        );
+                      }}
+                    >
+                      <SvgBoxStyle>
+                        <use href={`${svg}#delete`} />
+                      </SvgBoxStyle>{' '}
+                    </BtnForRemove>
+                  </AmountWrapper>
                 </ListItems>
               );
             })}
