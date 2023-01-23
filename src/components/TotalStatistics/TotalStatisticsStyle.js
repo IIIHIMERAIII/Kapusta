@@ -19,6 +19,7 @@ const TotalStatsStyle = {
       width: 1035px;
     }
   `,
+
   List: styled.ul`
     display: flex;
     padding: 0;
@@ -31,8 +32,12 @@ const TotalStatsStyle = {
     line-height: 16px;
     color: ${theme.colors.TextGray};
      @media screen and (max-width: 768px) {
-      column-gap: 10px;
-      width: 100%;
+    & > li {
+      width: 50%;
+    text-align: center;
+    &:nth-child(2){
+  border-left: 1px solid ${theme.colors.TextGray};
+    }
     }
   `,
     AmountExpenses: styled.li`

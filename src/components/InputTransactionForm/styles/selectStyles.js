@@ -20,6 +20,14 @@ export const selectStyles = {
     borderBottom: 'none',
     paddingLeft: '20px',
   }),
+  input: styles => ({
+    ...styles,
+    color: '#C7CCDC',
+  }),
+  placeholder: styles => ({
+        ...styles,
+        color: '#C7CCDC',
+    }),
   menu: () => ({
     boxSizing: 'border-box',
     position: 'absolute',

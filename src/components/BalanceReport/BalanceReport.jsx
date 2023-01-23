@@ -7,11 +7,11 @@ import {
   Period,
   PeriodArrow,
   PeriodData,
-  BaseContainer,
   PeriodBtn,
   StyledLink,
   MainPageText,
   MounthBox,
+  MounthContainer,
 } from './Balance.Report.styled';
 import { BalanceReportFrom } from './BalanceReportForm';
 import { currentPeriod } from 'redux/statistics/statsSlice';
@@ -77,7 +77,7 @@ export function BalanceReport() {
 
         <MounthBox>
           <Period>Current period</Period>
-          <BaseContainer>
+          <MounthContainer>
             <PeriodBtn type="button" onClick={prevMonth}>
               <PeriodArrow>
                 <use href={`${svg}#arrow_left`}></use>
@@ -89,7 +89,7 @@ export function BalanceReport() {
                 <use href={`${svg}#arrow_right`}></use>
               </PeriodArrow>
             </PeriodBtn>
-          </BaseContainer>
+          </MounthContainer>
         </MounthBox>
       </PeriodContainer>
     </BalanceContainer>

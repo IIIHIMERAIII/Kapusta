@@ -39,15 +39,23 @@ const Income = ({ onClick }) => {
 
     if (!data) return;
     if (!filter) return;
-    const [_, incomes] = Object.entries(data).filter(el => el[0] === filter)[0];
 
-    return Object.entries(incomes)
+    const [_, incomes] = Object.entries(data).filter(
+      el => el[0] === filter
+    )[0] || [null, false];
+
+    const res = Object.entries(incomes)
       .filter(el => {
         return el[0] !== 'total';
       })
       .map(el => {
         return { name: el[0], cost: el[1] };
       });
+
+    if (res.length === 0) {
+      return null;
+    }
+    return res;
   };
 
   return (
@@ -98,6 +106,9 @@ const Income = ({ onClick }) => {
         )}
       </BoxStats>
       {filter && (<BoxForSchedule><Chart data={filtredData()} /></BoxForSchedule>)}
+          <Chart data={filtredData()} />
+        </BoxForSchedule>
+      )}
     </>
   );
 };

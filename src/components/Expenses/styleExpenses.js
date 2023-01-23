@@ -34,6 +34,26 @@ const styledComponents = {
       width: 1035px;
     }
   `,
+
+  BoxForSchedule: styled.div`
+  height: 350px;
+  display: block;
+    text-align: center;
+    width: 705px;
+    padding: 20px;
+    border-radius: 30px;
+    margin: 0 auto;
+    background-color: ${theme.colors.PrimaryWhite};
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      padding: 5px 5px;
+    }
+
+    @media screen and (min-width: 1280px) {
+      width: 1035px;
+    }
+  `,
+
   ListOfBalanceChanges: styled.ul`
     display: flex;
     padding: 0;

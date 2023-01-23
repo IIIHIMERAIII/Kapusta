@@ -4,6 +4,7 @@ import styledComponents from './styleExpenses';
 import { formating } from 'components/Balance/BalanceForm';
 import { Chart } from 'components/Chart/Chart';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 const {
   ListOfBalanceChanges,
@@ -17,8 +18,8 @@ const {
 } = styledComponents;
 
 const Expenses = ({ onClick }) => {
+  const [filter, setFilter] = useState('');
   const statistics = useSelector(state => state.statistics.statistics);
-  const [filter, setFilter] = useState();
 
   if (!statistics) {
     return (
@@ -27,23 +28,31 @@ const Expenses = ({ onClick }) => {
       </BoxStats>
     );
   }
+
   const onItemClick = event => {
     setFilter(event.currentTarget.id);
   };
   const filtredData = () => {
-    const data = statistics.data.expenses.expensesData;
     if (!filter) return;
-    const [_, expenses] = Object.entries(data).filter(
-      el => el[0] === filter
-    )[0];
 
-    return Object.entries(expenses)
+    const data = statistics.data.expenses.expensesData;
+
+    const [_, expenses] = Object.entries(data).filter(el => {
+      return el[0] === filter;
+    })[0] || [null, false];
+
+    const res = Object.entries(expenses)
       .filter(el => {
         return el[0] !== 'total';
       })
       .map(el => {
         return { name: el[0], cost: el[1] };
       });
+
+    if (res.length === 0) {
+      return null;
+    }
+    return res;
   };
 
   const {

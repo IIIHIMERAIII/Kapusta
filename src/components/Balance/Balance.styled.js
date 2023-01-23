@@ -51,7 +51,8 @@ export const AbsoluteContainer = styled(BalanceContainer)`
   }
 
   @media screen and (max-width: 480px) {
-    top: 96px;
+    top: 232px;
+    left: -22px;
 
     padding: 0 20px;
   }
@@ -102,7 +103,7 @@ export const CurrentBalance = styled.p`
   width: 125px;
 
   display: flex;
-  justify-content: right;
+  justify-content: center;
   align-items: center;
 
   font-weight: 700;
@@ -115,7 +116,6 @@ export const CurrentBalance = styled.p`
   color: black;
   background-color: ${p => p.theme.colors.BgGray};
 
-  padding-right: 20px;
   border: 2px solid #ffffff;
   border-radius: 16px;
   margin-right: 16px;
@@ -131,8 +131,7 @@ export const CurrentBalance = styled.p`
 `;
 
 export const Input = styled.input`
-  min-width: 10px;
-  max-width: 300px;
+  width: 74px;
 
   font-weight: 700;
   font-size: 12px;
@@ -169,7 +168,7 @@ export const StyledBtn = styled.button`
   background-color: ${p => p.theme.colors.BgGray};
 
   transition: background-color 400ms cubic-bezier(0.4, 0, 0.2, 1),
-    color 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    color 400ms cubic-bezier(0.4, 0, 0.2, 1), border 400ms cubic-bezier(0.4, 0, 0.2, 1);
 
   border: 2px solid #ffffff;
   border-radius: 16px;
@@ -180,6 +179,8 @@ export const StyledBtn = styled.button`
   &:focus {
     color: white;
     background-color: ${p => p.theme.colors.PrimaryOrange};
+
+    border: none;
   }
 
   @media screen and (max-width: 480px) {
