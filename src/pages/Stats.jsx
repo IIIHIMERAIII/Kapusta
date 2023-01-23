@@ -19,6 +19,7 @@ const Statistics = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    
     if (!statePeriod) {
     const objDate = new Date();
     const year = objDate.getFullYear();
@@ -29,7 +30,11 @@ const Statistics = () => {
     dispatch(getStatistics({ period }))
     }
 
-  }, [dispatch, statePeriod]);
+    return () => {
+      dispatch(currentPeriod(''))
+    }
+
+  }, []);
 
   const statistics = useSelector(state => state.statistics.statistics);
 

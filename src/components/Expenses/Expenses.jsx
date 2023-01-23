@@ -13,6 +13,7 @@ const {
   BtnToggleStats,
   BoxForSvg,
   BoxStats,
+  BoxForSchedule,
 } = styledComponents;
 
 const Expenses = ({ onClick }) => {
@@ -225,9 +226,9 @@ const Expenses = ({ onClick }) => {
         )}
       </BoxStats>
       {filter && (
-        <BoxStats>
+        <BoxForSchedule>
           <Chart data={filtredData()} />{' '}
-        </BoxStats>
+        </BoxForSchedule>
       )}
     </>
   );
