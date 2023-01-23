@@ -26,7 +26,11 @@ const Income = ({ onClick }) => {
 
   const {
     incomes: {
-      incomesData: { ['З/П']: salary, ['Доп. доход']: income },
+      incomesData: {
+        // eslint-disable-next-line no-useless-computed-key
+        ['З/П']: salary,
+        // eslint-disable-next-line no-useless-computed-key
+        ['Доп. доход']: income },
       incomeTotal,
     },
   } = statistics.data;

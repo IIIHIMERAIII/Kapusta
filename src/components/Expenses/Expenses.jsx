@@ -62,9 +62,12 @@ const Expenses = ({ onClick }) => {
         Развлечения: entertainment,
         Здоровье: health,
         Транспорт: transport,
+       // eslint-disable-next-line no-useless-computed-key
         ['Всё для дома']: housing,
         Техника: technique,
+        // eslint-disable-next-line no-useless-computed-key
         ['Коммуналка и связь']: communal,
+       // eslint-disable-next-line no-useless-computed-key
         ['Спорт и хобби']: hobbies,
         Образование: education,
         Прочее: other,
