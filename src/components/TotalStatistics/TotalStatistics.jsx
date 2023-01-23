@@ -6,12 +6,12 @@ const { List, AmountExpenses, AmountIncome, BoxStats } = TotalStatsStyle
 const TotalStatistics = ({ expenses, income }) => {
     return (<BoxStats>
         <List>
-            <li>Expenses:
-                <AmountExpenses>{`- ${formating(expenses)} UAH.`}</AmountExpenses>
-            </li>
-            <li>Income:
-                <AmountIncome>{ `+ ${formating(income)} UAH.` }</AmountIncome>
-            </li>
+            <AmountExpenses>Expenses:
+                <span>{`- ${formating(expenses)} UAH.`}</span>
+            </AmountExpenses>
+            <AmountIncome>Income:
+                <span>{ `+ ${formating(income)} UAH.` }</span>
+            </AmountIncome>
         </List>
     </BoxStats>)
 }

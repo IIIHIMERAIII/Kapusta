@@ -15,7 +15,7 @@ const TotalStatsStyle = {
       padding: 5px 5px;
     }
 
-    @media screen and (min-width: 1030px) {
+    @media screen and (min-width: 1280px) {
       width: 1035px;
     }
   `,
@@ -31,6 +31,7 @@ const TotalStatsStyle = {
     font-size: 14px;
     line-height: 16px;
     color: ${theme.colors.TextGray};
+     @media screen and (max-width: 768px) {
     & > li {
       width: 50%;
     text-align: center;
@@ -38,22 +39,26 @@ const TotalStatsStyle = {
   border-left: 1px solid ${theme.colors.TextGray};
     }
     }
-
-    @media screen and (max-width: 768) {
-      column-gap: 10px;
-      width: 100%;
-
-    }
   `,
-    AmountExpenses: styled.span`
+    AmountExpenses: styled.li`
+    width: 50%;
+    text-align: center;
+    & > span{    color: red;
+          margin-left: 15px;
     display: inline-block;
-    margin-left: 15px;
-    color: red;
+}
     `,
-    AmountIncome: styled.span`
+  AmountIncome: styled.li`
+    width: 50%;
+    text-align: center;
+    & > span {    color: green;
+          margin-left: 15px;
     display: inline-block;
-    margin-left: 15px;
-    color: green;
+}
+    @media screen and (max-width: 768px) {
+border-left: 1px solid ${theme.colors.TextGray};
+    }
+
     `,
 };
 

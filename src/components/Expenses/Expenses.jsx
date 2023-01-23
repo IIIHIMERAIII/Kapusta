@@ -234,9 +234,9 @@ const Expenses = ({ onClick }) => {
           <TitleOfBalanceChanges>"No data to display!"</TitleOfBalanceChanges>
         )}
       </BoxStats>
-      {filtredData() && (
+      {filter && (
         <BoxForSchedule>
-          <Chart data={filtredData()} />
+          <Chart data={filtredData()} />{' '}
         </BoxForSchedule>
       )}
     </>
