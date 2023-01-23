@@ -1,8 +1,8 @@
-import { formating } from "components/Balance/BalanceForm"
-import TotalStatsStyle from "./TotalStatisticsStyle"
-
-const { List, AmountExpenses, AmountIncome, BoxStats } = TotalStatsStyle
-
+import { formating } from "components/Balance/BalanceForm" 
+import TotalStatsStyle from "./TotalStatisticsStyle" 
+ 
+const { List, AmountExpenses, AmountIncome, BoxStats } = TotalStatsStyle 
+ 
 const TotalStatistics = ({ expenses, income }) => {
     return (<BoxStats>
         <List>
@@ -10,10 +10,11 @@ const TotalStatistics = ({ expenses, income }) => {
                 <span>{`- ${formating(expenses)} UAH.`}</span>
             </AmountExpenses>
             <AmountIncome>Income:
-                <span>{ `+ ${formating(income)} UAH.` }</span>
+                <span>{`+ ${formating(income)} UAH.`}</span>
             </AmountIncome>
         </List>
     </BoxStats>)
-}
+};
 
+ 
 export default TotalStatistics
