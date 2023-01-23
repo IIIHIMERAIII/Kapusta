@@ -23,6 +23,7 @@ import { selectStyles } from './styles/selectStyles';
 import {
   ButtonsWrapper,
   InputAmount,
+  InputAmountWrapper,
   InputForm,
   InputGroupWrapper,
   InputProduct,
@@ -141,7 +142,6 @@ export default function InputTransactionForm({ type }) {
           <InputProduct
             type="text"
             value={formData.product}
-            className="input-product-form__input product-description"
             name="product"
             placeholder={TRANSACTION_FORM_DATA[type].description}
             onChange={e =>
@@ -161,18 +161,22 @@ export default function InputTransactionForm({ type }) {
             onChange={selectedOption => setCategory(selectedOption)}
             value={category}
           />
-
-          <InputAmount
-            type="text"
-            value={formData.sum}
-            className="input-product-form__input product-amount"
-            name="product"
-            placeholder="0.00"
-            onChange={e => validateSumInput(e.target.value)}
-          />
-          <svg className="input-product-form--calc-svg" width="20" height="20">
-            <use href={sprite + `#calculator`}></use>
-          </svg>
+          <InputAmountWrapper>
+            <InputAmount
+              type="text"
+              value={formData.sum}
+              name="product"
+              placeholder="0.00"
+              onChange={e => validateSumInput(e.target.value)}
+            />
+            <svg
+              className="input-product-form--calc-svg"
+              width="20"
+              height="20"
+            >
+              <use href={sprite + `#calculator`}></use>
+            </svg>
+          </InputAmountWrapper>
         </InputGroupWrapper>
         <ButtonsWrapper>
           <Btn text="INPUT" onClick={onFormSubmit} />
