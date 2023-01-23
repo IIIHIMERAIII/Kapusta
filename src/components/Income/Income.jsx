@@ -40,7 +40,7 @@ const Income = ({ onClick }) => {
     if (!data) return;
     if (!filter) return;
 
-    const [_, incomes] = Object.entries(data).filter(
+    const [, incomes] = Object.entries(data).filter(
       el => el[0] === filter
     )[0] || [null, false];
 

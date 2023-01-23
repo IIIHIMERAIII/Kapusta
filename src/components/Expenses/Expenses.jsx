@@ -4,7 +4,6 @@ import styledComponents from './styleExpenses';
 import { formating } from 'components/Balance/BalanceForm';
 import { Chart } from 'components/Chart/Chart';
 import { useState } from 'react';
-import { useEffect } from 'react';
 
 const {
   ListOfBalanceChanges,
@@ -37,7 +36,7 @@ const Expenses = ({ onClick }) => {
 
     const data = statistics.data.expenses.expensesData;
 
-    const [_, expenses] = Object.entries(data).filter(el => {
+    const [, expenses] = Object.entries(data).filter(el => {
       return el[0] === filter;
     })[0] || [null, false];
 
