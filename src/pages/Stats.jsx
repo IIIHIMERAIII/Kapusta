@@ -34,7 +34,8 @@ const Statistics = () => {
       dispatch(currentPeriod(''))
     }
 
-  }, []);
+  }, // eslint-disable-next-line react-hooks/exhaustive-deps
+    []);
 
   const statistics = useSelector(state => state.statistics.statistics);
 
