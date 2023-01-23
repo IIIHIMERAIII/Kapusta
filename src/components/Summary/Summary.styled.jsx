@@ -12,6 +12,7 @@ export const SummaryList = styled.ul`
   flex-direction: column;
   gap: 2px;
   width: 213px;
+  margin-top: 80px;
 `;
 
 export const SummaryTitle = styled.li`
