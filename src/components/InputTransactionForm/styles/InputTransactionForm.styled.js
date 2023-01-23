@@ -67,7 +67,11 @@ export const InputForm = styled.form`
 
 export const InputGroupWrapper = styled.div`
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  flex-wrap: wrap;
 
   @media screen and (min-width: 768px) and (max-width: 1279.5px) {
     display: flex;
@@ -127,22 +131,25 @@ export const Input = styled.input`
 `;
 
 export const InputProduct = styled(Input)`
+  width: 280px;
+
   font-family: inherit;
   font-size: 12px;
+
   padding-left: 20px;
 
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
 
   @media screen and (min-width: 768px) and (max-width: 1279.5px) {
-    width: 184px;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 16px;
+    width: 200px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 0px;
   }
   @media screen and (min-width: 1280px) {
     width: 290px;
 
-    border-top-left-radius: 0px;
+    border-top-left-radius: 16px;
     border-top-right-radius: 16px;
   }
 `;
@@ -150,12 +157,12 @@ export const InputProduct = styled(Input)`
 export const InputAmountWrapper = styled.div`
   position: relative;
 
-  /* @media screen and (max-width: 767.9px) {
+  @media screen and (max-width: 767.9px) {
     display: flex;
     position: relative;
 
     margin-top: 34px;
-    margin-bottom: 80px;
+    margin-bottom: 32px;
     margin-left: auto;
     margin-right: auto;
 
@@ -164,22 +171,26 @@ export const InputAmountWrapper = styled.div`
   @media screen and (min-width: 768px) and (max-width: 1279.5px) {
     display: flex;
     position: relative;
-  } */
+  }
 `;
 
 export const InputAmount = styled(Input)`
+  width: 100%;
   text-align: right;
+  padding-right: 42px;
+
+  border-radius: 16px;
 
   @media screen and (min-width: 768px) and (max-width: 1279.5px) {
     flex-shrink: 0;
-    padding-right: 42px;
     width: 110px;
 
     border-radius: 0 16px 16px 0;
-    overflow: hidden;
+    //   overflow: hidden;
   }
   @media screen and (min-width: 1280px) {
     width: 120px;
+    border-radius: 0 16px 16px 0;
   }
 `;
 
