@@ -4,6 +4,9 @@ import { theme } from 'components/Theme';
 const stylesTransactionsList = {
   BoxForList: styled.div`
     width: 100%;
+    @media screen and (min-width: 1280px) {
+      max-width: 746px;
+    }
   `,
 
   ListHeaderItems: styled.div`
@@ -68,7 +71,6 @@ const stylesTransactionsList = {
 
   List: styled.ul`
     display: flex;
-    flex-basis: 38px;
     flex-direction: column;
     gap: 8px;
     margin: 0;
@@ -213,6 +215,7 @@ const stylesTransactionsList = {
     gap: 20px;
     width: 50%;
     @media screen and (min-width: 768px) {
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: start;

@@ -8,6 +8,7 @@ export const Main = styled.main`
     width: 320px;
   }
   @media screen and (min-width: 768px) {
+    margin-bottom: 89px;
     width: 704px;
   }
   @media screen and (min-width: 1280px) {
@@ -19,5 +20,4 @@ export const Bg = styled.div`
   background-image: url(${wallet_bg});
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
 `;
