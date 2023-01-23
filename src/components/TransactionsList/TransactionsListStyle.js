@@ -4,6 +4,9 @@ import { theme } from 'components/Theme';
 const stylesTransactionsList = {
   BoxForList: styled.div`
     width: 100%;
+    @media screen and (min-width: 768px) {
+    margin-top:120px;
+    }
     @media screen and (min-width: 1280px) {
       max-width: 746px;
     }
