@@ -1,6 +1,6 @@
 @import-normalize; /* bring in normalize.css styles */
 
-/* Fonts */
+
 @font-face {
   font-family: 'Roboto';
   src: local('RobotoRegular'),
