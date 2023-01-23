@@ -106,9 +106,6 @@ const Income = ({ onClick }) => {
         )}
       </BoxStats>
       {filter && (<BoxForSchedule><Chart data={filtredData()} /></BoxForSchedule>)}
-          <Chart data={filtredData()} />
-        </BoxForSchedule>
-      )}
     </>
   );
 };
