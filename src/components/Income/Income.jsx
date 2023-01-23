@@ -105,7 +105,7 @@ const Income = ({ onClick }) => {
           <TitleOfBalanceChanges>"No data to display!"</TitleOfBalanceChanges>
         )}
       </BoxStats>
-      {filter && (<BoxForSchedule><Chart data={filtredData()} /></BoxForSchedule>)}
+      {filtredData() && (<BoxForSchedule><Chart data={filtredData()} /></BoxForSchedule>)}
     </>
   );
 };
